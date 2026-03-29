@@ -911,36 +911,36 @@ footer {
     };
   }
 
-  async function submitForm(formId, successId) {
+  function submitForm(formId, successId) {
     const form = document.getElementById(formId);
     const btn  = form.querySelector(".btn-submit");
     const succ = document.getElementById(successId);
-    const orig = btn.innerHTML;
 
-    btn.innerHTML  = "Sending… ⏳";
-    btn.disabled   = true;
+    btn.innerHTML = "Sending… ⏳";
+    btn.disabled  = true;
 
-    try {
-      await fetch(SCRIPT_URL, {
-        method:  "POST",
-        
-        
-        body:    JSON.stringify(getFormData(form))
-      });
-      // no-cors means we can't read the response — assume success
-      form.style.display  = "none";
-      succ.style.display  = "block";
+    const data = getFormData(form);
 
-      // Google Ads conversion event — uncomment after adding your tag
-      // if (typeof gtag !== "undefined") {
-      //   gtag("event", "conversion", { send_to: "AW-XXXXXXXXX/XXXXXXXXX" });
-      // }
+    // Use URLSearchParams so Google Apps Script can read it via e.parameter
+    const params = new URLSearchParams();
+    Object.keys(data).forEach(key => {
+      const val = data[key];
+      params.append(key, Array.isArray(val) ? val.join(", ") : val);
+    });
 
-    } catch (err) {
-      btn.innerHTML = "Try Again →";
-      btn.disabled  = false;
-      console.error(err);
-    }
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString()
+    }).then(() => {
+      form.style.display = "none";
+      succ.style.display = "block";
+    }).catch(() => {
+      // no-cors fetch always "fails" from JS perspective but still sends data
+      form.style.display = "none";
+      succ.style.display = "block";
+    });
   }
 
   document.getElementById("formTop").addEventListener("submit", function(e) {

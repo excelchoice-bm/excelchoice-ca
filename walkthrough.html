@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>ExcelChoice — Site Walkthrough</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --green:       #163d26;
+  --green-mid:   #2a6042;
+  --green-light: #eaf2ed;
+  --green-pale:  #f4f8f5;
+  --gold:        #c9954a;
+  --gold-light:  #fdf5e8;
+  --text:        #18201c;
+  --muted:       #6b7b71;
+  --border:      #d3ddd7;
+  --white:       #ffffff;
+  --red:         #b83232;
+  --shadow:      0 2px 12px rgba(22,61,38,.08);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--green-pale);
+  color:var(--text);
+  min-height:100vh;
+  font-size:15px;
+}
+
+/* ── HEADER ── */
+header {
+  background:var(--green);
+  padding:0 32px;
+  display:flex;
+  align-items:center;
+  height:64px;
+  gap:14px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 16px rgba(0,0,0,.18);
+}
+.logo {
+  display:flex;align-items:center;gap:12px;
+}
+.logo-icon {
+  width:36px;height:36px;
+  background:var(--gold);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;
+  font-size:18px;
+  font-weight:700;
+  color:var(--green);
+}
+.logo-name {
+  font-family:'Fraunces',serif;
+  font-size:19px;
+  color:#fff;
+  letter-spacing:.01em;
+}
+.logo-tag {
+  font-size:11px;
+  font-weight:500;
+  color:rgba(255,255,255,.5);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  margin-top:1px;
+}
+.badge {
+  margin-left:auto;
+  background:rgba(201,149,74,.15);
+  border:1px solid rgba(201,149,74,.4);
+  color:var(--gold);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:5px 12px;
+  border-radius:20px;
+}
+
+/* ── LAYOUT ── */
+.layout {
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:24px;
+  max-width:1140px;
+  margin:0 auto;
+  padding:32px 24px 80px;
+  align-items:start;
+}
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr;}
+}
+
+/* ── STICKY QUOTE PANEL ── */
+.quote-panel {
+  position:sticky;
+  top:84px;
+  background:var(--green);
+  border-radius:16px;
+  padding:28px 24px;
+  color:#fff;
+  box-shadow:0 8px 40px rgba(22,61,38,.22);
+}
+.qp-title {
+  font-family:'Fraunces',serif;
+  font-size:14px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:20px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.qp-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 0;
+  font-size:13px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  gap:8px;
+}
+.qp-row:last-of-type{border-bottom:none;}
+.qp-label{color:rgba(255,255,255,.65);flex:1;}
+.qp-val{font-weight:600;color:#fff;text-align:right;}
+.qp-total {
+  background:var(--gold);
+  border-radius:10px;
+  padding:16px;
+  margin-top:16px;
+  text-align:center;
+}
+.qp-total-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:4px;}
+.qp-total-amount{font-family:'Fraunces',serif;font-size:36px;color:var(--green);font-weight:700;line-height:1;}
+.qp-total-sub{font-size:11px;color:rgba(22,61,38,.65);margin-top:3px;}
+
+.qp-range {
+  margin-top:14px;
+  background:rgba(255,255,255,.07);
+  border-radius:8px;
+  padding:12px;
+  text-align:center;
+}
+.qp-range-label{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;}
+.qp-range-val{font-size:15px;font-weight:600;color:rgba(255,255,255,.9);}
+
+.qp-note {
+  margin-top:12px;
+  font-size:11px;
+  color:rgba(255,255,255,.4);
+  text-align:center;
+  line-height:1.5;
+}
+
+.qp-breakdown {
+  margin-top:14px;
+  background:rgba(255,255,255,.05);
+  border-radius:8px;
+  padding:12px;
+}
+.qp-bd-title{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;}
+.qp-bd-item{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;color:rgba(255,255,255,.7);}
+.qp-bd-item span:last-child{color:rgba(255,255,255,.9);font-weight:500;}
+
+/* ── FORM AREA ── */
+.form-area{}
+
+.section {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:28px;
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
+}
+.section-head {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:22px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--green-light);
+}
+.section-num {
+  width:28px;height:28px;
+  background:var(--green);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:#fff;
+  flex-shrink:0;
+}
+.section-title {
+  font-family:'Fraunces',serif;
+  font-size:17px;
+  color:var(--green);
+}
+.section-sub {
+  font-size:12px;
+  color:var(--muted);
+  margin-top:1px;
+}
+
+/* ── FIELDS ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.full{grid-column:1/-1;}
+@media(max-width:600px){
+  .grid-2,.grid-3{grid-template-columns:1fr;}
+}
+
+.field{display:flex;flex-direction:column;gap:5px;}
+label.lbl{
+  font-size:12px;font-weight:600;
+  color:var(--text);
+  letter-spacing:.02em;
+  text-transform:uppercase;
+}
+label.lbl .req{color:var(--red);margin-left:2px;}
+label.lbl .hint{font-weight:400;text-transform:none;color:var(--muted);font-size:11px;margin-left:4px;letter-spacing:0;}
+
+input[type=text],input[type=tel],input[type=email],
+input[type=number],select,textarea {
+  font-family:'Outfit',sans-serif;
+  font-size:14px;
+  color:var(--text);
+  background:var(--green-pale);
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  padding:10px 13px;
+  width:100%;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+  outline:none;
+  -webkit-appearance:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--green-mid);
+  background:#fff;
+  box-shadow:0 0 0 3px rgba(42,96,66,.1);
+}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7b71' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 13px center;
+  padding-right:36px;
+  cursor:pointer;
+}
+textarea{resize:vertical;min-height:80px;line-height:1.5;}
+
+/* ── TOGGLE TABS ── */
+.toggle-tabs {
+  display:flex;
+  background:var(--green-light);
+  border-radius:9px;
+  padding:4px;
+  gap:4px;
+  width:fit-content;
+  margin-bottom:20px;
+}
+.tab-btn {
+  padding:8px 22px;
+  border:none;
+  border-radius:7px;
+  font-family:'Outfit',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  background:none;
+  color:var(--muted);
+  transition:all .18s;
+}
+.tab-btn.active{
+  background:var(--green);
+  color:#fff;
+  box-shadow:0 2px 8px rgba(22,61,38,.2);
+}
+
+/* ── AREA ROWS ── */
+.area-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.area-row {
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 36px;
+  gap:8px;
+  align-items:end;
+  background:var(--green-light);
+  padding:10px 12px;
+  border-radius:9px;
+}
+@media(max-width:580px){
+  .area-row{grid-template-columns:1fr 1fr;}
+  .area-row .rm-btn{display:none;}
+}
+.area-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px;}
+.area-row input,.area-row select{background:#fff;}
+.rm-btn{
+  width:36px;height:36px;
+  border:1.5px solid #ccc;
+  border-radius:7px;
+  background:#fff;
+  color:var(--muted);
+  cursor:pointer;
+  font-size:15px;
+  display:flex;align-items:center;justify-content:center;
+  transition:.15s;
+  align-self:end;
+}
+.rm-btn:hover{background:#fef2f2;color:var(--red);border-color:var(--red);}
+.add-area-btn {
+  border:1.5px dashed var(--green-mid);
+  background:none;
+  color:var(--green-mid);
+  font-family:'Outfit',sans-serif;
+  font-size:13px;font-weight:500;
+  padding:9px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+  transition:.15s;
+}
+.add-area-btn:hover{background:var(--green-light);}
+
+/* ── CHECKBOXES ── */
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.chk {
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;
+  cursor:pointer;
+  padding:9px 12px;
+  border-radius:8px;
+  border:1.5px solid var(--border);
+  background:var(--green-pale);
+  transition:.12s;
+  user-select:none;
+}
+.chk:hover{background:var(--green-light);border-color:var(--green-mid);}
+.chk.on{background:var(--green-light);border-color:var(--green-mid);}
+.chk input[type=checkbox]{
+  width:15px;height:15px;
+  accent-color:var(--green);
+  flex-shrink:0;cursor:pointer;
+}
+
+/* ── ADD-ONS ── */
+.addon-grid{display:flex;flex-direction:column;gap:7px;}
+.addon-item {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;
+  border-radius:8px;
+  border:1.5px solid var(--border);
+  background:var(--green-pale);
+  cursor:pointer;
+  transition:.12s;
+}
+.addon-item:hover,.addon-item.on{background:var(--gold-light);border-color:var(--gold);}
+.addon-left{display:flex;align-items:center;gap:10px;font-size:13px;}
+.addon-left input{width:15px;height:15px;accent-color:var(--gold);cursor:pointer;}
+.addon-price{font-size:12px;font-weight:600;color:var(--gold);}
+
+/* ── CONDITION BAR ── */
+.cond-bar{display:flex;gap:6px;}
+.cond-btn {
+  flex:1;padding:8px 4px;text-align:center;
+  font-size:11px;font-weight:600;
+  border:1.5px solid var(--border);
+  border-radius:7px;
+  background:var(--green-pale);
+  cursor:pointer;
+  transition:.12s;
+  line-height:1.3;
+}
+.cond-btn:hover{border-color:var(--green-mid);}
+.cond-btn.sel-1{background:#d4edda;border-color:#2d7a47;color:#1a4a2e;}
+.cond-btn.sel-2{background:#fff3cd;border-color:#d4a017;color:#7a5c00;}
+.cond-btn.sel-3{background:#f8d7da;border-color:#c0392b;color:#7a1212;}
+
+/* ── STARS ── */
+.stars{display:flex;gap:6px;}
+.star{font-size:26px;cursor:pointer;color:#ddd;transition:.1s;user-select:none;}
+.star.on{color:var(--gold);}
+
+/* ── SUBMIT ── */
+.submit-row {
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--border);
+  gap:16px;flex-wrap:wrap;
+}
+.submit-note{font-size:12px;color:var(--muted);}
+.btn-submit {
+  background:var(--green);
+  color:#fff;
+  font-family:'Outfit',sans-serif;
+  font-size:15px;font-weight:600;
+  padding:13px 30px;
+  border:none;border-radius:9px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  transition:.15s;
+  box-shadow:0 4px 16px rgba(22,61,38,.2);
+}
+.btn-submit:hover{background:var(--green-mid);}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;}
+
+/* ── TOAST ── */
+.toast {
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:var(--green);color:#fff;
+  padding:13px 22px;border-radius:10px;
+  font-size:14px;font-weight:500;
+  box-shadow:0 8px 32px rgba(0,0,0,.18);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  z-index:999;display:flex;align-items:center;gap:10px;
+  white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.err{background:var(--red);}
+
+/* ── SUCCESS ── */
+.success-screen {
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:80px 24px;gap:14px;
+  max-width:500px;margin:0 auto;
+}
+.suc-icon{width:72px;height:72px;background:var(--green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;}
+.success-screen h2{font-family:'Fraunces',serif;font-size:28px;color:var(--green);}
+.success-screen p{color:var(--muted);font-size:14px;line-height:1.6;}
+.btn-new{margin-top:8px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;padding:11px 24px;border:none;border-radius:8px;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">E</div>
+    <div>
+      <div class="logo-name">ExcelChoice</div>
+      <div class="logo-tag">Building Maintenance</div>
+    </div>
+  </div>
+  <div class="badge">🔒 Internal · Walkthrough Tool</div>
+</header>
+
+<div style="max-width:1140px;margin:0 auto;padding:28px 24px 10px;">
+  <h1 style="font-family:'Fraunces',serif;font-size:28px;color:var(--green);margin-bottom:4px;">Site Walkthrough Form</h1>
+  <p style="color:var(--muted);font-size:13px;">Fill in during or after the site visit. Live quote updates as you go. Responses save to ExcelChoice's quoting sheet.</p>
+</div>
+
+<div class="layout" id="mainLayout">
+
+  <!-- ═══════════════════ FORM COLUMN ═══════════════════ -->
+  <div class="form-area" id="formPage">
+
+    <!-- S1: Who -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">Client Information</div>
+          <div class="section-sub">Business or homeowner details</div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label class="lbl">Business / Client Name <span class="req">*</span></label>
+          <input type="text" id="clientName" placeholder="e.g. Northwest Family Dental" />
+        </div>
+        <div class="field">
+          <label class="lbl">Contact Person</label>
+          <input type="text" id="contactPerson" placeholder="e.g. Dr. Sarah Ahmed" />
+        </div>
+        <div class="field">
+          <label class="lbl">Phone</label>
+          <input type="tel" id="phone" placeholder="(519) 000-0000" />
+        </div>
+        <div class="field">
+          <label class="lbl">Email</label>
+          <input type="email" id="email" placeholder="owner@business.com" />
+        </div>
+        <div class="field full">
+          <label class="lbl">Site Address <span class="req">*</span></label>
+          <input type="text" id="address" placeholder="123 Main St, London, ON N6A 1A1" />
+        </div>
+      </div>
+    </div>
+
+    <!-- S2: Property -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">Property Type & Service</div>
+          <div class="section-sub">Drives the live price estimate</div>
+        </div>
+      </div>
+
+      <div class="toggle-tabs">
+        <button class="tab-btn active" onclick="setType('Residential',this)">🏠 Residential</button>
+        <button class="tab-btn" onclick="setType('Commercial',this)">🏢 Commercial</button>
+      </div>
+
+      <!-- RESIDENTIAL fields -->
+      <div id="res-fields">
+        <div class="grid-3">
+          <div class="field">
+            <label class="lbl">Bedrooms <span class="req">*</span></label>
+            <select id="bedrooms" onchange="calcQuote()">
+              <option value="0">Studio / 0</option>
+              <option value="1">1 Bedroom</option>
+              <option value="2" selected>2 Bedrooms</option>
+              <option value="3">3 Bedrooms</option>
+              <option value="4">4 Bedrooms</option>
+              <option value="5">5+ Bedrooms</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="lbl">Bathrooms <span class="req">*</span></label>
+            <select id="bathrooms" onchange="calcQuote()">
+              <option value="1">1 Bathroom</option>
+              <option value="2" selected>2 Bathrooms</option>
+              <option value="3">3 Bathrooms</option>
+              <option value="4">4+ Bathrooms</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="lbl">Home Size <span class="hint">(approx)</span></label>
+            <select id="homeSize" onchange="calcQuote()">
+              <option value="small">Under 1,000 sqft</option>
+              <option value="med" selected>1,000 – 2,000 sqft</option>
+              <option value="large">2,000 – 3,500 sqft</option>
+              <option value="xlarge">3,500+ sqft</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMMERCIAL fields -->
+      <div id="com-fields" style="display:none;">
+        <div class="grid-3">
+          <div class="field">
+            <label class="lbl">Square Footage <span class="req">*</span></label>
+            <input type="number" id="sqft" placeholder="e.g. 3500" min="0" oninput="calcQuote()" />
+          </div>
+          <div class="field">
+            <label class="lbl">Number of Floors</label>
+            <input type="number" id="floors" placeholder="1" min="1" value="1" oninput="calcQuote()" />
+          </div>
+          <div class="field">
+            <label class="lbl">Industry Type</label>
+            <select id="industry" onchange="calcQuote()">
+              <option value="office">Office / Professional</option>
+              <option value="medical">Medical / Dental</option>
+              <option value="retail">Retail Store</option>
+              <option value="restaurant">Restaurant / Food</option>
+              <option value="industrial">Industrial / Warehouse</option>
+              <option value="gym">Gym / Fitness</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:14px;">
+        <div class="field">
+          <label class="lbl">Service Type <span class="req">*</span></label>
+          <select id="serviceType" onchange="calcQuote()">
+            <option value="standard">Standard / Maintenance Clean</option>
+            <option value="deep">Deep Clean</option>
+            <option value="moveinout">Move-in / Move-out</option>
+            <option value="postconstruction">Post-Construction</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="lbl">Frequency</label>
+          <select id="frequency" onchange="calcQuote()">
+            <option value="onetime">One-time</option>
+            <option value="weekly">Weekly</option>
+            <option value="biweekly">Bi-weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="lbl">Preferred Service Time</label>
+          <select id="serviceTime">
+            <option>Early Morning (6–9 AM)</option>
+            <option>Business Hours (9–5)</option>
+            <option>After Hours (5–10 PM)</option>
+            <option>Overnight</option>
+            <option>Weekends Only</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="lbl">Requested Start Date</label>
+          <input type="text" id="startDate" placeholder="e.g. ASAP or Apr 15" />
+        </div>
+      </div>
+    </div>
+
+    <!-- S3: Areas -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">Areas / Spaces</div>
+          <div class="section-sub">List each space — helps with quoting accuracy</div>
+        </div>
+      </div>
+      <div class="area-list" id="areaList"></div>
+      <button class="add-area-btn" onclick="addArea()">＋ Add Area / Room</button>
+    </div>
+
+    <!-- S4: Services -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">4</div>
+        <div>
+          <div class="section-title">Services Required</div>
+          <div class="section-sub">Check all that apply</div>
+        </div>
+      </div>
+      <div class="check-grid" id="serviceChecks">
+        <label class="chk"><input type="checkbox" value="General Cleaning" onchange="toggleChk(this)" /> General Cleaning</label>
+        <label class="chk"><input type="checkbox" value="Deep Cleaning" onchange="toggleChk(this)" /> Deep Cleaning</label>
+        <label class="chk"><input type="checkbox" value="Sweeping / Mopping" onchange="toggleChk(this)" /> Sweeping / Mopping</label>
+        <label class="chk"><input type="checkbox" value="Vacuuming" onchange="toggleChk(this)" /> Vacuuming</label>
+        <label class="chk"><input type="checkbox" value="Washroom Sanitization" onchange="toggleChk(this)" /> Washroom Sanitization</label>
+        <label class="chk"><input type="checkbox" value="Kitchen / Break Room" onchange="toggleChk(this)" /> Kitchen / Break Room</label>
+        <label class="chk"><input type="checkbox" value="Window Cleaning (Interior)" onchange="toggleChk(this)" /> Window Cleaning (Interior)</label>
+        <label class="chk"><input type="checkbox" value="Trash Removal" onchange="toggleChk(this)" /> Trash Removal</label>
+        <label class="chk"><input type="checkbox" value="Carpet Cleaning" onchange="toggleChk(this)" /> Carpet Cleaning</label>
+        <label class="chk"><input type="checkbox" value="Floor Stripping / Waxing" onchange="toggleChk(this)" /> Floor Stripping / Waxing</label>
+        <label class="chk"><input type="checkbox" value="Disinfection / Sanitization" onchange="toggleChk(this)" /> Disinfection / Sanitization</label>
+        <label class="chk"><input type="checkbox" value="Post-Construction Cleanup" onchange="toggleChk(this)" /> Post-Construction Cleanup</label>
+      </div>
+    </div>
+
+    <!-- S5: Add-ons -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">5</div>
+        <div>
+          <div class="section-title">Add-ons & Extras</div>
+          <div class="section-sub">Each adds to the quote automatically</div>
+        </div>
+      </div>
+      <div class="addon-grid">
+        <label class="addon-item" onclick="toggleAddon(this)">
+          <div class="addon-left"><input type="checkbox" data-price="45" /> Inside oven cleaning</div>
+          <span class="addon-price">+$45</span>
+        </label>
+        <label class="addon-item" onclick="toggleAddon(this)">
+          <div class="addon-left"><input type="checkbox" data-price="35" /> Inside fridge cleaning</div>
+          <span class="addon-price">+$35</span>
+        </label>
+        <label class="addon-item" onclick="toggleAddon(this)">
+          <div class="addon-left"><input type="checkbox" data-price="60" /> Inside cabinet cleaning</div>
+          <span class="addon-price">+$60</span>
+        </label>
+        <label class="addon-item" onclick="toggleAddon(this)">
+          <div class="addon-left"><input type="checkbox" data-price="80" /> Carpet steam cleaning</div>
+          <span class="addon-price">+$80</span>
+        </label>
+        <label class="addon-item" onclick="toggleAddon(this)">
+          <div class="addon-left"><input type="checkbox" data-price="50" /> Exterior window cleaning</div>
+          <span class="addon-price">+$50</span>
+        </label>
+        <label class="addon-item" onclick="toggleAddon(this)">
+          <div class="addon-left"><input type="checkbox" data-price="40" /> Garage cleaning</div>
+          <span class="addon-price">+$40</span>
+        </label>
+        <label class="addon-item" onclick="toggleAddon(this)">
+          <div class="addon-left"><input type="checkbox" data-price="55" /> Balcony / patio cleanup</div>
+          <span class="addon-price">+$55</span>
+        </label>
+        <label class="addon-item" onclick="toggleAddon(this)">
+          <div class="addon-left"><input type="checkbox" data-price="30" /> Supply / products provided by us</div>
+          <span class="addon-price">+$30</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- S6: Site Conditions -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">6</div>
+        <div>
+          <div class="section-title">Site Conditions</div>
+          <div class="section-sub">Helps adjust pricing and plan resources</div>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:16px;">
+        <label class="lbl">Current Cleanliness Condition</label>
+        <div class="cond-bar" id="condBar">
+          <div class="cond-btn sel-1" onclick="setCondition(1,this)">✅ Good<br/><span style="font-weight:400;font-size:10px;">Light work</span></div>
+          <div class="cond-btn" onclick="setCondition(2,this)">⚠️ Fair<br/><span style="font-weight:400;font-size:10px;">Moderate</span></div>
+          <div class="cond-btn" onclick="setCondition(3,this)">🔴 Poor<br/><span style="font-weight:400;font-size:10px;">Heavy duty</span></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label class="lbl">Access Method</label>
+          <select id="access">
+            <option>Key provided</option>
+            <option>Keypad / code</option>
+            <option>Fob / card</option>
+            <option>Client on-site</option>
+            <option>Building management</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="lbl">Parking / Entry Notes</label>
+          <input type="text" id="parking" placeholder="e.g. Free lot behind building" />
+        </div>
+        <div class="field full">
+          <label class="lbl">Hazards / Special Requirements</label>
+          <textarea id="hazards" placeholder="e.g. Medical waste bins — do not touch. Fragile equipment in lab area. Dog on premises."></textarea>
+        </div>
+        <div class="field full">
+          <label class="lbl">Walkthrough Observations</label>
+          <textarea id="observations" placeholder="What did you see on-site? Any quirks, concerns, or opportunities to upsell..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- S7: Internal -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">7</div>
+        <div>
+          <div class="section-title">Internal Estimate & Notes</div>
+          <div class="section-sub">For planning — not shown to client</div>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="field">
+          <label class="lbl">Est. Hours / Visit</label>
+          <input type="number" id="estHours" placeholder="e.g. 3.5" min="0" step="0.5" oninput="calcQuote()" />
+        </div>
+        <div class="field">
+          <label class="lbl">No. of Staff</label>
+          <input type="number" id="staffCount" placeholder="e.g. 2" min="1" oninput="calcQuote()" />
+        </div>
+        <div class="field">
+          <label class="lbl">Override Quote <span class="hint">($/visit)</span></label>
+          <input type="number" id="overrideQuote" placeholder="Leave blank = auto" min="0" oninput="calcQuote()" />
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px;">
+        <label class="lbl">Client Interest Level</label>
+        <div class="stars" id="stars">
+          <span class="star" onclick="setStar(1)">★</span>
+          <span class="star" onclick="setStar(2)">★</span>
+          <span class="star" onclick="setStar(3)">★</span>
+          <span class="star" onclick="setStar(4)">★</span>
+          <span class="star" onclick="setStar(5)">★</span>
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px;">
+        <label class="lbl">Internal Notes</label>
+        <textarea id="internalNotes" placeholder="Pricing rationale, follow-up plan, who to contact next..."></textarea>
+      </div>
+    </div>
+
+    <!-- S8: Rep -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">8</div>
+        <div>
+          <div class="section-title">Submitted By</div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label class="lbl">Your Name <span class="req">*</span></label>
+          <input type="text" id="repName" placeholder="e.g. Raja" />
+        </div>
+        <div class="field">
+          <label class="lbl">Walkthrough Date <span class="req">*</span></label>
+          <input type="text" id="walkthroughDate" />
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-row">
+      <span class="submit-note">🔒 Saves to ExcelChoice quoting sheet only. Not visible publicly.</span>
+      <button class="btn-submit" id="submitBtn" onclick="submitForm()">
+        <span id="submitLabel">Submit Walkthrough →</span>
+      </button>
+    </div>
+
+  </div><!-- /form-area -->
+
+  <!-- ═══════════════════ QUOTE PANEL ═══════════════════ -->
+  <div class="quote-panel" id="quotePanel">
+    <div class="qp-title">📋 Live Quote Estimate</div>
+
+    <div class="qp-row"><span class="qp-label">Property Type</span><span class="qp-val" id="qp-type">Residential</span></div>
+    <div class="qp-row"><span class="qp-label">Service</span><span class="qp-val" id="qp-service">Standard Clean</span></div>
+    <div class="qp-row"><span class="qp-label">Frequency</span><span class="qp-val" id="qp-freq">One-time</span></div>
+    <div class="qp-row"><span class="qp-label">Condition</span><span class="qp-val" id="qp-cond">Good</span></div>
+
+    <div class="qp-total">
+      <div class="qp-total-label">Estimated Total (incl. HST)</div>
+      <div class="qp-total-amount" id="qp-total">$0.00</div>
+      <div class="qp-total-sub">Ontario HST 13% included</div>
+    </div>
+
+    <div class="qp-range">
+      <div class="qp-range-label">Quote Range to Show Client</div>
+      <div class="qp-range-val" id="qp-range">$0 – $0 / visit</div>
+    </div>
+
+    <div class="qp-breakdown">
+      <div class="qp-bd-title">Breakdown</div>
+      <div class="qp-bd-item"><span>Base price</span><span id="bd-base">$0.00</span></div>
+      <div class="qp-bd-item"><span>Service multiplier</span><span id="bd-mult">×1.0</span></div>
+      <div class="qp-bd-item"><span>Condition adj.</span><span id="bd-cond">×1.0</span></div>
+      <div class="qp-bd-item"><span>Frequency discount</span><span id="bd-freq">–0%</span></div>
+      <div class="qp-bd-item"><span>Add-ons</span><span id="bd-addons">$0.00</span></div>
+      <div class="qp-bd-item"><span>HST (13%)</span><span id="bd-hst">$0.00</span></div>
+    </div>
+
+    <div class="qp-note">This is an internal estimate. Always review before quoting the client.</div>
+  </div>
+
+</div><!-- /layout -->
+
+<!-- Success -->
+<div class="success-screen" id="successScreen">
+  <div class="suc-icon">✅</div>
+  <h2>Walkthrough Saved!</h2>
+  <p>All details have been recorded in the ExcelChoice quoting sheet. You're good to follow up with the client.</p>
+  <button class="btn-new" onclick="resetForm()">+ Log Another Walkthrough</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── CONFIG ────────────────────────────────────────────
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwmGI58k0JqBPi1SeNNUVa5NlrQKHjrCiJe_MLRASAP_zNg1P7u-trvhcQL2u4CAPar/exec";
+
+// ─── STATE ─────────────────────────────────────────────
+let propertyType = "Residential";
+let conditionLevel = 1;   // 1=Good 2=Fair 3=Poor
+let starRating = 0;
+let areaCount = 0;
+
+// ─── PROPERTY TYPE TOGGLE ──────────────────────────────
+function setType(t, btn) {
+  propertyType = t;
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("res-fields").style.display = t === "Residential" ? "" : "none";
+  document.getElementById("com-fields").style.display = t === "Commercial" ? "" : "none";
+  calcQuote();
+}
+
+// ─── CONDITION ─────────────────────────────────────────
+function setCondition(level, btn) {
+  conditionLevel = level;
+  document.querySelectorAll(".cond-btn").forEach(b => b.className = "cond-btn");
+  btn.classList.add("sel-" + level);
+  calcQuote();
+}
+
+// ─── AREAS ─────────────────────────────────────────────
+function addArea(name="", sqft="", cond="") {
+  areaCount++;
+  const id = "ar_" + areaCount;
+  const list = document.getElementById("areaList");
+  const row = document.createElement("div");
+  row.className = "area-row"; row.id = id;
+  row.innerHTML = `
+    <div><div class="area-lbl">Area / Room</div>
+      <input type="text" placeholder="e.g. Reception, Washroom" value="${name}" /></div>
+    <div><div class="area-lbl">Sq Ft</div>
+      <input type="number" placeholder="200" value="${sqft}" min="0" /></div>
+    <div><div class="area-lbl">Condition</div>
+      <select><option value="">–</option><option>Good</option><option>Fair</option><option>Poor</option></select></div>
+    <button class="rm-btn" onclick="document.getElementById('${id}').remove()" title="Remove">✕</button>`;
+  list.appendChild(row);
+}
+
+function getAreas() {
+  return Array.from(document.querySelectorAll(".area-row")).map(r => {
+    const inp = r.querySelectorAll("input,select");
+    return `${inp[0].value||"–"} (${inp[1].value||"?"}sqft, ${inp[2].value||"?"})`;
+  }).join(" | ") || "None listed";
+}
+
+// ─── CHECKBOXES ────────────────────────────────────────
+function toggleChk(el) { el.closest(".chk").classList.toggle("on", el.checked); }
+function getServices() {
+  return Array.from(document.querySelectorAll("#serviceChecks input:checked")).map(c=>c.value).join(", ") || "None";
+}
+
+// ─── ADD-ONS ───────────────────────────────────────────
+function toggleAddon(label) {
+  const cb = label.querySelector("input[type=checkbox]");
+  cb.checked = !cb.checked;
+  label.classList.toggle("on", cb.checked);
+  calcQuote();
+}
+function getAddonTotal() {
+  return Array.from(document.querySelectorAll(".addon-item input:checked"))
+    .reduce((s,c) => s + parseFloat(c.dataset.price||0), 0);
+}
+function getAddonList() {
+  return Array.from(document.querySelectorAll(".addon-item input:checked"))
+    .map(c => c.closest(".addon-item").querySelector(".addon-left").textContent.trim()).join(", ") || "None";
+}
+
+// ─── STARS ─────────────────────────────────────────────
+function setStar(n) {
+  starRating = n;
+  document.querySelectorAll(".star").forEach((s,i) => s.classList.toggle("on", i<n));
+}
+
+// ─── LIVE QUOTE CALCULATOR ─────────────────────────────
+// Pricing model (adjust these to match your real rates)
+const PRICING = {
+  residential: {
+    bedBase:   { 0:80, 1:100, 2:130, 3:160, 4:190, 5:220 },
+    bathBase:  { 1:40, 2:70, 3:100, 4:130 },
+    sizeAdj:   { small:-10, med:0, large:30, xlarge:70 },
+  },
+  commercial: {
+    ratePerSqft: { office:0.12, medical:0.16, retail:0.11, restaurant:0.14, industrial:0.08, gym:0.13 },
+    floorAdj: 0.85, // each extra floor gets 85% of the per-sqft rate (overlap/efficiencies)
+  },
+  serviceMultiplier: { standard:1.0, deep:1.55, moveinout:1.70, postconstruction:1.80 },
+  conditionMultiplier: { 1:1.0, 2:1.20, 3:1.45 },
+  frequencyDiscount:  { onetime:0, weekly:0.15, biweekly:0.10, monthly:0.05 },
+};
+
+function calcQuote() {
+  let base = 0;
+
+  if (propertyType === "Residential") {
+    const beds  = parseInt(document.getElementById("bedrooms").value) || 0;
+    const baths = parseInt(document.getElementById("bathrooms").value) || 1;
+    const size  = document.getElementById("homeSize").value;
+    const bedPay  = PRICING.residential.bedBase[Math.min(beds,5)] || 100;
+    const bathPay = PRICING.residential.bathBase[Math.min(baths,4)] || 40;
+    const sizeAdj = PRICING.residential.sizeAdj[size] || 0;
+    base = bedPay + bathPay + sizeAdj;
+  } else {
+    const sqft    = parseFloat(document.getElementById("sqft").value) || 0;
+    const floors  = parseInt(document.getElementById("floors").value) || 1;
+    const industry= document.getElementById("industry").value;
+    const rate    = PRICING.commercial.ratePerSqft[industry] || 0.12;
+    const floorAdj= PRICING.commercial.floorAdj;
+    // First floor full rate, extra floors at reduced rate
+    base = sqft * rate;
+    if (floors > 1) base += sqft * rate * floorAdj * (floors - 1);
+  }
+
+  const svcKey  = document.getElementById("serviceType").value;
+  const freqKey = document.getElementById("frequency").value;
+  const override= parseFloat(document.getElementById("overrideQuote").value) || 0;
+
+  const svcMult  = PRICING.serviceMultiplier[svcKey]  || 1;
+  const condMult = PRICING.conditionMultiplier[conditionLevel] || 1;
+  const freqDisc = PRICING.frequencyDiscount[freqKey] || 0;
+  const addons   = getAddonTotal();
+
+  let subtotal = base * svcMult * condMult * (1 - freqDisc) + addons;
+  if (override > 0) subtotal = override;
+
+  const hst   = subtotal * 0.13;
+  const total  = subtotal + hst;
+  const low    = Math.round(subtotal * 0.9 / 5) * 5;
+  const high   = Math.round(subtotal * 1.15 / 5) * 5;
+
+  // Update panel
+  const svcLabels = {standard:"Standard Clean",deep:"Deep Clean",moveinout:"Move-in / Move-out",postconstruction:"Post-Construction"};
+  const freqLabels = {onetime:"One-time",weekly:"Weekly",biweekly:"Bi-weekly",monthly:"Monthly"};
+  const condLabels = {1:"Good ✅",2:"Fair ⚠️",3:"Poor 🔴"};
+
+  set("qp-type",    propertyType);
+  set("qp-service", svcLabels[svcKey]   || svcKey);
+  set("qp-freq",    freqLabels[freqKey] || freqKey);
+  set("qp-cond",    condLabels[conditionLevel]);
+  set("qp-total",   "$" + total.toFixed(2));
+  set("qp-range",   "$" + low + " – $" + high + " / visit");
+  set("bd-base",    "$" + base.toFixed(2));
+  set("bd-mult",    "×" + svcMult.toFixed(2));
+  set("bd-cond",    "×" + condMult.toFixed(2));
+  set("bd-freq",    "–" + (freqDisc*100).toFixed(0) + "%");
+  set("bd-addons",  "$" + addons.toFixed(2));
+  set("bd-hst",     "$" + hst.toFixed(2));
+}
+
+function set(id, val) { const el=document.getElementById(id); if(el) el.textContent=val; }
+
+// ─── SUBMIT ────────────────────────────────────────────
+function v(id) { const el=document.getElementById(id); return el?el.value.trim():""; }
+
+function showToast(msg, err=false) {
+  const t=document.getElementById("toast");
+  t.textContent=(err?"⚠️ ":"✅ ")+msg;
+  t.className="toast"+(err?" err":"")+" show";
+  setTimeout(()=>t.className="toast",3500);
+}
+
+async function submitForm() {
+  if (!v("clientName"))      return showToast("Client name is required.", true);
+  if (!v("address"))         return showToast("Site address is required.", true);
+  if (!v("repName"))         return showToast("Your name is required.", true);
+  if (!v("walkthroughDate")) return showToast("Walkthrough date is required.", true);
+
+  const btn=document.getElementById("submitBtn");
+  const lbl=document.getElementById("submitLabel");
+  btn.disabled=true; lbl.textContent="Submitting…";
+
+  // Read final quote values
+  const totalEl = document.getElementById("qp-total");
+  const rangeEl = document.getElementById("qp-range");
+
+  const payload = {
+    timestamp:        new Date().toISOString(),
+    walkthroughDate:  v("walkthroughDate"),
+    repName:          v("repName"),
+    clientName:       v("clientName"),
+    contactPerson:    v("contactPerson"),
+    phone:            v("phone"),
+    email:            v("email"),
+    address:          v("address"),
+    propertyType:     propertyType,
+    serviceType:      v("serviceType"),
+    frequency:        v("frequency"),
+    serviceTime:      v("serviceTime"),
+    startDate:        v("startDate"),
+    bedrooms:         v("bedrooms"),
+    bathrooms:        v("bathrooms"),
+    homeSize:         v("homeSize"),
+    sqft:             v("sqft"),
+    floors:           v("floors"),
+    industry:         v("industry"),
+    conditionLevel:   ["","Good","Fair","Poor"][conditionLevel],
+    areas:            getAreas(),
+    services:         getServices(),
+    addons:           getAddonList(),
+    hazards:          v("hazards"),
+    observations:     v("observations"),
+    access:           v("access"),
+    parking:          v("parking"),
+    estHours:         v("estHours"),
+    staffCount:       v("staffCount"),
+    overrideQuote:    v("overrideQuote"),
+    estimatedTotal:   totalEl ? totalEl.textContent : "",
+    quoteRange:       rangeEl ? rangeEl.textContent : "",
+    clientInterest:   starRating + "/5",
+    internalNotes:    v("internalNotes"),
+  };
+
+  try {
+    if (SHEET_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
+      await new Promise(r=>setTimeout(r,900));
+      console.log("DEMO — payload:", payload);
+    } else {
+      const res = await fetch(SHEET_URL, { method:"POST", body:JSON.stringify(payload) });
+      if (!res.ok) throw new Error("Server error");
+    }
+    document.getElementById("formPage").style.display="none";
+    document.getElementById("quotePanel").style.display="none";
+    const ss=document.getElementById("successScreen");
+    ss.style.display="flex";
+  } catch(e) {
+    showToast("Could not submit. Check your Sheet URL or connection.", true);
+    btn.disabled=false; lbl.textContent="Submit Walkthrough →";
+  }
+}
+
+// ─── RESET ─────────────────────────────────────────────
+function resetForm() {
+  document.getElementById("successScreen").style.display="none";
+  document.getElementById("formPage").style.display="";
+  document.getElementById("quotePanel").style.display="";
+  document.querySelectorAll("input[type=text],input[type=tel],input[type=email],input[type=number]").forEach(i=>{
+    if(i.id!=="walkthroughDate") i.value="";
+  });
+  document.querySelectorAll("select").forEach(s=>s.selectedIndex=0);
+  document.querySelectorAll("textarea").forEach(t=>t.value="");
+  document.querySelectorAll("input[type=checkbox]").forEach(c=>{c.checked=false;});
+  document.querySelectorAll(".chk").forEach(c=>c.classList.remove("on"));
+  document.querySelectorAll(".addon-item").forEach(a=>a.classList.remove("on"));
+  document.getElementById("areaList").innerHTML="";
+  areaCount=0;
+  conditionLevel=1;
+  starRating=0;
+  document.querySelectorAll(".star").forEach(s=>s.classList.remove("on"));
+  document.querySelectorAll(".cond-btn").forEach((b,i)=>{ b.className="cond-btn"+(i===0?" sel-1":""); });
+  propertyType="Residential";
+  document.querySelectorAll(".tab-btn").forEach((b,i)=>{b.classList.toggle("active",i===0);});
+  document.getElementById("res-fields").style.display="";
+  document.getElementById("com-fields").style.display="none";
+  document.getElementById("submitBtn").disabled=false;
+  document.getElementById("submitLabel").textContent="Submit Walkthrough →";
+  initAreas(); calcQuote();
+}
+
+// ─── INIT ──────────────────────────────────────────────
+function initAreas() {
+  addArea("Reception / Lobby","","");
+  addArea("Washroom","","");
+  addArea("Main Work Area","","");
+}
+
+document.getElementById("walkthroughDate").value =
+  new Date().toLocaleDateString("en-CA",{year:"numeric",month:"short",day:"numeric"});
+
+initAreas();
+calcQuote();
+</script>
+</body>
+</html>

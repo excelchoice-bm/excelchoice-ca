@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExcelChoice — Job Log</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:        #0B1F3A;
+  --navy-mid:    #132D54;
+  --navy-light:  #1E3F6E;
+  --gold:        #C49A28;
+  --gold-light:  #E2B84A;
+  --gold-pale:   #F5E8C0;
+  --white:       #FFFFFF;
+  --off-white:   #F8F6F1;
+  --slate:       #8A9BB0;
+  --slate-light: #D4DBE6;
+  --charcoal:    #4A5A6A;
+  --text-dark:   #1A2A3A;
+  --text-body:   #4A5A6A;
+  --text-muted:  #8A9BB0;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Nunito Sans', sans-serif;
+  --radius: 10px;
+  --green: #15803d;
+  --green-bg: #dcfce7;
+  --red: #dc2626;
+  --red-bg: #fee2e2;
+  --amber: #C49A28;
+  --amber-bg: #F5E8C0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--off-white);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--navy);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(11,31,58,0.3);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.3px;
+}
+.logo span { color: var(--gold-light); }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-tag {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  background: rgba(196,154,40,0.15);
+  border: 1px solid rgba(196,154,40,0.35);
+  padding: 5px 12px;
+  border-radius: 4px;
+}
+
+/* ── GOLD BAR ── */
+.gold-bar { height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent); }
+
+/* ── PROGRESS ── */
+.progress-wrap {
+  background: var(--slate-light);
+  height: 3px;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+/* ── CONTAINER ── */
+.container { max-width: 640px; margin: 0 auto; padding: 36px 20px; }
+
+/* ── PAGE INTRO ── */
+.page-intro {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.page-intro::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; right: -30px;
+  width: 120px; height: 120px;
+  border: 22px solid rgba(196,154,40,0.10);
+  border-radius: 50%;
+}
+.page-intro .eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 6px;
+}
+.page-intro h1 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.page-intro p { font-size: 13px; color: var(--slate); line-height: 1.5; }
+
+/* ── SECTION HEADER ── */
+.section-header { margin-bottom: 20px; }
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.section-desc { font-size: 13px; color: var(--text-muted); }
+
+/* ── SECTION BLOCK ── */
+.section-block {
+  background: var(--white);
+  border: 1px solid var(--slate-light);
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.accent-line {
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  border-radius: 2px;
+  margin-bottom: 24px;
+}
+
+/* ── FIELD ── */
+.field { margin-bottom: 20px; }
+.field:last-child { margin-bottom: 0; }
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 7px;
+}
+.field label .req { color: var(--gold); }
+.field .hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  background: var(--off-white);
+  border: 1.5px solid var(--slate-light);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(196,154,40,0.12);
+  background: var(--white);
+}
+textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
+select option { background: var(--white); }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
+
+/* ── TOGGLE GROUP ── */
+.toggle-group { display: flex; gap: 8px; flex-wrap: wrap; }
+.toggle-group input[type="radio"],
+.toggle-group input[type="checkbox"] { display: none; }
+.toggle-group label {
+  cursor: pointer;
+  background: var(--off-white);
+  border: 1.5px solid var(--slate-light);
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.15s;
+  margin-bottom: 0;
+}
+.toggle-group input[type="radio"]:checked + label,
+.toggle-group input[type="checkbox"]:checked + label {
+  background: var(--gold-pale);
+  border-color: var(--gold);
+  color: var(--navy);
+}
+.toggle-group label:hover { border-color: var(--slate); color: var(--text-dark); }
+
+/* ── CONDITIONAL ── */
+.conditional {
+  display: none;
+  margin-top: 16px;
+  padding: 18px;
+  background: var(--off-white);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.conditional.show { display: block; }
+.conditional-red { border-left-color: var(--red); }
+
+/* ── VOICE BLOCK ── */
+.voice-block {
+  background: var(--off-white);
+  border: 1.5px solid var(--slate-light);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.voice-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+
+.btn-record {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--navy);
+  border: none;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.15s;
+}
+.btn-record:hover { background: var(--navy-light); }
+.btn-record.recording {
+  background: var(--red);
+  animation: pulse 1.2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+.record-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-light); flex-shrink: 0; }
+.btn-record.recording .record-dot { background: var(--white); }
+
+.voice-timer { font-size: 12px; color: var(--text-muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+.voice-status { font-size: 11px; color: var(--text-muted); font-style: italic; margin-bottom: 8px; min-height: 16px; }
+.voice-status.active { color: var(--red); font-weight: 700; font-style: normal; }
+.voice-status.done   { color: var(--green); font-weight: 700; font-style: normal; }
+
+.voice-transcript {
+  background: var(--white);
+  border: 1px solid var(--slate-light);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 56px;
+}
+.voice-transcript.empty { color: var(--text-muted); font-style: italic; }
+
+/* ── CHIPS ── */
+.chip-input-wrap { display: flex; gap: 8px; margin-bottom: 10px; }
+.chip-input-wrap input { flex: 1; }
+.btn-add-chip {
+  background: var(--navy);
+  border: none;
+  color: var(--gold-light);
+  font-size: 22px;
+  padding: 0 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-weight: 300;
+  line-height: 1;
+}
+.btn-add-chip:hover { background: var(--navy-light); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  background: var(--gold-pale);
+  border: 1px solid var(--gold);
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chip button { background: none; border: none; color: var(--charcoal); cursor: pointer; font-size: 14px; line-height: 1; padding: 0; opacity: 0.5; }
+.chip button:hover { opacity: 1; }
+
+/* ── SUBMIT ── */
+.submit-block { margin-top: 28px; }
+.btn-submit {
+  width: 100%;
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  padding: 17px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  letter-spacing: -0.2px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.btn-submit::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+.btn-submit:hover { background: var(--navy-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(11,31,58,0.25); }
+.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-submit .arrow { color: var(--gold-light); font-size: 20px; }
+
+.submit-note {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* ── SUCCESS ── */
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+}
+.success-screen.show { display: block; }
+.success-icon { font-size: 52px; margin-bottom: 16px; }
+.success-screen h2 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.success-screen p { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+.btn-new {
+  background: var(--white);
+  border: 2px solid var(--navy);
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-new:hover { background: var(--navy); color: var(--white); }
+
+/* ── LOADING ── */
+.loading-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11,31,58,0.75);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+}
+.loading-overlay.show { display: flex; }
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top-color: var(--gold-light);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-overlay p { font-size: 13px; color: var(--slate); font-weight: 600; letter-spacing: 0.5px; }
+
+/* ── INFO BOX ── */
+.info-box {
+  display: flex;
+  gap: 10px;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+.info-box .icon { font-size: 15px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">Excel<span>Choice</span></div>
+  <div class="header-right">
+    <div class="header-tag">Job Log</div>
+  </div>
+</div>
+<div class="gold-bar"></div>
+<div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p>Submitting job log...</p>
+</div>
+
+<div class="container">
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✅</div>
+    <h2>Job Logged.</h2>
+    <p>Your debrief has been sent to the ExcelChoice weekly operations report.</p>
+    <button class="btn-new" onclick="resetForm()">Log Another Job</button>
+  </div>
+
+  <!-- FORM -->
+  <form id="jobForm" onsubmit="handleSubmit(event)">
+
+    <div class="page-intro">
+      <div class="eyebrow">Field Debrief</div>
+      <h1>Job Log</h1>
+      <p>Complete this after every job. Takes under 3 minutes. Your input directly improves next week's operations.</p>
+    </div>
+
+    <!-- S1: JOB DETAILS -->
+    <div class="section-block">
+      <div class="accent-line"></div>
+      <div class="section-header">
+        <div class="section-eyebrow">Section 01</div>
+        <div class="section-title">Job Details</div>
+        <div class="section-desc">Who, where, and when.</div>
+      </div>
+      <div class="info-box">
+        <span class="icon">🔒</span>
+        <span>All entries go directly to the ExcelChoice weekly operations sheet. Only management can view the full report.</span>
+      </div>
+      <div class="field">
+        <label>Your Name <span class="req">*</span></label>
+        <input type="text" id="workerName" placeholder="e.g. James, Priya, Raja" required>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Job Date <span class="req">*</span></label>
+          <input type="date" id="jobDate" required>
+        </div>
+        <div class="field">
+          <label>Job Type <span class="req">*</span></label>
+          <select id="jobType" required>
+            <option value="">Select...</option>
+            <option>Residential</option>
+            <option>Commercial</option>
+            <option>Move-in / Move-out</option>
+            <option>Post-construction</option>
+            <option>Deep Clean</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Client / Location <span class="req">*</span></label>
+        <input type="text" id="clientName" placeholder="e.g. Smith Residence, Northwest Dental" required>
+      </div>
+    </div>
+
+    <!-- S2: HOW DID IT GO -->
+    <div class="section-block">
+      <div class="accent-line"></div>
+      <div class="section-header">
+        <div class="section-eyebrow">Section 02</div>
+        <div class="section-title">How Did It Go?</div>
+        <div class="section-desc">Overall quality and what went well.</div>
+      </div>
+      <div class="field">
+        <label>Job Completion Status <span class="req">*</span></label>
+        <div class="toggle-group">
+          <input type="radio" name="completion" id="c1" value="Fully Complete" onchange="toggleConditional('completionDetail', false)">
+          <label for="c1">✅ Fully Complete</label>
+          <input type="radio" name="completion" id="c2" value="Mostly Complete" onchange="toggleConditional('completionDetail', true)">
+          <label for="c2">⚠️ Mostly Complete</label>
+          <input type="radio" name="completion" id="c3" value="Incomplete" onchange="toggleConditional('completionDetail', true)">
+          <label for="c3">❌ Incomplete</label>
+        </div>
+        <div class="conditional" id="completionDetail">
+          <div class="field">
+            <label>What was left and why?</label>
+            <textarea id="completionNote" placeholder="e.g. Ran out of time on the basement — floors had heavy buildup..."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>What went well on this job?</label>
+        <div class="hint">Voice note or type — aim for 2–3 sentences</div>
+        <div class="voice-block">
+          <div class="voice-controls">
+            <button type="button" class="btn-record" id="recordBtn1" onclick="toggleRecording('wellNote','recordBtn1','voiceStatus1','timer1')">
+              <div class="record-dot"></div> Record
+            </button>
+            <span class="voice-timer" id="timer1">0:00</span>
+          </div>
+          <div class="voice-status" id="voiceStatus1">Tap to record, or type below</div>
+          <div class="voice-transcript empty" id="wellNoteDisplay">Transcript will appear here...</div>
+          <input type="hidden" id="wellNote">
+        </div>
+        <textarea id="wellNoteText" placeholder="Or type here..." style="margin-top:8px;"></textarea>
+      </div>
+    </div>
+
+    <!-- S3: REDO -->
+    <div class="section-block">
+      <div class="accent-line"></div>
+      <div class="section-header">
+        <div class="section-eyebrow">Section 03</div>
+        <div class="section-title">Redo & Return Flags</div>
+        <div class="section-desc">Every redo costs time and money. Flag it honestly so we fix it at the system level.</div>
+      </div>
+      <div class="field">
+        <label>Do we need to return or redo anything? <span class="req">*</span></label>
+        <div class="toggle-group">
+          <input type="radio" name="redo" id="r1" value="No" onchange="toggleConditional('redoDetail', false)">
+          <label for="r1">No — job is clean</label>
+          <input type="radio" name="redo" id="r2" value="Yes" onchange="toggleConditional('redoDetail', true)">
+          <label for="r2">Yes — flagging a redo</label>
+        </div>
+        <div class="conditional conditional-red" id="redoDetail">
+          <div class="field">
+            <label>What specifically needs to be redone?</label>
+            <div class="voice-block">
+              <div class="voice-controls">
+                <button type="button" class="btn-record" id="recordBtn2" onclick="toggleRecording('redoNote','recordBtn2','voiceStatus2','timer2')">
+                  <div class="record-dot"></div> Record
+                </button>
+                <span class="voice-timer" id="timer2">0:00</span>
+              </div>
+              <div class="voice-status" id="voiceStatus2">Tap to record, or type below</div>
+              <div class="voice-transcript empty" id="redoNoteDisplay">e.g. "Missed the dryer filter and door seal..."</div>
+              <input type="hidden" id="redoNote">
+            </div>
+            <textarea id="redoNoteText" placeholder="Or type here..." style="margin-top:8px;"></textarea>
+          </div>
+          <div class="field">
+            <label>Root Cause <span class="req">*</span></label>
+            <select id="rootCause">
+              <option value="">Select root cause...</option>
+              <option>Missed during cleaning — overlooked the spot</option>
+              <option>Wrong product used</option>
+              <option>Tool not available / forgot to bring</option>
+              <option>Not enough time — job underquoted</option>
+              <option>Miscommunication — client expected something different</option>
+              <option>First visit — didn't know the layout</option>
+              <option>Physical access issue</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>How do we prevent this next time?</label>
+            <textarea id="preventNote" placeholder="e.g. Add dryer filter to the residential checklist..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S4: SUPPLIES -->
+    <div class="section-block">
+      <div class="accent-line"></div>
+      <div class="section-header">
+        <div class="section-eyebrow">Section 04</div>
+        <div class="section-title">Supplies & Tools</div>
+        <div class="section-desc">Flag anything low, missing, or needed.</div>
+      </div>
+      <div class="field">
+        <label>Did anything run low or run out? <span class="req">*</span></label>
+        <div class="toggle-group">
+          <input type="radio" name="supplies" id="s1" value="No" onchange="toggleConditional('suppliesDetail', false)">
+          <label for="s1">All good</label>
+          <input type="radio" name="supplies" id="s2" value="Yes" onchange="toggleConditional('suppliesDetail', true)">
+          <label for="s2">Flag items</label>
+        </div>
+        <div class="conditional" id="suppliesDetail">
+          <div class="field">
+            <label>Add items to the buy list</label>
+            <div class="hint">Type item + press + to add</div>
+            <div class="chip-input-wrap">
+              <input type="text" id="supplyInput" placeholder="e.g. Microfibre cloths, Degreaser..." onkeydown="if(event.key==='Enter'){event.preventDefault();addChip();}">
+              <button type="button" class="btn-add-chip" onclick="addChip()">+</button>
+            </div>
+            <div class="chips" id="chipContainer"></div>
+            <input type="hidden" id="suppliesList">
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label>Tools or equipment you wished you had?</label>
+            <textarea id="toolWishlist" placeholder="e.g. A second set of brushes, smaller vacuum..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S5: CLIENT SIGNAL -->
+    <div class="section-block">
+      <div class="accent-line"></div>
+      <div class="section-header">
+        <div class="section-eyebrow">Section 05</div>
+        <div class="section-title">Client Signal</div>
+        <div class="section-desc">How did the client feel? This feeds our review pipeline.</div>
+      </div>
+      <div class="field">
+        <label>Client mood at end of job <span class="req">*</span></label>
+        <div class="toggle-group">
+          <input type="radio" name="clientMood" id="m1" value="Very Happy"><label for="m1">😊 Very Happy</label>
+          <input type="radio" name="clientMood" id="m2" value="Happy"><label for="m2">🙂 Happy</label>
+          <input type="radio" name="clientMood" id="m3" value="Neutral"><label for="m3">😐 Neutral</label>
+          <input type="radio" name="clientMood" id="m4" value="Concerned"><label for="m4">😟 Concerned</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Did the client say anything specific?</label>
+        <textarea id="clientComment" placeholder="Good or bad — great intel for follow-ups and reviews..."></textarea>
+      </div>
+      <div class="field">
+        <label>Review potential</label>
+        <div class="toggle-group">
+          <input type="radio" name="reviewPotential" id="rp1" value="High — ask now"><label for="rp1">⭐ High — ask now</label>
+          <input type="radio" name="reviewPotential" id="rp2" value="Maybe — follow up later"><label for="rp2">Maybe — follow up</label>
+          <input type="radio" name="reviewPotential" id="rp3" value="Not yet"><label for="rp3">Not yet</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- S6: FINAL NOTE -->
+    <div class="section-block">
+      <div class="accent-line"></div>
+      <div class="section-header">
+        <div class="section-eyebrow">Section 06</div>
+        <div class="section-title">Anything Else?</div>
+        <div class="section-desc">Voice or type — optional but valued.</div>
+      </div>
+      <div class="field">
+        <div class="voice-block">
+          <div class="voice-controls">
+            <button type="button" class="btn-record" id="recordBtn3" onclick="toggleRecording('finalNote','recordBtn3','voiceStatus3','timer3')">
+              <div class="record-dot"></div> Record
+            </button>
+            <span class="voice-timer" id="timer3">0:00</span>
+          </div>
+          <div class="voice-status" id="voiceStatus3">Optional — tap to record or type below</div>
+          <div class="voice-transcript empty" id="finalNoteDisplay">Transcript will appear here...</div>
+          <input type="hidden" id="finalNote">
+        </div>
+        <textarea id="finalNoteText" placeholder="Or type here..." style="margin-top:8px;"></textarea>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-block">
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span>Submit Job Log</span>
+        <span class="arrow">→</span>
+      </button>
+      <div class="submit-note">Data goes directly to ExcelChoice Google Sheets · excelchoice.ca</div>
+    </div>
+
+  </form>
+</div>
+
+<script>
+const SHEET_ENDPOINT = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+document.getElementById('jobDate').valueAsDate = new Date();
+
+function updateProgress() {
+  const required = ['workerName','jobDate','jobType','clientName'];
+  let filled = required.filter(id => document.getElementById(id)?.value).length;
+  const radios = ['completion','redo','supplies','clientMood'];
+  radios.forEach(n => { if (document.querySelector(`input[name="${n}"]:checked`)) filled++; });
+  document.getElementById('progressFill').style.width = (filled / (required.length + radios.length) * 100) + '%';
+}
+document.querySelectorAll('input,select,textarea').forEach(el => {
+  el.addEventListener('change', updateProgress);
+  el.addEventListener('input', updateProgress);
+});
+
+function toggleConditional(id, show) {
+  document.getElementById(id).classList.toggle('show', show);
+}
+
+let activeRecognition = null, timerInterval = null, timerSeconds = 0;
+
+function toggleRecording(fieldId, btnId, statusId, timerId) {
+  if (activeRecognition) { stopRecording(btnId, statusId, timerId); return; }
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    document.getElementById(statusId).textContent = "⚠️ Voice not supported — please type below.";
+    return;
+  }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SR();
+  recognition.continuous = true; recognition.interimResults = true; recognition.lang = 'en-CA';
+  const btn = document.getElementById(btnId);
+  const status = document.getElementById(statusId);
+  const display = document.getElementById(fieldId + 'Display');
+  const hidden = document.getElementById(fieldId);
+  btn.classList.add('recording');
+  btn.innerHTML = '<div class="record-dot"></div> Stop';
+  status.textContent = '🔴 Recording — speak now...';
+  status.className = 'voice-status active';
+  if (display) display.classList.remove('empty');
+  timerSeconds = 0;
+  timerInterval = setInterval(() => {
+    timerSeconds++;
+    const m = Math.floor(timerSeconds/60), s = timerSeconds%60;
+    document.getElementById(timerId).textContent = `${m}:${s.toString().padStart(2,'0')}`;
+  }, 1000);
+  let finalTranscript = '';
+  recognition.onresult = (e) => {
+    let interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) finalTranscript += e.results[i][0].transcript + ' ';
+      else interim += e.results[i][0].transcript;
+    }
+    const full = finalTranscript + interim;
+    if (display) display.textContent = full || 'Listening...';
+    if (hidden) hidden.value = finalTranscript.trim();
+    updateProgress();
+  };
+  recognition.onerror = () => stopRecording(btnId, statusId, timerId);
+  recognition.onend = () => { if (activeRecognition) stopRecording(btnId, statusId, timerId); };
+  recognition.start();
+  activeRecognition = { recognition, fieldId, btnId };
+}
+
+function stopRecording(btnId, statusId, timerId) {
+  if (activeRecognition) { activeRecognition.recognition.stop(); activeRecognition = null; }
+  clearInterval(timerInterval);
+  const btn = document.getElementById(btnId);
+  btn.classList.remove('recording');
+  btn.innerHTML = '<div class="record-dot"></div> Record Again';
+  document.getElementById(statusId).textContent = '✓ Transcribed — edit below or re-record.';
+  document.getElementById(statusId).className = 'voice-status done';
+}
+
+let chips = [];
+function addChip() {
+  const input = document.getElementById('supplyInput');
+  const val = input.value.trim();
+  if (!val) return;
+  chips.push(val); input.value = ''; renderChips();
+}
+function removeChip(i) { chips.splice(i,1); renderChips(); }
+function renderChips() {
+  document.getElementById('chipContainer').innerHTML = chips.map((c,i) =>
+    `<div class="chip">${c}<button onclick="removeChip(${i})" type="button">×</button></div>`).join('');
+  document.getElementById('suppliesList').value = chips.join(', ');
+}
+
+const merge = (v,t) => {
+  const voice = document.getElementById(v)?.value?.trim()||'';
+  const typed = document.getElementById(t)?.value?.trim()||'';
+  return voice && typed ? `${voice} | ${typed}` : voice || typed;
+};
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const data = {
+    timestamp: new Date().toLocaleString('en-CA',{timeZone:'America/Toronto'}),
+    workerName: document.getElementById('workerName').value,
+    jobDate: document.getElementById('jobDate').value,
+    jobType: document.getElementById('jobType').value,
+    clientName: document.getElementById('clientName').value,
+    completion: document.querySelector('input[name="completion"]:checked')?.value||'',
+    completionNote: document.getElementById('completionNote')?.value||'',
+    whatWentWell: merge('wellNote','wellNoteText'),
+    redoFlag: document.querySelector('input[name="redo"]:checked')?.value||'',
+    redoDetail: merge('redoNote','redoNoteText'),
+    rootCause: document.getElementById('rootCause')?.value||'',
+    preventNote: document.getElementById('preventNote')?.value||'',
+    suppliesFlag: document.querySelector('input[name="supplies"]:checked')?.value||'',
+    suppliesList: document.getElementById('suppliesList')?.value||'',
+    toolWishlist: document.getElementById('toolWishlist')?.value||'',
+    clientMood: document.querySelector('input[name="clientMood"]:checked')?.value||'',
+    clientComment: document.getElementById('clientComment')?.value||'',
+    reviewPotential: document.querySelector('input[name="reviewPotential"]:checked')?.value||'',
+    finalNote: merge('finalNote','finalNoteText'),
+  };
+  document.getElementById('loadingOverlay').classList.add('show');
+  try {
+    if (SHEET_ENDPOINT === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
+      await new Promise(r => setTimeout(r,1500)); showSuccess(); return;
+    }
+    await fetch(SHEET_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    showSuccess();
+  } catch {
+    document.getElementById('loadingOverlay').classList.remove('show');
+    alert('Submission failed. Please check your connection.');
+  }
+}
+
+function showSuccess() {
+  document.getElementById('loadingOverlay').classList.remove('show');
+  document.getElementById('jobForm').style.display = 'none';
+  document.getElementById('successScreen').classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function resetForm() {
+  document.getElementById('jobForm').reset();
+  document.getElementById('jobForm').style.display = 'block';
+  document.getElementById('successScreen').classList.remove('show');
+  chips = []; renderChips();
+  document.querySelectorAll('.conditional').forEach(el => el.classList.remove('show'));
+  document.querySelectorAll('.voice-transcript').forEach(el => { el.textContent='Transcript will appear here...'; el.classList.add('empty'); });
+  document.querySelectorAll('.voice-status').forEach(el => { el.textContent='Tap to record, or type below'; el.className='voice-status'; });
+  document.querySelectorAll('.voice-timer').forEach(el => el.textContent='0:00');
+  document.getElementById('jobDate').valueAsDate = new Date();
+  document.getElementById('progressFill').style.width = '0%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

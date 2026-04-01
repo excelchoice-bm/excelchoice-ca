@@ -498,7 +498,7 @@ select option { background: var(--white); }
       </div>
       <div class="field">
         <label>Your Name <span class="req">*</span></label>
-        <input type="text" id="workerName" placeholder="e.g. James, Priya, Raja" required>
+        <input type="text" id="workerName" placeholder="e.g. James" required>
       </div>
       <div class="field-row">
         <div class="field">

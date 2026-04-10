@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>ExcelChoice — Site Walkthrough</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --dark:     #1a1a1a;
+  --charcoal: #36454F;
+  --mid:      #3f3f3f;
+  --steel:    #5a5a5a;
+  --border:   #d0d0d0;
+  --silver:   #e8e8e8;
+  --bg:       #f2f2f2;
+  --white:    #ffffff;
+  --gold:     #ffc815;
+  --gold-dk:  #ffc815;
+  --gold-lt:  #ffc815;
+  --red:      #b53030;
+  --font:     'Barlow', sans-serif;
+  --head:     'Barlow Condensed', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--dark);font-size:14px;line-height:1.5}
+
+/* HEADER */
+header{
+  background:var(--dark);height:58px;display:flex;align-items:center;
+  padding:0 28px;gap:16px;position:sticky;top:0;z-index:200;
+  border-bottom:3px solid var(--gold);
+}
+.h-logo{display:flex;align-items:center;gap:10px}
+.h-mark{width:32px;height:32px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:15px;font-weight:700;color:var(--dark);letter-spacing:.02em}
+.h-name{font-family:var(--head);font-size:17px;font-weight:700;color:#fff;letter-spacing:.06em;text-transform:uppercase}
+.h-sub{font-size:10px;font-weight:500;color:#888;letter-spacing:.1em;text-transform:uppercase;margin-top:1px}
+.h-badge{margin-left:auto;background:transparent;border:1px solid #444;color:#888;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px}
+
+/* LAYOUT */
+.shell{display:grid;grid-template-columns:1fr 300px;gap:20px;max-width:1100px;margin:0 auto;padding:24px 20px 80px;align-items:start}
+@media(max-width:820px){.shell{grid-template-columns:1fr}}
+
+/* QUOTE PANEL */
+.qpanel{position:sticky;top:78px;background:var(--dark);border-top:3px solid var(--gold)}
+.qp-head{padding:16px 18px 12px;border-bottom:1px solid #333}
+.qp-title{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.qp-total-box{background:var(--gold);padding:18px;text-align:center}
+.qp-total-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);margin-bottom:4px}
+.qp-amount{font-family:var(--head);font-size:40px;font-weight:700;color:var(--dark);line-height:1}
+.qp-hst{font-size:10px;color:rgba(26,26,26,.65);margin-top:3px;font-weight:500}
+.qp-body{padding:14px 18px}
+.qp-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #2e2e2e;font-size:12px;gap:8px}
+.qp-row:last-child{border-bottom:none}
+.qp-lbl{color:#888}.qp-val{font-weight:600;color:#e0e0e0;text-align:right}
+.qp-range-box{margin:0 18px 14px;background:#2a2a2a;border-left:3px solid var(--gold);padding:10px 14px}
+.qp-range-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#666;margin-bottom:3px}
+.qp-range-val{font-size:14px;font-weight:600;color:#ccc}
+.qp-breakdown{margin:0 18px 18px;background:#222;padding:10px 12px}
+.qp-bd-title{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#555;margin-bottom:8px}
+.qp-bd-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;color:#666}
+.qp-bd-row span:last-child{color:#999;font-weight:500}
+.qp-note{padding:0 18px 16px;font-size:10px;color:#555;line-height:1.5;font-style:italic}
+
+/* FORM COLUMN */
+.page-header{margin-bottom:20px}
+.page-header h1{font-family:var(--head);font-size:26px;font-weight:700;color:var(--dark);letter-spacing:.04em;text-transform:uppercase}
+.page-header p{font-size:12px;color:var(--steel);margin-top:3px}
+
+/* CARD */
+.card{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--charcoal);margin-bottom:16px;padding:20px 22px}
+.card.gt{border-top-color:var(--gold)}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--silver)}
+.card-num{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--gold);background:var(--gold-lt);border:1px solid #e8c97a;padding:3px 8px}
+.card-title{font-family:var(--head);font-size:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--dark)}
+.card-sub{font-size:11px;color:var(--steel);margin-top:1px}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.s2{grid-column:span 2}.sa{grid-column:1/-1}
+@media(max-width:560px){.g2,.g3{grid-template-columns:1fr 1fr}.sa{grid-column:1/-1}}
+
+/* FIELDS */
+.f{display:flex;flex-direction:column;gap:4px}
+.lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+.lbl .req{color:var(--red);margin-left:2px}
+input[type=text],input[type=tel],input[type=email],input[type=number],select,textarea{
+  font-family:var(--font);font-size:13px;color:var(--dark);background:var(--bg);
+  border:1px solid var(--border);padding:9px 11px;width:100%;outline:none;
+  transition:border-color .15s,background .15s;-webkit-appearance:none;border-radius:0
+}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);background:#fff}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235a5a5a'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px;cursor:pointer}
+textarea{resize:vertical;min-height:72px;line-height:1.5}
+
+/* TYPE TOGGLE */
+.type-toggle{display:flex;gap:0;margin-bottom:18px;border:1px solid var(--border)}
+.type-btn{flex:1;padding:10px 0;text-align:center;font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--bg);color:var(--steel);border:none;cursor:pointer;transition:.15s}
+.type-btn.active{background:var(--dark);color:#fff}
+.type-btn:first-child{border-right:1px solid var(--border)}
+
+/* SPACE CHIPS */
+.space-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px}
+@media(max-width:560px){.space-grid{grid-template-columns:repeat(3,1fr)}}
+.sp-chip{border:1px solid var(--border);background:var(--bg);padding:10px 6px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--steel);cursor:pointer;transition:.12s;user-select:none;line-height:1.3}
+.sp-chip:hover{border-color:var(--gold);color:var(--dark)}
+.sp-chip.on{background:var(--dark);border-color:var(--dark);color:#fff}
+
+/* SPACE DETAIL */
+.sp-detail{display:none;background:var(--bg);border:1px solid var(--border);border-top:2px solid var(--gold);padding:14px;margin-top:10px}
+.sp-detail.show{display:block}
+.sd-title{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sd-g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:480px){.sd-g{grid-template-columns:1fr 1fr}}
+
+/* SERVICE PILLS */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+@media(max-width:480px){.svc-grid{grid-template-columns:1fr 1fr}}
+.svc-pill{border:1px solid var(--border);background:var(--bg);padding:9px 10px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--steel);cursor:pointer;transition:.12s;display:flex;align-items:center;gap:7px;user-select:none}
+.svc-pill:hover{border-color:var(--gold);color:var(--dark)}
+.svc-pill.on{background:var(--charcoal);border-color:var(--charcoal);color:#fff}
+.svc-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--border);flex-shrink:0;transition:.12s}
+.svc-pill.on .dot{background:var(--gold)}
+
+/* FLOOR CHIPS */
+.fl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+@media(max-width:480px){.fl-grid{grid-template-columns:1fr 1fr}}
+.fl-chip{border:1px solid var(--border);background:var(--bg);padding:8px 6px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);cursor:pointer;transition:.12s;user-select:none}
+.fl-chip:hover{border-color:var(--gold)}
+.fl-chip.on{background:var(--charcoal);border-color:var(--charcoal);color:#fff}
+
+/* CONDITION */
+.cond-bar{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--border)}
+.cond-opt{padding:10px 8px;text-align:center;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:.12s;background:var(--bg);color:var(--steel);border-right:1px solid var(--border)}
+.cond-opt:last-child{border-right:none}
+.cond-opt:hover{background:var(--silver)}
+.cond-opt.c1.on{background:#d4edda;color:#1a5c2a}
+.cond-opt.c2.on{background:#fff3cd;color:#7a5500}
+.cond-opt.c3.on{background:#f8d7da;color:#8b1c1c}
+.cond-sub{font-size:10px;font-weight:400;text-transform:none;letter-spacing:0;margin-top:2px;display:block}
+
+/* STARS */
+.stars{display:flex;gap:4px}
+.star{font-size:22px;cursor:pointer;color:#ccc;transition:.1s;user-select:none;line-height:1}
+.star.on{color:var(--gold)}
+
+/* DIVIDER */
+.dvd{height:1px;background:var(--silver);margin:16px 0}
+.slbl{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin-bottom:8px}
+
+/* SUBMIT */
+.submit-bar{display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:1px solid var(--border);margin-top:6px;gap:16px;flex-wrap:wrap}
+.submit-note{font-size:11px;color:var(--steel)}
+.btn-sub{font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--dark);border:none;padding:12px 28px;cursor:pointer;transition:.15s}
+.btn-sub:hover{background:var(--gold-dk);color:#fff}
+.btn-sub:disabled{opacity:.5;cursor:not-allowed}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dark);color:#fff;border-left:4px solid var(--gold);padding:12px 20px;font-size:13px;font-weight:500;box-shadow:0 4px 24px rgba(0,0,0,.25);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:999;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.err{border-left-color:var(--red)}
+
+/* SUCCESS */
+.success{display:none;flex-direction:column;align-items:center;text-align:center;padding:80px 24px;gap:14px;max-width:480px;margin:0 auto}
+.suc-mark{width:64px;height:64px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;font-family:var(--head);letter-spacing:.06em;color:var(--dark)}
+.success h2{font-family:var(--head);font-size:26px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.success p{font-size:13px;color:var(--steel);line-height:1.6}
+.btn-new{font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--dark);color:#fff;border:none;padding:11px 24px;cursor:pointer;margin-top:8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-logo">
+    <div class="h-mark">EC</div>
+    <div><div class="h-name">ExcelChoice</div><div class="h-sub">Building Maintenance</div></div>
+  </div>
+  <div class="h-badge">Internal &middot; Walkthrough</div>
+</header>
+
+<div class="shell">
+
+<!-- FORM -->
+<div id="formPage">
+  <div class="page-header">
+    <h1>Site Walkthrough Form</h1>
+    <p>Complete during or after the client visit. The live quote updates as you fill in details.</p>
+  </div>
+
+  <!-- 01 CLIENT -->
+  <div class="card">
+    <div class="card-head"><div class="card-num">01</div><div><div class="card-title">Client Information</div></div></div>
+    <div class="g2">
+      <div class="f"><label class="lbl">Business / Client Name <span class="req">*</span></label><input type="text" id="clientName" placeholder="e.g. Northwest Family Dental"/></div>
+      <div class="f"><label class="lbl">Contact Person</label><input type="text" id="contactPerson" placeholder="e.g. Dr. Sarah Ahmed"/></div>
+      <div class="f"><label class="lbl">Phone</label><input type="tel" id="phone" placeholder="(519) 000-0000"/></div>
+      <div class="f"><label class="lbl">Email</label><input type="email" id="email" placeholder="owner@business.com"/></div>
+      <div class="f sa"><label class="lbl">Site Address <span class="req">*</span></label><input type="text" id="address" placeholder="123 Main St, London, ON N6A 1A1"/></div>
+    </div>
+  </div>
+
+  <!-- 02 PROPERTY & SERVICE -->
+  <div class="card gt">
+    <div class="card-head"><div class="card-num">02</div><div><div class="card-title">Property & Service</div><div class="card-sub">Drives the live quote</div></div></div>
+    <div class="type-toggle">
+      <button class="type-btn active" onclick="setType('Residential',this)">Residential</button>
+      <button class="type-btn" onclick="setType('Commercial',this)">Commercial</button>
+    </div>
+    <div id="res-fields">
+      <div class="g3">
+        <div class="f"><label class="lbl">Bedrooms</label><select id="bedrooms" onchange="calc()"><option value="0">Studio</option><option value="1">1 Bed</option><option value="2" selected>2 Bed</option><option value="3">3 Bed</option><option value="4">4 Bed</option><option value="5">5+ Bed</option></select></div>
+        <div class="f"><label class="lbl">Bathrooms</label><select id="bathrooms" onchange="calc()"><option value="half">Half Bath Only</option><option value="1">1 Bath</option><option value="2" selected>2 Bath</option><option value="3">3 Bath</option><option value="4">4+ Bath</option></select></div>
+        <div class="f"><label class="lbl">Home Size</label><select id="homeSize" onchange="calc()"><option value="s">Under 1,000 sqft</option><option value="m" selected>1,000–2,000 sqft</option><option value="l">2,000–3,500 sqft</option><option value="xl">3,500+ sqft</option></select></div>
+      </div>
+    </div>
+    <div id="com-fields" style="display:none">
+      <div class="g3">
+        <div class="f"><label class="lbl">Square Footage <span class="req">*</span></label><input type="number" id="sqft" placeholder="e.g. 3500" min="0" oninput="calc()"/></div>
+        <div class="f"><label class="lbl">Floors</label><input type="number" id="floors" value="1" min="1" oninput="calc()"/></div>
+        <div class="f"><label class="lbl">Industry</label><select id="industry" onchange="calc()"><option value="office">Office / Professional</option><option value="medical">Medical / Dental</option><option value="retail">Retail</option><option value="restaurant">Restaurant / Food</option><option value="industrial">Industrial / Warehouse</option><option value="gym">Gym / Fitness</option></select></div>
+      </div>
+    </div>
+    <div class="dvd"></div>
+    <div class="g2">
+      <div class="f"><label class="lbl">Service Type <span class="req">*</span></label><select id="serviceType" onchange="calc()"><option value="standard">Standard / Maintenance</option><option value="deep">Deep Clean</option><option value="moveinout">Move-In / Move-Out</option><option value="postconstruction">Post-Construction</option><option value="airbnb">Airbnb / Vacation Turnover</option><option value="stripwax">Strip & Wax (Floors)</option><option value="carpet">Carpet & Upholstery</option><option value="junk">Junk Removal</option></select></div>
+      <div class="f"><label class="lbl">Frequency</label><select id="frequency" onchange="calc()"><option value="onetime">One-Time</option><option value="weekly">Weekly</option><option value="biweekly">Bi-Weekly</option><option value="monthly">Monthly</option></select></div>
+      <div class="f"><label class="lbl">Preferred Time</label><select id="serviceTime"><option>Early Morning (6–9 AM)</option><option>Business Hours (9–5)</option><option>After Hours (5–10 PM)</option><option>Overnight</option><option>Weekends Only</option><option>Flexible</option></select></div>
+      <div class="f"><label class="lbl">Requested Start Date</label><input type="text" id="startDate" placeholder="e.g. ASAP or Apr 15"/></div>
+    </div>
+  </div>
+
+  <!-- 03 SPACES -->
+  <div class="card">
+    <div class="card-head"><div class="card-num">03</div><div><div class="card-title">Spaces Included</div><div class="card-sub">Select all that apply — tap to expand for details</div></div></div>
+    <div class="space-grid">
+      <div class="sp-chip" onclick="toggleSp('living')"   id="ch-living">Living Room</div>
+      <div class="sp-chip" onclick="toggleSp('kitchen')"  id="ch-kitchen">Kitchen</div>
+      <div class="sp-chip" onclick="toggleSp('bedroom')"  id="ch-bedroom">Bedrooms</div>
+      <div class="sp-chip" onclick="toggleSp('bathroom')" id="ch-bathroom">Bathrooms</div>
+      <div class="sp-chip" onclick="toggleSp('halfbath')" id="ch-halfbath">Half Bath</div>
+      <div class="sp-chip" onclick="toggleSp('office')"   id="ch-office">Office / Den</div>
+      <div class="sp-chip" onclick="toggleSp('basement')" id="ch-basement">Basement</div>
+      <div class="sp-chip" onclick="toggleSp('garage')"   id="ch-garage">Garage</div>
+      <div class="sp-chip" onclick="toggleSp('laundry')"  id="ch-laundry">Laundry Room</div>
+      <div class="sp-chip" onclick="toggleSp('hallways')" id="ch-hallways">Hallways</div>
+      <div class="sp-chip" onclick="toggleSp('reception')"id="ch-reception">Reception</div>
+      <div class="sp-chip" onclick="toggleSp('lunchroom')"id="ch-lunchroom">Lunch Room</div>
+      <div class="sp-chip" onclick="toggleSp('other')"    id="ch-other">Other</div>
+    </div>
+    <!-- Detail panels -->
+    <div class="sp-detail" id="dt-kitchen">
+      <div class="sd-title">Kitchen — Additional</div>
+      <div class="sd-g">
+        <div class="f"><label class="lbl">Inside Oven</label><select id="kt-oven" onchange="calc()"><option value="0">No</option><option value="1">Yes (+$45)</option></select></div>
+        <div class="f"><label class="lbl">Inside Fridge</label><select id="kt-fridge" onchange="calc()"><option value="0">No</option><option value="1">Yes (+$35)</option></select></div>
+        <div class="f"><label class="lbl">Inside Cabinets</label><select id="kt-cabinets" onchange="calc()"><option value="0">No</option><option value="1">Yes (+$60)</option></select></div>
+      </div>
+    </div>
+    <div class="sp-detail" id="dt-basement">
+      <div class="sd-title">Basement — Details</div>
+      <div class="sd-g">
+        <div class="f"><label class="lbl">Finished?</label><select id="bs-fin" onchange="calc()"><option value="0">Unfinished</option><option value="1">Finished (+$60)</option></select></div>
+        <div class="f"><label class="lbl">Has Bathroom?</label><select id="bs-bath" onchange="calc()"><option value="0">No</option><option value="1">Yes (+$30)</option></select></div>
+        <div class="f"><label class="lbl">Approx Sq Ft</label><input type="number" id="bs-sqft" placeholder="e.g. 600" oninput="calc()"/></div>
+      </div>
+    </div>
+    <div class="sp-detail" id="dt-garage">
+      <div class="sd-title">Garage — Details</div>
+      <div class="sd-g">
+        <div class="f"><label class="lbl">Size</label><select id="gr-size" onchange="calc()"><option value="40">1-Car (+$40)</option><option value="65">2-Car (+$65)</option><option value="90">3-Car (+$90)</option></select></div>
+        <div class="f"><label class="lbl">Condition</label><select id="gr-cond"><option>Clean</option><option>Moderate</option><option>Heavy</option></select></div>
+      </div>
+    </div>
+    <div class="sp-detail" id="dt-other">
+      <div class="sd-title">Other Spaces</div>
+      <div class="f"><label class="lbl">Describe</label><input type="text" id="other-desc" placeholder="e.g. Storage room, rooftop deck, server room..."/></div>
+    </div>
+  </div>
+
+  <!-- 04 FLOORS & VENTS -->
+  <div class="card">
+    <div class="card-head"><div class="card-num">04</div><div><div class="card-title">Floor Types & Extras</div><div class="card-sub">Select all floor types present on-site</div></div></div>
+    <div class="slbl">Floor Types Present</div>
+    <div class="fl-grid" id="flGrid">
+      <div class="fl-chip" onclick="toggleFl(this)" data-val="Hardwood">Hardwood</div>
+      <div class="fl-chip" onclick="toggleFl(this)" data-val="Tile / Ceramic">Tile / Ceramic</div>
+      <div class="fl-chip" onclick="toggleFl(this)" data-val="Carpet">Carpet</div>
+      <div class="fl-chip" onclick="toggleFl(this)" data-val="Laminate">Laminate</div>
+      <div class="fl-chip" onclick="toggleFl(this)" data-val="Vinyl / LVP">Vinyl / LVP</div>
+      <div class="fl-chip" onclick="toggleFl(this)" data-val="Concrete">Concrete</div>
+      <div class="fl-chip" onclick="toggleFl(this)" data-val="Marble / Stone">Marble / Stone</div>
+      <div class="fl-chip" onclick="toggleFl(this)" data-val="Mixed">Mixed</div>
+    </div>
+    <div class="dvd"></div>
+    <div class="g3">
+      <div class="f"><label class="lbl">Vents / Ducts</label><select id="vents" onchange="calc()"><option value="0">No cleaning needed</option><option value="30">Basic wipe (+$30)</option><option value="80">Deep vent clean (+$80)</option></select></div>
+      <div class="f"><label class="lbl">Windows (Interior)</label><select id="windows" onchange="calc()"><option value="0">Not included</option><option value="40">1–5 windows (+$40)</option><option value="70">6–12 windows (+$70)</option><option value="110">13+ windows (+$110)</option></select></div>
+      <div class="f"><label class="lbl">Blinds / Tracks</label><select id="blinds" onchange="calc()"><option value="0">No</option><option value="25">Yes (+$25)</option></select></div>
+      <div class="f"><label class="lbl">Baseboard Deep Cleaning</label><select id="baseboards" onchange="calc()"><option value="0">No</option><option value="40">Yes (+$40)</option></select></div>
+      <div class="f"><label class="lbl">Supplies Provided By</label><select id="supplies" onchange="calc()"><option value="0">Client provides</option><option value="30">We provide (+$30)</option></select></div>
+      <div class="f"><label class="lbl">Eco-Friendly Products</label><select id="eco"><option>No preference</option><option>Yes — requested</option></select></div>
+      <div class="f"><label class="lbl">WSIB / Insurance Req'd?</label><select id="wsib"><option>Standard</option><option>Yes — certificate needed</option></select></div>
+    </div>
+  </div>
+
+  <!-- 05 SERVICES -->
+  <div class="card">
+    <div class="card-head"><div class="card-num">05</div><div><div class="card-title">Services Required</div></div></div>
+    <div class="svc-grid">
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="General Cleaning"><span class="dot"></span>General Cleaning</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Deep Cleaning"><span class="dot"></span>Deep Cleaning</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Vacuuming"><span class="dot"></span>Vacuuming</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Sweep / Mop"><span class="dot"></span>Sweep / Mop</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Washroom Sanitization"><span class="dot"></span>Washroom Sanitization</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Disinfection"><span class="dot"></span>Disinfection</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Carpet Cleaning"><span class="dot"></span>Carpet Cleaning</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Strip & Wax"><span class="dot"></span>Strip & Wax</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Post-Construction"><span class="dot"></span>Post-Construction</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Junk Removal"><span class="dot"></span>Junk Removal</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Building Maintenance"><span class="dot"></span>Building Maintenance</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Airbnb Turnover"><span class="dot"></span>Airbnb Turnover</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Buffing"><span class="dot"></span>Buffing</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Upholstery Cleaning"><span class="dot"></span>Upholstery Cleaning</div>
+      <div class="svc-pill" onclick="toggleSvc(this)" data-val="Pressure Washing"><span class="dot"></span>Pressure Washing</div>
+    </div>
+  </div>
+
+  <!-- 06 SITE CONDITIONS -->
+  <div class="card">
+    <div class="card-head"><div class="card-num">06</div><div><div class="card-title">Site Conditions</div></div></div>
+    <div class="f" style="margin-bottom:14px">
+      <label class="lbl">Current Cleanliness Level</label>
+      <div class="cond-bar">
+        <div class="cond-opt c1 on" onclick="setCond(1,this)">Good<span class="cond-sub">Light work</span></div>
+        <div class="cond-opt c2" onclick="setCond(2,this)">Fair<span class="cond-sub">Moderate effort</span></div>
+        <div class="cond-opt c3" onclick="setCond(3,this)">Poor<span class="cond-sub">Heavy duty</span></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="f"><label class="lbl">Access Method</label><select id="access"><option>Key provided</option><option>Keypad / Code</option><option>Fob / Card</option><option>Client on-site</option><option>Building Management</option></select></div>
+      <div class="f"><label class="lbl">Parking / Entry Notes</label><input type="text" id="parking" placeholder="e.g. Free lot behind building"/></div>
+      <div class="f sa"><label class="lbl">Hazards / Special Requirements</label><textarea id="hazards" placeholder="Medical equipment, fragile items, pets, restricted areas, chemical storage..."></textarea></div>
+      <div class="f sa"><label class="lbl">Walkthrough Observations</label><textarea id="observations" placeholder="What stood out on-site? Upsell opportunities, concerns, client priorities..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- 07 INTERNAL -->
+  <div class="card gt">
+    <div class="card-head"><div class="card-num">07</div><div><div class="card-title">Internal Planning</div><div class="card-sub">Not visible to client</div></div></div>
+    <div class="g3">
+      <div class="f"><label class="lbl">Est. Hours / Visit</label><input type="number" id="estHours" placeholder="e.g. 3.5" min="0" step="0.5" oninput="calc()"/></div>
+      <div class="f"><label class="lbl">No. of Staff</label><input type="number" id="staffCount" placeholder="e.g. 2" min="1"/></div>
+      <div class="f"><label class="lbl">Override Quote ($/visit)</label><input type="number" id="overrideQuote" placeholder="Blank = auto" min="0" oninput="calc()"/></div>
+    </div>
+    <div class="g2" style="margin-top:14px">
+      <div class="f">
+        <label class="lbl">Client Interest</label>
+        <div class="stars" id="stars">
+          <span class="star" onclick="setStar(1)">&#9733;</span>
+          <span class="star" onclick="setStar(2)">&#9733;</span>
+          <span class="star" onclick="setStar(3)">&#9733;</span>
+          <span class="star" onclick="setStar(4)">&#9733;</span>
+          <span class="star" onclick="setStar(5)">&#9733;</span>
+        </div>
+      </div>
+      <div class="f"><label class="lbl">Follow-Up Plan</label><select id="followup"><option>Call within 24 hrs</option><option>Send quote by email</option><option>Schedule second visit</option><option>Client will call us</option><option>Not interested</option></select></div>
+      <div class="f sa"><label class="lbl">Internal Notes</label><textarea id="internalNotes" placeholder="Pricing rationale, upsell potential, red flags, next steps..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- 08 REP -->
+  <div class="card">
+    <div class="card-head"><div class="card-num">08</div><div><div class="card-title">Submitted By</div></div></div>
+    <div class="g2">
+      <div class="f"><label class="lbl">Your Name <span class="req">*</span></label><input type="text" id="repName" placeholder="e.g. Raja"/></div>
+      <div class="f"><label class="lbl">Walkthrough Date <span class="req">*</span></label><input type="text" id="walkDate"/></div>
+    </div>
+  </div>
+
+  <div class="submit-bar">
+    <span class="submit-note">Secured internal form &mdash; responses go directly to ExcelChoice quoting sheet only.</span>
+    <button class="btn-sub" id="submitBtn" onclick="submitForm()"><span id="submitLabel">Submit Walkthrough</span></button>
+  </div>
+</div><!-- /formPage -->
+
+<!-- QUOTE PANEL -->
+<div class="qpanel" id="quotePanel">
+  <div class="qp-head"><div class="qp-title">Live Quote Estimate</div></div>
+  <div class="qp-total-box">
+    <div class="qp-total-label">Total incl. HST</div>
+    <div class="qp-amount" id="qp-total">$0.00</div>
+    <div class="qp-hst">Ontario HST 13% included</div>
+  </div>
+  <div class="qp-body">
+    <div class="qp-row"><span class="qp-lbl">Type</span><span class="qp-val" id="qp-type">Residential</span></div>
+    <div class="qp-row"><span class="qp-lbl">Service</span><span class="qp-val" id="qp-svc">Standard</span></div>
+    <div class="qp-row"><span class="qp-lbl">Frequency</span><span class="qp-val" id="qp-freq">One-Time</span></div>
+    <div class="qp-row"><span class="qp-lbl">Condition Adj.</span><span class="qp-val" id="qp-cond">Good</span></div>
+  </div>
+  <div class="qp-range-box">
+    <div class="qp-range-lbl">Show Client Range</div>
+    <div class="qp-range-val" id="qp-range">$0 &ndash; $0 / visit</div>
+  </div>
+  <div class="qp-breakdown">
+    <div class="qp-bd-title">Breakdown</div>
+    <div class="qp-bd-row"><span>Base price</span><span id="bd-base">$0.00</span></div>
+    <div class="qp-bd-row"><span>Service &times;</span><span id="bd-smult">&times;1.0</span></div>
+    <div class="qp-bd-row"><span>Condition &times;</span><span id="bd-cmult">&times;1.0</span></div>
+    <div class="qp-bd-row"><span>Freq. discount</span><span id="bd-disc">0%</span></div>
+    <div class="qp-bd-row"><span>Add-ons</span><span id="bd-addons">$0.00</span></div>
+    <div class="qp-bd-row"><span>HST (13%)</span><span id="bd-hst">$0.00</span></div>
+  </div>
+  <div class="qp-note">Internal estimate only. Review before presenting to client.</div>
+</div>
+
+</div><!-- /shell -->
+
+<!-- SUCCESS -->
+<div class="success" id="successScreen">
+  <div class="suc-mark">SAVED</div>
+  <h2>Walkthrough Submitted</h2>
+  <p>All details recorded in the ExcelChoice quoting sheet. Ready to follow up with the client.</p>
+  <button class="btn-new" onclick="location.reload()">Log Another Walkthrough</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzHTLMoYAcihdyNiZ_qRpWZOQDYQL2aIM5dsVI5RIu2sKVi56y0bdPGWYzXtemNpyxM/exec";
+
+let propType  = "Residential";
+let condLevel = 1;
+let starVal   = 0;
+const activeSpaces = new Set();
+const activeFloors = new Set();
+
+function setType(t, btn) {
+  propType = t;
+  document.querySelectorAll(".type-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("res-fields").style.display = t==="Residential"?"":"none";
+  document.getElementById("com-fields").style.display = t==="Commercial"?"":"none";
+  calc();
+}
+
+function setCond(n, btn) {
+  condLevel = n;
+  document.querySelectorAll(".cond-opt").forEach(b => b.classList.remove("on"));
+  btn.classList.add("on");
+  calc();
+}
+
+function toggleSp(key) {
+  const chip   = document.getElementById("ch-"+key);
+  const detail = document.getElementById("dt-"+key);
+  if (activeSpaces.has(key)) {
+    activeSpaces.delete(key); chip.classList.remove("on");
+    if (detail) detail.classList.remove("show");
+  } else {
+    activeSpaces.add(key); chip.classList.add("on");
+    if (detail) detail.classList.add("show");
+  }
+  calc();
+}
+function getSpaces() { return [...activeSpaces].join(", ") || "None selected"; }
+
+function toggleFl(el) {
+  const v = el.dataset.val;
+  if (activeFloors.has(v)) { activeFloors.delete(v); el.classList.remove("on"); }
+  else { activeFloors.add(v); el.classList.add("on"); }
+}
+function getFloors() { return [...activeFloors].join(", ") || "Not specified"; }
+
+function toggleSvc(el) { el.classList.toggle("on"); }
+function getServices() {
+  return [...document.querySelectorAll(".svc-pill.on")].map(e=>e.dataset.val).join(", ")||"None";
+}
+
+function setStar(n) {
+  starVal = n;
+  document.querySelectorAll(".star").forEach((s,i) => s.classList.toggle("on", i<n));
+}
+
+const P = {
+  res: { bed:{0:75,1:95,2:125,3:155,4:185,5:215}, bath:{half:20,1:38,2:65,3:92,4:120}, size:{s:-10,m:0,l:35,xl:75} },
+  com: { rate:{office:.12,medical:.17,retail:.11,restaurant:.15,industrial:.08,gym:.13}, ff:.80 },
+  svc: { standard:1.0, deep:1.55, moveinout:1.72, postconstruction:1.85, airbnb:1.30, stripwax:1.60, carpet:1.50, junk:1.20 },
+  cond:{ 1:1.0, 2:1.22, 3:1.48 },
+  freq:{ onetime:0, weekly:.15, biweekly:.10, monthly:.05 }
+};
+
+function gs(id){ const e=document.getElementById(id); return e?e.value:""; }
+function gn(id){ return parseFloat(gs(id))||0; }
+
+function getAddons() {
+  let total=0; const items=[];
+  if(activeSpaces.has("kitchen")){
+    if(gn("kt-oven"))     { total+=45; items.push("Inside Oven +$45"); }
+    if(gn("kt-fridge"))   { total+=35; items.push("Inside Fridge +$35"); }
+    if(gn("kt-cabinets")) { total+=60; items.push("Inside Cabinets +$60"); }
+  }
+  if(activeSpaces.has("basement")){
+    if(gn("bs-fin"))  { total+=60; items.push("Finished Basement +$60"); }
+    if(gn("bs-bath")) { total+=30; items.push("Basement Bath +$30"); }
+    const bsq=gn("bs-sqft"); if(bsq>0){ const x=Math.round(bsq*.06); total+=x; items.push("Basement Area +$"+x); }
+  }
+  if(activeSpaces.has("garage")){
+    const gp=parseInt(gs("gr-size"))||40; total+=gp; items.push("Garage +$"+gp);
+  }
+  const vn=gn("vents"); if(vn){ total+=vn; items.push("Vents +$"+vn); }
+  const wn=gn("windows"); if(wn){ total+=wn; items.push("Windows +$"+wn); }
+  const bl=gn("blinds"); if(bl){ total+=bl; items.push("Blinds +$"+bl); }
+  const sp=gn("supplies"); if(sp){ total+=sp; items.push("Supplies +$"+sp); }
+  const bb=gn("baseboards"); if(bb){ total+=bb; items.push("Baseboards +$"+bb); }
+  return { total, list: items.join(", ")||"None" };
+}
+
+function calc() {
+  let base=0;
+  if(propType==="Residential"){
+    const b=Math.min(parseInt(gs("bedrooms"))||0,5);
+    const baRaw=gs("bathrooms"); const baKey=baRaw==="half"?"half":Math.min(parseInt(baRaw)||1,4);
+    const sz=gs("homeSize")||"m";
+    base=(P.res.bed[b]||95)+(P.res.bath[baKey]||38)+(P.res.size[sz]||0);
+  } else {
+    const sqft=gn("sqft");
+    const fl=Math.max(1,parseInt(gs("floors"))||1);
+    const rate=P.com.rate[gs("industry")]||.12;
+    base=sqft*rate; if(fl>1) base+=sqft*rate*P.com.ff*(fl-1);
+  }
+  const sk=gs("serviceType")||"standard";
+  const fk=gs("frequency")||"onetime";
+  const sm=P.svc[sk]||1, cm=P.cond[condLevel]||1, disc=P.freq[fk]||0;
+  const addons=getAddons();
+  const ov=gn("overrideQuote");
+  let sub=base*sm*cm*(1-disc)+addons.total;
+  if(ov>0) sub=ov;
+  const hst=sub*.13, total=sub+hst;
+  const low=Math.floor(sub*.90/5)*5, high=Math.ceil(sub*1.15/5)*5;
+  const svcL={standard:"Standard",deep:"Deep Clean",moveinout:"Move-In/Out",postconstruction:"Post-Construction",airbnb:"Airbnb Turnover",stripwax:"Strip & Wax",carpet:"Carpet/Upholstery",junk:"Junk Removal"};
+  const frqL={onetime:"One-Time",weekly:"Weekly",biweekly:"Bi-Weekly",monthly:"Monthly"};
+  const cndL={1:"Good",2:"Fair",3:"Poor"};
+  st("qp-total","$"+total.toFixed(2));
+  st("qp-type",propType);
+  st("qp-svc",svcL[sk]||sk);
+  st("qp-freq",frqL[fk]||fk);
+  st("qp-cond",cndL[condLevel]);
+  st("qp-range","$"+low+" \u2013 $"+high+" / visit");
+  st("bd-base","$"+base.toFixed(2));
+  st("bd-smult","\u00d7"+sm.toFixed(2));
+  st("bd-cmult","\u00d7"+cm.toFixed(2));
+  st("bd-disc",(disc*100).toFixed(0)+"%");
+  st("bd-addons","$"+addons.total.toFixed(2));
+  st("bd-hst","$"+hst.toFixed(2));
+}
+function st(id,v){ const e=document.getElementById(id); if(e) e.textContent=v; }
+
+function vf(id){ const e=document.getElementById(id); return e?e.value.trim():""; }
+
+function showToast(msg,err=false){
+  const t=document.getElementById("toast");
+  t.textContent=msg; t.className="toast"+(err?" err":"")+" show";
+  setTimeout(()=>t.className="toast",3500);
+}
+
+async function submitForm(){
+  if(!vf("clientName")) return showToast("Client name is required.",true);
+  if(!vf("address"))    return showToast("Site address is required.",true);
+  if(!vf("repName"))    return showToast("Your name is required.",true);
+  if(!vf("walkDate"))   return showToast("Walkthrough date is required.",true);
+  const btn=document.getElementById("submitBtn"), lbl=document.getElementById("submitLabel");
+  btn.disabled=true; lbl.textContent="Submitting...";
+  const addons=getAddons();
+  const payload={
+    timestamp:       new Date().toISOString(),
+    walkDate:        vf("walkDate"),
+    repName:         vf("repName"),
+    clientName:      vf("clientName"),
+    contactPerson:   vf("contactPerson"),
+    phone:           vf("phone"),
+    email:           vf("email"),
+    address:         vf("address"),
+    propertyType:    propType,
+    serviceType:     vf("serviceType"),
+    frequency:       vf("frequency"),
+    serviceTime:     vf("serviceTime"),
+    startDate:       vf("startDate"),
+    bedrooms:        vf("bedrooms"),
+    bathrooms:       vf("bathrooms"),
+    homeSize:        vf("homeSize"),
+    sqft:            vf("sqft"),
+    floors:          vf("floors"),
+    industry:        vf("industry"),
+    spacesIncluded:  getSpaces(),
+    floorTypes:      getFloors(),
+    services:        getServices(),
+    addons:          addons.list,
+    vents:           vf("vents"),
+    windows:         vf("windows"),
+    baseboards:      vf("baseboards"),
+    conditionLevel:  ["","Good","Fair","Poor"][condLevel],
+    access:          vf("access"),
+    parking:         vf("parking"),
+    supplies:        vf("supplies"),
+    eco:             vf("eco"),
+    wsib:            vf("wsib"),
+    hazards:         vf("hazards"),
+    observations:    vf("observations"),
+    estHours:        vf("estHours"),
+    staffCount:      vf("staffCount"),
+    estimatedTotal:  document.getElementById("qp-total")?.textContent||"",
+    quoteRange:      document.getElementById("qp-range")?.textContent||"",
+    clientInterest:  starVal+"/5",
+    followup:        vf("followup"),
+    internalNotes:   vf("internalNotes"),
+  };
+  try {
+    const params = new URLSearchParams();
+    Object.entries(payload).forEach(([k,v]) => params.append(k, String(v).substring(0,500)));
+    await fetch(SHEET_URL + "?" + params.toString(), {mode:"no-cors"});
+    document.getElementById("formPage").style.display="none";
+    document.getElementById("quotePanel").style.display="none";
+    document.getElementById("successScreen").style.display="flex";
+  } catch(e){
+    showToast("Submission failed. Check connection.",true);
+    btn.disabled=false; lbl.textContent="Submit Walkthrough";
+  }
+}
+
+document.getElementById("walkDate").value=
+  new Date().toLocaleDateString("en-CA",{year:"numeric",month:"short",day:"numeric"});
+calc();
+</script>
+</body>
+</html>

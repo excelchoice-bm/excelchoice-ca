@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,10 +8,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+<script>
+  var gPlacesReady = false;
+  function initPlaces() {
+    gPlacesReady = true;
+    setupAutocomplete();
+  }
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKM8U4nbYUK7CQvm-9QFzueo7vtFuI_zo&libraries=places&callback=initPlaces" async defer></script>
 <style>
-  :root{--teal:#0a7c6e;--teal-light:#0db89e;--teal-dark:#065f52;--gold:#d4a017;--gold-light:#f0c040;--gold-pale:#fdf8ec;--cream:#f7faf9;--white:#ffffff;--text:#111827;--muted:#6b7280;--border:#d1e8e4;--radius-lg:22px;--radius:14px}
+  :root{--teal:#0a7c6e;--teal-light:#0db89e;--teal-dark:#065f52;--gold:#d4a017;--gold-light:#f0c040;--gold-pale:#fdf8ec;--cream:#f7faf9;--white:#ffffff;--text:#111827;--muted:#6b7280;--border:#d1e8e4;--radius-lg:22px}
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{font-family:'DM Sans',sans-serif;background:var(--cream);min-height:100dvh;color:var(--text);overflow-x:hidden}
@@ -23,10 +31,10 @@
   .offer-banner::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:rgba(255,255,255,.055);border-radius:50%;pointer-events:none}
   .offer-banner::after{content:'';position:absolute;bottom:-55px;left:-35px;width:150px;height:150px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none}
   .offer-pill{display:inline-block;background:var(--gold);color:#4a2000;font-size:9.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:4px 15px;border-radius:100px;margin-bottom:11px}
-  .offer-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,5.5vw,30px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:7px;letter-spacing:-.2px}
+  .offer-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,5.5vw,30px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:7px}
   .offer-headline span{color:var(--gold-light)}
   .offer-sub{font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.55;margin-bottom:15px}
-  .offer-counter{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:7px 17px;border-radius:100px;font-size:12px;font-weight:600;color:#fff;letter-spacing:.2px}
+  .offer-counter{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:7px 17px;border-radius:100px;font-size:12px;font-weight:600;color:#fff}
   .counter-dot{width:7px;height:7px;background:var(--gold-light);border-radius:50%;animation:blink 1.6s ease-in-out infinite;flex-shrink:0}
   @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
   .header{text-align:center;padding:26px 12px 20px}
@@ -36,7 +44,7 @@
   .logo-circle img{width:52px;height:52px;object-fit:contain;display:block}
   .logo-fallback{width:46px;height:46px;background:linear-gradient(135deg,var(--teal),var(--teal-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
   .brand-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--teal-dark);letter-spacing:-.4px;line-height:1}
-  .header-sub{font-size:13.5px;color:var(--muted);font-weight:400;margin-top:5px;line-height:1.5}
+  .header-sub{font-size:13.5px;color:var(--muted);font-weight:400;margin-top:5px}
   .trust-line{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:500;margin-top:11px}
   .stars{color:var(--gold);letter-spacing:1.5px;font-size:10.5px}
   .divider-accent{width:56px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:2px;margin:14px auto 0}
@@ -51,7 +59,7 @@
   .field{margin-bottom:14px}
   .field label{display:block;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--text);margin-bottom:7px}
   .req{color:#dc2626;margin-left:2px}
-  .opt-tag{font-size:10px;color:var(--muted);font-weight:400;margin-left:5px;letter-spacing:.3px}
+  .opt-tag{font-size:10px;color:var(--muted);font-weight:400;margin-left:5px}
   input[type="text"],input[type="tel"],input[type="email"],select{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:var(--text);background:#fafdfc;transition:border-color .18s,box-shadow .18s,background .18s;-webkit-appearance:none;appearance:none}
   input:focus,select:focus{outline:none;border-color:var(--teal-light);background:var(--white);box-shadow:0 0 0 3.5px rgba(13,184,158,.11)}
   input::placeholder{color:#b0bec5;font-size:13.5px;font-weight:400}
@@ -59,12 +67,10 @@
   .field.err input,.field.err select{border-color:#dc2626;background:#fff8f8}
   .err-msg{display:none;font-size:11px;color:#dc2626;margin-top:5px;font-weight:500}
   .field.err .err-msg{display:block}
-  .p-btn{display:flex;align-items:center;gap:6px;padding:9px 16px;border:1.5px solid var(--border);border-radius:100px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all .18s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation;justify-content:center}
+  .p-btn{display:flex;align-items:center;gap:6px;padding:9px 16px;border:1.5px solid var(--border);border-radius:100px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all .18s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;justify-content:center}
   .p-btn.on{background:var(--teal-dark);border-color:var(--teal-dark);color:white;font-weight:600}
-  .p-btn:active{transform:scale(.97)}
   .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-  .svc-btn{display:flex;align-items:center;gap:9px;padding:12px 13px;border:1.5px solid var(--border);border-radius:12px;background:#fafdfc;cursor:pointer;transition:all .18s ease;text-align:left;font-family:'DM Sans',sans-serif;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-  .svc-btn:active{transform:scale(.97)}
+  .svc-btn{display:flex;align-items:center;gap:9px;padding:12px 13px;border:1.5px solid var(--border);border-radius:12px;background:#fafdfc;cursor:pointer;transition:all .18s;text-align:left;font-family:'DM Sans',sans-serif;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   .svc-btn .ico{font-size:18px;width:24px;text-align:center;flex-shrink:0}
   .svc-btn .lbl{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.3;flex:1}
   .svc-chk{margin-left:auto;width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;transition:all .18s;display:flex;align-items:center;justify-content:center}
@@ -73,26 +79,23 @@
   .svc-btn.on .svc-chk{background:var(--teal);border-color:var(--teal)}
   .svc-btn.on .svc-chk::after{content:'✓';color:white;font-size:10px;font-weight:700}
   .svc-full{grid-column:span 2}
-  .t-btn{padding:9px 17px;border:1.5px solid var(--border);border-radius:100px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all .18s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation;text-align:center}
+  .t-btn{padding:9px 17px;border:1.5px solid var(--border);border-radius:100px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all .18s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;text-align:center}
   .t-btn.on{background:var(--teal);border-color:var(--teal);color:white;font-weight:600}
-  /* BOOKING BUTTONS */
-  .book-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;border:1.5px solid var(--border);border-radius:14px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;width:100%}
+  .book-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 10px;border:1.5px solid var(--border);border-radius:14px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;width:100%}
   .book-btn.on{border-color:var(--teal);background:linear-gradient(135deg,#edf9f7,#dff5f0);box-shadow:0 0 0 2.5px rgba(10,124,110,.08)}
   .book-btn:active{transform:scale(.97)}
-  /* ADDRESS DROPDOWN */
   .addr-wrap{position:relative}
-  .addr-dd{display:none;position:absolute;top:100%;left:0;right:0;background:white;border:1.5px solid var(--teal-light);border-top:none;border-radius:0 0 12px 12px;box-shadow:0 8px 24px rgba(10,124,110,.12);z-index:100;max-height:220px;overflow-y:auto}
+  .addr-dd{display:none;position:absolute;top:100%;left:0;right:0;background:white;border:1.5px solid var(--teal-light);border-top:none;border-radius:0 0 12px 12px;box-shadow:0 8px 24px rgba(10,124,110,.12);z-index:999;max-height:220px;overflow-y:auto}
   .addr-item{padding:11px 14px;font-size:13.5px;cursor:pointer;border-bottom:1px solid #f0f4f3;color:#111827;line-height:1.4}
   .addr-item:hover{background:#f0faf8}
   .addr-item:last-child{border-bottom:none}
-  /* OPTIONAL TOGGLE */
   .opt-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:11px 0;user-select:none;-webkit-tap-highlight-color:transparent}
   .opt-toggle-lbl{font-size:12.5px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:8px}
-  .arrow{transition:transform .3s ease;color:var(--teal)}
+  .arrow{transition:transform .3s;color:var(--teal)}
   .arrow.open{transform:rotate(180deg)}
-  .opt-fields{overflow:hidden;max-height:0;transition:max-height .4s ease}
+  .opt-fields{overflow:hidden;max-height:0;transition:max-height .4s}
   .opt-fields.open{max-height:500px}
-  .cta{width:100%;margin-top:24px;padding:17px;background:linear-gradient(130deg,var(--teal-dark) 0%,var(--teal) 55%,var(--teal-light) 100%);color:white;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;letter-spacing:.2px;cursor:pointer;box-shadow:0 8px 28px rgba(10,124,110,.32);transition:transform .18s,box-shadow .18s;display:flex;align-items:center;justify-content:center;gap:10px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .cta{width:100%;margin-top:24px;padding:17px;background:linear-gradient(130deg,var(--teal-dark) 0%,var(--teal) 55%,var(--teal-light) 100%);color:white;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 28px rgba(10,124,110,.32);transition:transform .18s;display:flex;align-items:center;justify-content:center;gap:10px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   .cta:active{transform:scale(.98)}
   .cta:disabled{opacity:.6;cursor:not-allowed;transform:none}
   .spin{width:18px;height:18px;border:2px solid rgba(255,255,255,.35);border-top-color:white;border-radius:50%;animation:turn .65s linear infinite;display:none}
@@ -108,19 +111,17 @@
   .success .sub{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px}
   .action-label{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
   .action-btns{display:flex;flex-direction:column;gap:11px}
-  .btn-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;padding:15px;border-radius:14px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 8px 26px rgba(37,211,102,.3);-webkit-tap-highlight-color:transparent;transition:transform .18s}
-  .btn-wt{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--teal);color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;padding:15px;border-radius:14px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 8px 26px rgba(10,124,110,.28);-webkit-tap-highlight-color:transparent;transition:transform .18s}
-  .btn-cl{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--teal-dark);color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;padding:15px;border-radius:14px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 8px 26px rgba(6,95,82,.28);-webkit-tap-highlight-color:transparent;transition:transform .18s}
-  .btn-wa:active,.btn-wt:active,.btn-cl:active{transform:scale(.97)}
+  .btn-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;padding:15px;border-radius:14px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 8px 26px rgba(37,211,102,.3);-webkit-tap-highlight-color:transparent}
+  .btn-wt{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--teal);color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;padding:15px;border-radius:14px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 8px 26px rgba(10,124,110,.28);-webkit-tap-highlight-color:transparent}
+  .btn-cl{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--teal-dark);color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;padding:15px;border-radius:14px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 8px 26px rgba(6,95,82,.28);-webkit-tap-highlight-color:transparent}
+  .skip-link{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:8px;cursor:pointer;text-decoration:underline}
   .vishu-tag{display:inline-flex;align-items:center;gap:7px;background:var(--gold-pale);border:1px solid rgba(212,160,23,.28);padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;color:#7a4e00;margin-top:20px}
   @media(max-width:400px){.field-row{grid-template-columns:1fr;gap:0}.services-grid{grid-template-columns:1fr}.card{padding:24px 18px 20px}.brand-name{font-size:26px}.logo-circle{width:52px;height:52px}.logo-circle img{width:42px;height:42px}}
 </style>
 </head>
 <body>
-
 <div class="floral floral-tl">🌸</div>
 <div class="floral floral-br">🌺</div>
-
 <div class="wrap">
 
   <div class="offer-banner">
@@ -139,10 +140,7 @@
       <div class="brand-name">ExcelChoice</div>
     </div>
     <p class="header-sub">Professional Cleaning Services &middot; London, ON</p>
-    <div class="trust-line">
-      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-      Trusted by homeowners &amp; property managers across London
-    </div>
+    <div class="trust-line"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>Trusted by homeowners &amp; property managers across London</div>
     <div class="divider-accent"></div>
   </div>
 
@@ -152,127 +150,125 @@
       <span>&#9889; Limited discounted slots available today &mdash; fill in your details to reserve yours</span>
     </div>
 
-    <!-- 1: DETAILS -->
-    <div class="sec">Your Details</div>
+```
+<div class="sec">Your Details</div>
+<div class="field-row">
+  <div class="field" id="f-name">
+    <label for="name">First Name <span class="req">*</span></label>
+    <input type="text" id="name" placeholder="e.g. George" autocomplete="given-name" autocorrect="off" spellcheck="false">
+    <div class="err-msg">Please enter your name</div>
+  </div>
+  <div class="field" id="f-phone">
+    <label for="phone">Mobile Number <span class="req">*</span></label>
+    <input type="tel" id="phone" placeholder="519 000 0000" autocomplete="tel" inputmode="numeric">
+    <div class="err-msg">Please enter a valid number</div>
+  </div>
+</div>
+
+<div class="sep"></div>
+<div class="sec">Property Type <span class="sec-note">&nbsp;(tap one &mdash; optional)</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+  <button type="button" class="p-btn" data-p="Home / Condo">🏡 Home / Condo</button>
+  <button type="button" class="p-btn" data-p="Rental Unit">🏠 Rental Unit</button>
+  <button type="button" class="p-btn" data-p="Commercial">🏢 Commercial</button>
+  <button type="button" class="p-btn" data-p="Airbnb / STR">🛎️ Airbnb / STR</button>
+</div>
+
+<div class="sep"></div>
+<div class="sec">Service Interested In <span class="sec-note">&nbsp;(optional)</span></div>
+<div class="services-grid">
+  <button type="button" class="svc-btn" data-s="Spring Deep Clean"><span class="ico">🌸</span><span class="lbl">Spring Deep Clean</span><span class="svc-chk"></span></button>
+  <button type="button" class="svc-btn" data-s="Standard Regular Cleaning"><span class="ico">🧹</span><span class="lbl">Standard Regular Cleaning</span><span class="svc-chk"></span></button>
+  <button type="button" class="svc-btn" data-s="Rental Property Cleaning"><span class="ico">🏠</span><span class="lbl">Rental Property Cleaning</span><span class="svc-chk"></span></button>
+  <button type="button" class="svc-btn" data-s="Move In / Move Out Cleaning"><span class="ico">📦</span><span class="lbl">Move In / Move Out</span><span class="svc-chk"></span></button>
+  <button type="button" class="svc-btn" data-s="Junk Removal"><span class="ico">🗑️</span><span class="lbl">Junk Removal</span><span class="svc-chk"></span></button>
+  <button type="button" class="svc-btn" data-s="Window Cleaning"><span class="ico">🪟</span><span class="lbl">Window Cleaning</span><span class="svc-chk"></span></button>
+  <button type="button" class="svc-btn" data-s="Carpet Cleaning"><span class="ico">🧺</span><span class="lbl">Carpet Cleaning</span><span class="svc-chk"></span></button>
+  <button type="button" class="svc-btn" data-s="Post Construction Cleaning"><span class="ico">🏗️</span><span class="lbl">Post Construction</span><span class="svc-chk"></span></button>
+  <button type="button" class="svc-btn svc-full" data-s="Not Sure Yet"><span class="ico">🤔</span><span class="lbl">Not Sure Yet &mdash; Just Exploring</span><span class="svc-chk"></span></button>
+</div>
+
+<div class="sep"></div>
+<div class="sec">How Soon? <span class="sec-note">&nbsp;(optional)</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+  <button type="button" class="t-btn" data-t="This Week">⚡ This Week</button>
+  <button type="button" class="t-btn" data-t="This Month">🗓️ This Month</button>
+  <button type="button" class="t-btn" data-t="Next Month">🗓️ Next Month</button>
+  <button type="button" class="t-btn" data-t="Just Exploring">🤔 Just Exploring</button>
+</div>
+
+<div class="sep"></div>
+<div class="sec">Book a Slot <span class="sec-note">&nbsp;(optional &mdash; only if interested)</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:4px;">
+  <button type="button" class="book-btn" id="btnWT" onclick="openBooking('walkthrough')">
+    <span style="font-size:26px">📋</span>
+    <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book Walkthrough</span>
+    <span style="font-size:10.5px;color:var(--muted)">Free &middot; 30 min</span>
+  </button>
+  <button type="button" class="book-btn" id="btnCL" onclick="openBooking('cleaning')">
+    <span style="font-size:26px">🧹</span>
+    <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book Cleaning</span>
+    <span style="font-size:10.5px;color:var(--muted)">Pick your date</span>
+  </button>
+</div>
+
+<div id="addressBlock" style="display:none;margin-top:14px;">
+  <div class="field" id="f-address">
+    <label for="address">Property Address <span class="req">*</span> <span style="font-size:10px;color:var(--muted);font-weight:400">Ontario, Canada</span></label>
+    <div class="addr-wrap">
+      <input type="text" id="address" placeholder="Start typing e.g. 146 Elliott..." autocomplete="off" autocorrect="off" spellcheck="false">
+      <div class="addr-dd" id="addrDd"></div>
+    </div>
+    <div class="err-msg">Please enter your property address</div>
+  </div>
+  <div style="text-align:center;margin-top:4px;">
+    <span class="skip-link" onclick="skipBooking()">Skip — just reserve my discount slot</span>
+  </div>
+</div>
+
+<div class="sep"></div>
+<div class="opt-toggle" onclick="toggleOpt()">
+  <span class="opt-toggle-lbl">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#0a7c6e" stroke-width="1.5"/><path d="M8 5v4M8 11v.5" stroke="#0a7c6e" stroke-width="1.5" stroke-linecap="round"/></svg>
+    More details &mdash; helps us give you a faster quote
+  </span>
+  <svg class="arrow" id="arrow" width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#0a7c6e" stroke-width="1.5" stroke-linecap="round"/></svg>
+</div>
+<div class="opt-fields" id="optFields">
+  <div style="padding-top:14px">
     <div class="field-row">
-      <div class="field" id="f-name">
-        <label for="name">First Name <span class="req">*</span></label>
-        <input type="text" id="name" placeholder="e.g. George" autocomplete="given-name" autocorrect="off" spellcheck="false">
-        <div class="err-msg">Please enter your name</div>
+      <div class="field">
+        <label for="email">Email <span class="opt-tag">optional</span></label>
+        <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
       </div>
-      <div class="field" id="f-phone">
-        <label for="phone">Mobile Number <span class="req">*</span></label>
-        <input type="tel" id="phone" placeholder="519 000 0000" autocomplete="tel" inputmode="numeric">
-        <div class="err-msg">Please enter a valid number</div>
+      <div class="field">
+        <label for="area">Neighbourhood <span class="opt-tag">optional</span></label>
+        <input type="text" id="area" placeholder="e.g. Hyde Park, Byron">
       </div>
     </div>
-
-    <!-- 2: PROPERTY TYPE -->
-    <div class="sep"></div>
-    <div class="sec">Property Type <span class="sec-note">&nbsp;(tap one &mdash; optional)</span></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
-      <button type="button" class="p-btn" data-p="Home / Condo">🏡 Home / Condo</button>
-      <button type="button" class="p-btn" data-p="Rental Unit">🏠 Rental Unit</button>
-      <button type="button" class="p-btn" data-p="Commercial">🏢 Commercial</button>
-      <button type="button" class="p-btn" data-p="Airbnb / STR">🛎️ Airbnb / STR</button>
+    <div class="field">
+      <label for="sqft">Property Size <span class="opt-tag">optional</span></label>
+      <select id="sqft">
+        <option value="">Select size</option>
+        <option>Under 800 sq ft</option>
+        <option>800 &ndash; 1500 sq ft</option>
+        <option>1500 &ndash; 2500 sq ft</option>
+        <option>2500+ sq ft</option>
+        <option>Not sure</option>
+      </select>
     </div>
+  </div>
+</div>
 
-    <!-- 3: SERVICE -->
-    <div class="sep"></div>
-    <div class="sec">Service Interested In <span class="sec-note">&nbsp;(optional)</span></div>
-    <div class="services-grid">
-      <button type="button" class="svc-btn" data-s="Spring Deep Clean"><span class="ico">🌸</span><span class="lbl">Spring Deep Clean</span><span class="svc-chk"></span></button>
-      <button type="button" class="svc-btn" data-s="Standard Regular Cleaning"><span class="ico">🧹</span><span class="lbl">Standard Regular Cleaning</span><span class="svc-chk"></span></button>
-      <button type="button" class="svc-btn" data-s="Rental Property Cleaning"><span class="ico">🏠</span><span class="lbl">Rental Property Cleaning</span><span class="svc-chk"></span></button>
-      <button type="button" class="svc-btn" data-s="Move In / Move Out Cleaning"><span class="ico">📦</span><span class="lbl">Move In / Move Out</span><span class="svc-chk"></span></button>
-      <button type="button" class="svc-btn" data-s="Junk Removal"><span class="ico">🗑️</span><span class="lbl">Junk Removal</span><span class="svc-chk"></span></button>
-      <button type="button" class="svc-btn" data-s="Window Cleaning"><span class="ico">🪟</span><span class="lbl">Window Cleaning</span><span class="svc-chk"></span></button>
-      <button type="button" class="svc-btn" data-s="Carpet Cleaning"><span class="ico">🧺</span><span class="lbl">Carpet Cleaning</span><span class="svc-chk"></span></button>
-      <button type="button" class="svc-btn" data-s="Post Construction Cleaning"><span class="ico">🏗️</span><span class="lbl">Post Construction</span><span class="svc-chk"></span></button>
-      <button type="button" class="svc-btn svc-full" data-s="Not Sure Yet"><span class="ico">🤔</span><span class="lbl">Not Sure Yet &mdash; Just Exploring</span><span class="svc-chk"></span></button>
-    </div>
+<button class="cta" id="ctaBtn" onclick="handleSubmit()">
+  <span id="ctaTxt">Reserve My Discount Slot &#8594;</span>
+  <div class="spin" id="spin"></div>
+</button>
+<p class="privacy">&#128274; Your details are safe with us. We'll only contact you about your booking.</p>
+```
 
-    <!-- 4: TIMELINE -->
-    <div class="sep"></div>
-    <div class="sec">How Soon? <span class="sec-note">&nbsp;(optional)</span></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
-      <button type="button" class="t-btn" data-t="This Week">⚡ This Week</button>
-      <button type="button" class="t-btn" data-t="This Month">🗓️ This Month</button>
-      <button type="button" class="t-btn" data-t="Next Month">🗓️ Next Month</button>
-      <button type="button" class="t-btn" data-t="Just Exploring">🤔 Just Exploring</button>
-    </div>
-
-    <!-- 5: BOOK A SLOT -->
-    <div class="sep"></div>
-    <div class="sec">Book a Slot <span class="sec-note">&nbsp;(optional — tap to open calendar)</span></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:16px;">
-      <button type="button" class="book-btn" id="btnWalkthrough" onclick="openBooking('walkthrough')">
-        <span style="font-size:26px">📋</span>
-        <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book Walkthrough</span>
-        <span style="font-size:10.5px;color:var(--muted)">Free &middot; 30 min</span>
-      </button>
-      <button type="button" class="book-btn" id="btnCleaning" onclick="openBooking('cleaning')">
-        <span style="font-size:26px">🧹</span>
-        <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book Cleaning</span>
-        <span style="font-size:10.5px;color:var(--muted)">Pick your date</span>
-      </button>
-    </div>
-
-    <!-- ADDRESS — appears when booking button tapped -->
-    <div id="addressBlock" style="display:none">
-      <div class="field" id="f-address">
-        <label for="address">Property Address <span class="req">*</span> <span style="font-size:10px;color:var(--muted);font-weight:400">Ontario, Canada</span></label>
-        <div class="addr-wrap">
-          <input type="text" id="address" placeholder="Start typing e.g. 146 Elliott..." autocomplete="off" autocorrect="off" spellcheck="false">
-          <div class="addr-dd" id="addrDd"></div>
-        </div>
-        <div class="err-msg">Please enter your property address</div>
-      </div>
-    </div>
-
-    <!-- 6: OPTIONAL EXTRAS -->
-    <div class="sep"></div>
-    <div class="opt-toggle" onclick="toggleOpt()">
-      <span class="opt-toggle-lbl">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#0a7c6e" stroke-width="1.5"/><path d="M8 5v4M8 11v.5" stroke="#0a7c6e" stroke-width="1.5" stroke-linecap="round"/></svg>
-        More details &mdash; helps us give you a faster quote
-      </span>
-      <svg class="arrow" id="arrow" width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#0a7c6e" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </div>
-    <div class="opt-fields" id="optFields">
-      <div style="padding-top:14px">
-        <div class="field-row">
-          <div class="field">
-            <label for="email">Email <span class="opt-tag">optional</span></label>
-            <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="area">Neighbourhood / Area <span class="opt-tag">optional</span></label>
-            <input type="text" id="area" placeholder="e.g. Hyde Park, Byron">
-          </div>
-        </div>
-        <div class="field">
-          <label for="sqft">Property Size <span class="opt-tag">optional</span></label>
-          <select id="sqft">
-            <option value="">Select size</option>
-            <option>Under 800 sq ft</option>
-            <option>800 &ndash; 1500 sq ft</option>
-            <option>1500 &ndash; 2500 sq ft</option>
-            <option>2500+ sq ft</option>
-            <option>Not sure</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <button class="cta" id="ctaBtn" onclick="handleSubmit()">
-      <span id="ctaTxt">Reserve My Discount Slot &#8594;</span>
-      <div class="spin" id="spin"></div>
-    </button>
-    <p class="privacy">&#128274; Your details are safe with us. We'll only contact you about your booking.</p>
   </div>
 
-  <!-- SUCCESS -->
   <div class="success" id="successScreen">
     <div class="tick-ring">🎉</div>
     <h2>You're in, <span id="sName"></span>!</h2>
@@ -283,201 +279,200 @@
         <svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M10 1.5C5.3 1.5 1.5 5.3 1.5 10c0 1.5.4 2.9 1.1 4.1L1.5 18.5l4.5-1.1C7.1 18.1 8.5 18.5 10 18.5c4.7 0 8.5-3.8 8.5-8.5S14.7 1.5 10 1.5zm4.2 11.8c-.2.5-1 .9-1.4.9-.4 0-.7.1-2.2-.5s-2.4-2-2.8-2.7c-.3-.5-.8-1.5-.2-2.1.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .4.3l.6 1.4c.1.1.1.3 0 .4l-.4.5c-.1.1-.1.2 0 .3.3.5.7 1 1.1 1.3.5.4 1 .6 1.2.7.1.1.3 0 .4-.1l.4-.5c.1-.1.3-.2.4-.1l1.4.7c.2.1.3.2.3.4v.4c0 .1 0 .3-.2.4z"/></svg>
         💬 Chat With Us on WhatsApp
       </a>
-      <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/excelchoicebm/30min'});return false;" class="btn-wt">
-        📋 Book a Free Walkthrough
-      </a>
-      <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/excel-choice-info/cleaning-slot'});return false;" class="btn-cl">
-        🧹 Book a Cleaning Slot
-      </a>
+      <button class="btn-wt" onclick="successBook('walkthrough')">📋 Book a Free Walkthrough</button>
+      <button class="btn-cl" onclick="successBook('cleaning')">🧹 Book a Cleaning Slot</button>
     </div>
     <div class="vishu-tag">🌼 Happy Vishu from ExcelChoice!</div>
   </div>
 
 </div>
-
 <script>
   const WA_NUM    = '12267936754';
-  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbznJtiZvIkvYkbjiPOdNI9phHtu9UDQSMttLPp-rD7lONhxf3mIBSrEnV0z0f1eetf9Sw/exec';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbywHEZjyxXqxpJJo7HwkA8PKHDQ96Pv4Igl7VxPlMVvMY5MiAb4rLQsueJu5JvnFk7ZJQ/exec';
 
-  let selService = '', selTimeline = '', selProp = '';
-  let addressRequired = false, pendingType = null;
-  let acService, acSession;
+let selService=’’, selTimeline=’’, selProp=’’;
+let addressRequired=false, pendingType=null;
+let acService, acSession;
 
-  // ── Google Places init (called by API callback) ──
-  function initPlaces() {
-    acService = new google.maps.places.AutocompleteService();
-    acSession = new google.maps.places.AutocompleteSessionToken();
-    const inp = document.getElementById('address');
-    const dd  = document.getElementById('addrDd');
+function setupAutocomplete() {
+acService = new google.maps.places.AutocompleteService();
+acSession = new google.maps.places.AutocompleteSessionToken();
+const inp = document.getElementById(‘address’);
+const dd  = document.getElementById(‘addrDd’);
 
-    inp.addEventListener('input', function() {
-      const val = this.value.trim();
-      if (val.length < 2) { dd.style.display = 'none'; return; }
-      acService.getPlacePredictions({
-        input: val,
-        sessionToken: acSession,
-        componentRestrictions: { country: 'ca' },
-        types: ['address'],
-        bounds: new google.maps.LatLngBounds(
-          new google.maps.LatLng(42.0, -81.5),
-          new google.maps.LatLng(44.0, -79.5)
-        )
-      }, (preds, status) => {
-        dd.innerHTML = '';
-        if (status !== 'OK' || !preds) { dd.style.display = 'none'; return; }
-        preds.slice(0, 5).forEach(p => {
-          const item = document.createElement('div');
-          item.className = 'addr-item';
-          item.textContent = p.description;
-          item.addEventListener('mousedown', () => {
-            inp.value = p.description;
-            dd.style.display = 'none';
-            document.getElementById('f-address').classList.remove('err');
-            acSession = new google.maps.places.AutocompleteSessionToken();
-            // Auto-open Calendly after address picked
-            if (pendingType) launchCalendly(pendingType);
-          });
-          dd.appendChild(item);
-        });
-        dd.style.display = 'block';
+```
+inp.addEventListener('input', function() {
+  const val = this.value.trim();
+  if (val.length < 2) { dd.style.display='none'; return; }
+  acService.getPlacePredictions({
+    input: val,
+    sessionToken: acSession,
+    componentRestrictions: { country: 'ca' },
+    types: ['address']
+  }, function(preds, status) {
+    dd.innerHTML='';
+    if (status !== 'OK' || !preds) { dd.style.display='none'; return; }
+    preds.slice(0,5).forEach(function(p) {
+      const item = document.createElement('div');
+      item.className='addr-item';
+      item.textContent = p.description;
+      item.addEventListener('mousedown', function() {
+        inp.value = p.description;
+        dd.style.display='none';
+        document.getElementById('f-address').classList.remove('err');
+        acSession = new google.maps.places.AutocompleteSessionToken();
+        if (pendingType) launchCalendly(pendingType);
       });
+      dd.appendChild(item);
     });
-
-    inp.addEventListener('blur', () => setTimeout(() => dd.style.display = 'none', 180));
-  }
-
-  // ── Booking buttons ──
-  function openBooking(type) {
-    pendingType = type;
-    addressRequired = true;
-
-    // Highlight active button
-    document.getElementById('btnWalkthrough').classList.toggle('on', type === 'walkthrough');
-    document.getElementById('btnCleaning').classList.toggle('on', type === 'cleaning');
-
-    // Show address block
-    const block = document.getElementById('addressBlock');
-    block.style.display = 'block';
-    setTimeout(() => block.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-
-    // If address already filled, open Calendly immediately
-    if (document.getElementById('address').value.trim()) {
-      launchCalendly(type);
-    } else {
-      document.getElementById('address').focus();
-    }
-  }
-
-  function launchCalendly(type) {
-    const addr = document.getElementById('address').value.trim();
-    if (!addr) { document.getElementById('f-address').classList.add('err'); return; }
-    document.getElementById('f-address').classList.remove('err');
-
-    const name  = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const svc   = (selService && selService !== 'Not Sure Yet') ? selService : 'cleaning services';
-    const url   = type === 'walkthrough'
-      ? 'https://calendly.com/excelchoicebm/30min'
-      : 'https://calendly.com/excel-choice-info/cleaning-slot';
-
-    Calendly.initPopupWidget({
-      url,
-      prefill: {
-        name,
-        email: document.getElementById('email').value.trim() || '',
-        customAnswers: { a1: phone, a2: addr, a3: svc }
-      }
-    });
-  }
-
-  // ── Other interactions ──
-  document.getElementById('name').addEventListener('blur', () => {
-    if (document.getElementById('name').value.trim().length > 1)
-      setTimeout(() => document.getElementById('phone').focus(), 70);
+    dd.style.display='block';
   });
+});
+inp.addEventListener('blur', function(){ setTimeout(function(){ dd.style.display='none'; }, 200); });
+```
 
-  document.querySelectorAll('.p-btn').forEach(btn => btn.addEventListener('click', () => {
-    document.querySelectorAll('.p-btn').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on'); selProp = btn.dataset.p;
-    if (navigator.vibrate) navigator.vibrate(22);
-  }));
+}
 
-  document.querySelectorAll('.svc-btn').forEach(btn => btn.addEventListener('click', () => {
-    document.querySelectorAll('.svc-btn').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on'); selService = btn.dataset.s;
-    if (navigator.vibrate) navigator.vibrate(22);
-  }));
+function openBooking(type) {
+pendingType = type;
+addressRequired = true;
+document.getElementById(‘btnWT’).classList.toggle(‘on’, type===‘walkthrough’);
+document.getElementById(‘btnCL’).classList.toggle(‘on’, type===‘cleaning’);
+const block = document.getElementById(‘addressBlock’);
+block.style.display = ‘block’;
+setTimeout(function(){ block.scrollIntoView({behavior:‘smooth’,block:‘center’}); }, 100);
+const addr = document.getElementById(‘address’).value.trim();
+if (addr) launchCalendly(type);
+else document.getElementById(‘address’).focus();
+}
 
-  document.querySelectorAll('.t-btn').forEach(btn => btn.addEventListener('click', () => {
-    document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on'); selTimeline = btn.dataset.t;
-  }));
+function launchCalendly(type) {
+const addr = document.getElementById(‘address’).value.trim();
+if (!addr) { document.getElementById(‘f-address’).classList.add(‘err’); return; }
+document.getElementById(‘f-address’).classList.remove(‘err’);
+const url = type===‘walkthrough’
+? ‘https://calendly.com/excelchoicebm/30min’
+: ‘https://calendly.com/excel-choice-info/cleaning-slot’;
+const name  = document.getElementById(‘name’).value.trim();
+const email = document.getElementById(‘email’).value.trim();
+if (typeof Calendly !== ‘undefined’) {
+Calendly.initPopupWidget({ url: url, prefill: { name: name, email: email } });
+} else {
+window.open(url, ‘_blank’);
+}
+}
 
-  function toggleOpt() {
-    document.getElementById('optFields').classList.toggle('open');
-    document.getElementById('arrow').classList.toggle('open');
-  }
+function successBook(type) {
+const url = type===‘walkthrough’
+? ‘https://calendly.com/excelchoicebm/30min’
+: ‘https://calendly.com/excel-choice-info/cleaning-slot’;
+const name  = document.getElementById(‘sName’).textContent;
+const email = document.getElementById(‘email’) ? document.getElementById(‘email’).value.trim() : ‘’;
+if (typeof Calendly !== ‘undefined’) {
+Calendly.initPopupWidget({ url: url, prefill: { name: name, email: email } });
+} else {
+window.open(url, ‘_blank’);
+}
+}
 
-  function buildWA(name, service, prop) {
-    const svc  = (service && service !== 'Not Sure Yet') ? service : 'cleaning services';
-    const type = prop ? ' (' + prop + ')' : '';
-    return encodeURIComponent('Hi ExcelChoice! 🌸 I met you at the Vishu event. I\'m ' + name + ' and I\'m interested in ' + svc + type + '. Looking forward to hearing from you!');
-  }
+function skipBooking() {
+addressRequired = false;
+document.getElementById(‘addressBlock’).style.display=‘none’;
+document.getElementById(‘btnWT’).classList.remove(‘on’);
+document.getElementById(‘btnCL’).classList.remove(‘on’);
+pendingType = null;
+}
 
-  async function handleSubmit() {
-    const name  = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    let ok = true;
+document.getElementById(‘name’).addEventListener(‘blur’, function() {
+if (this.value.trim().length > 1) setTimeout(function(){ document.getElementById(‘phone’).focus(); }, 70);
+});
 
-    document.getElementById('f-name').classList.toggle('err', !name);
-    if (!name) ok = false;
+document.querySelectorAll(’.p-btn’).forEach(function(btn){ btn.addEventListener(‘click’, function(){
+document.querySelectorAll(’.p-btn’).forEach(function(b){ b.classList.remove(‘on’); });
+btn.classList.add(‘on’); selProp=btn.dataset.p;
+if(navigator.vibrate) navigator.vibrate(22);
+});});
 
-    const digits = phone.replace(/\D/g, '');
-    document.getElementById('f-phone').classList.toggle('err', digits.length < 10);
-    if (digits.length < 10) ok = false;
+document.querySelectorAll(’.svc-btn’).forEach(function(btn){ btn.addEventListener(‘click’, function(){
+document.querySelectorAll(’.svc-btn’).forEach(function(b){ b.classList.remove(‘on’); });
+btn.classList.add(‘on’); selService=btn.dataset.s;
+if(navigator.vibrate) navigator.vibrate(22);
+});});
 
-    if (addressRequired) {
-      const addr = document.getElementById('address').value.trim();
-      document.getElementById('f-address').classList.toggle('err', !addr);
-      if (!addr) ok = false;
-    }
+document.querySelectorAll(’.t-btn’).forEach(function(btn){ btn.addEventListener(‘click’, function(){
+document.querySelectorAll(’.t-btn’).forEach(function(b){ b.classList.remove(‘on’); });
+btn.classList.add(‘on’); selTimeline=btn.dataset.t;
+});});
 
-    if (!ok) return;
+function toggleOpt() {
+document.getElementById(‘optFields’).classList.toggle(‘open’);
+document.getElementById(‘arrow’).classList.toggle(‘open’);
+}
 
-    if (navigator.vibrate) navigator.vibrate([30, 20, 30]);
-    document.getElementById('ctaTxt').textContent = 'Securing your slot\u2026';
-    document.getElementById('spin').style.display = 'block';
-    document.getElementById('ctaBtn').disabled = true;
+function buildWA(name, service, prop) {
+const svc  = (service && service!==‘Not Sure Yet’) ? service : ‘cleaning services’;
+const type = prop ? ’ (’+prop+’)’ : ‘’;
+return encodeURIComponent(‘Hi ExcelChoice! 🌸 I met you at the Vishu event. I'm ‘+name+’ and I'm interested in ‘+svc+type+’. Looking forward to hearing from you!’);
+}
 
-    const payload = {
-      name, phone,
-      propertyType: selProp     || '',
-      service:      selService  || '',
-      timeline:     selTimeline || '',
-      address:      addressRequired ? document.getElementById('address').value.trim() : '',
-      email:        document.getElementById('email').value.trim(),
-      area:         document.getElementById('area').value.trim(),
-      sqft:         document.getElementById('sqft').value,
-      source:       'Tatvamasi Vishu Event \u2014 Apr 19 2026',
-      submittedAt:  new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' })
-    };
+function handleSubmit() {
+const name  = document.getElementById(‘name’).value.trim();
+const phone = document.getElementById(‘phone’).value.trim();
+let ok = true;
 
-    try {
-      fetch(SHEET_URL + '?data=' + encodeURIComponent(JSON.stringify(payload)), { method: 'GET', mode: 'no-cors' });
-    } catch(e) {}
+```
+document.getElementById('f-name').classList.toggle('err', !name);
+if (!name) ok=false;
 
-    const waURL = 'https://wa.me/' + WA_NUM + '?text=' + buildWA(name, selService, selProp);
-    document.getElementById('waBtn').href = waURL;
-    document.getElementById('sName').textContent = name;
+const digits = phone.replace(/\D/g,'');
+document.getElementById('f-phone').classList.toggle('err', digits.length<10);
+if (digits.length<10) ok=false;
 
-    document.getElementById('formCard').classList.add('gone');
-    document.getElementById('successScreen').classList.add('show');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+if (addressRequired) {
+  const addr = document.getElementById('address').value.trim();
+  document.getElementById('f-address').classList.toggle('err', !addr);
+  if (!addr) ok=false;
+}
 
-  document.querySelectorAll('input').forEach(inp => {
-    inp.addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
-  });
+if (!ok) return;
+
+if (navigator.vibrate) navigator.vibrate([30,20,30]);
+document.getElementById('ctaTxt').textContent = 'Securing your slot\u2026';
+document.getElementById('spin').style.display = 'block';
+document.getElementById('ctaBtn').disabled = true;
+
+const payload = {
+  name:         name,
+  phone:        phone,
+  address:      addressRequired ? document.getElementById('address').value.trim() : '',
+  propertyType: selProp     || '',
+  service:      selService  || '',
+  timeline:     selTimeline || '',
+  email:        document.getElementById('email').value.trim(),
+  area:         document.getElementById('area').value.trim(),
+  sqft:         document.getElementById('sqft').value,
+  source:       'Tatvamasi Vishu Event \u2014 Apr 19 2026',
+  submittedAt:  new Date().toLocaleString('en-CA',{timeZone:'America/Toronto'})
+};
+
+try {
+  fetch(SHEET_URL+'?data='+encodeURIComponent(JSON.stringify(payload)),{method:'GET',mode:'no-cors'});
+} catch(e) {}
+
+const waURL = 'https://wa.me/'+WA_NUM+'?text='+buildWA(name,selService,selProp);
+document.getElementById('waBtn').href = waURL;
+document.getElementById('sName').textContent = name;
+document.getElementById('formCard').classList.add('gone');
+document.getElementById('successScreen').classList.add('show');
+window.scrollTo({top:0,behavior:'smooth'});
+```
+
+}
+
+document.querySelectorAll(‘input’).forEach(function(inp){
+inp.addEventListener(‘keydown’, function(e){ if(e.key===‘Enter’) handleSubmit(); });
+});
 </script>
+
 </body>
 </html>

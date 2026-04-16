@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ExcelChoice — Vishu Exclusive Offer 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:       #0a7c6e;
+    --teal-light: #0db89e;
+    --teal-dark:  #065f52;
+    --gold:       #d4a017;
+    --gold-light: #f0c040;
+    --gold-pale:  #fdf8ec;
+    --cream:      #f7faf9;
+    --white:      #ffffff;
+    --text:       #111827;
+    --muted:      #6b7280;
+    --border:     #d1e8e4;
+    --radius-lg:  22px;
+    --radius:     14px;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);min-height:100dvh;color:var(--text);overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 45% at 105% -5%,rgba(10,124,110,.07) 0%,transparent 55%),radial-gradient(ellipse 55% 40% at -5% 105%,rgba(212,160,23,.05) 0%,transparent 55%);pointer-events:none;z-index:0}
+  .floral{position:fixed;font-size:110px;opacity:.035;pointer-events:none;z-index:0;user-select:none;line-height:1}
+  .floral-tl{top:-18px;left:-18px;transform:rotate(-25deg)}
+  .floral-br{bottom:-18px;right:-18px;transform:rotate(155deg)}
+  .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 16px 56px}
+
+  /* OFFER BANNER */
+  .offer-banner{background:linear-gradient(132deg,var(--teal-dark) 0%,var(--teal) 55%,#0ec9ae 100%);border-radius:var(--radius-lg);padding:24px 28px 22px;margin-top:20px;text-align:center;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(10,124,110,.16)}
+  .offer-banner::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:rgba(255,255,255,.055);border-radius:50%;pointer-events:none}
+  .offer-banner::after{content:'';position:absolute;bottom:-55px;left:-35px;width:150px;height:150px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none}
+  .offer-pill{display:inline-block;background:var(--gold);color:#4a2000;font-size:9.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:4px 15px;border-radius:100px;margin-bottom:11px}
+  .offer-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,5.5vw,30px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:7px;letter-spacing:-.2px}
+  .offer-headline span{color:var(--gold-light)}
+  .offer-sub{font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.55;margin-bottom:15px}
+  .offer-counter{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:7px 17px;border-radius:100px;font-size:12px;font-weight:600;color:#fff;letter-spacing:.2px}
+  .counter-dot{width:7px;height:7px;background:var(--gold-light);border-radius:50%;animation:blink 1.6s ease-in-out infinite;flex-shrink:0}
+  @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+  /* HEADER */
+  .header{text-align:center;padding:26px 12px 20px}
+  .event-badge{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#5a2d00;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 17px;border-radius:100px;margin-bottom:18px;box-shadow:0 4px 14px rgba(212,160,23,.3)}
+  .brand{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:10px}
+
+  /* LOGO CIRCLE */
+  .logo-circle{width:64px;height:64px;background:var(--white);border-radius:50%;border:2px solid var(--border);box-shadow:0 8px 36px rgba(10,124,110,.13);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+  .logo-circle img{width:52px;height:52px;object-fit:contain;display:block}
+  .logo-fallback{width:46px;height:46px;background:linear-gradient(135deg,var(--teal),var(--teal-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
+
+  .brand-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--teal-dark);letter-spacing:-.4px;line-height:1}
+  .header-sub{font-size:13.5px;color:var(--muted);font-weight:400;margin-top:5px;line-height:1.5}
+  .trust-line{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:500;margin-top:11px}
+  .stars{color:var(--gold);letter-spacing:1.5px;font-size:10.5px}
+  .divider-accent{width:56px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:2px;margin:14px auto 0}
+
+  /* CARD */
+  .card{background:var(--white);border-radius:var(--radius-lg);box-shadow:0 20px 60px rgba(10,124,110,.16);padding:30px 26px 26px;border:1px solid rgba(10,124,110,.07);animation:rise .45s cubic-bezier(.22,1,.36,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+  .urgency{display:flex;align-items:center;gap:9px;background:var(--gold-pale);border:1px solid rgba(212,160,23,.3);border-radius:10px;padding:9px 13px;margin-bottom:22px;font-size:12px;font-weight:600;color:#6b4100;line-height:1.4}
+
+  .sec{font-size:10.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .sec::after{content:'';flex:1;height:1px;background:var(--border)}
+  .sec-note{font-size:9px;color:#9ca3af;text-transform:none;letter-spacing:0;font-weight:400}
+
+  .sep{height:1px;background:linear-gradient(90deg,transparent,var(--border) 25%,var(--border) 75%,transparent);margin:22px 0 20px}
+
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:4px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--text);margin-bottom:7px}
+  .req{color:#dc2626;margin-left:2px}
+  .opt-tag{font-size:10px;color:var(--muted);font-weight:400;margin-left:5px;letter-spacing:.3px}
+
+  input[type="text"],input[type="tel"],input[type="email"],input[type="date"],select{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:var(--text);background:#fafdfc;transition:border-color .18s,box-shadow .18s,background .18s;-webkit-appearance:none;appearance:none}
+  input:focus,select:focus{outline:none;border-color:var(--teal-light);background:var(--white);box-shadow:0 0 0 3.5px rgba(13,184,158,.11)}
+  input::placeholder{color:#b0bec5;font-size:13.5px;font-weight:400}
+  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230a7c6e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center;padding-right:38px;cursor:pointer}
+
+  .field.err input,.field.err select{border-color:#dc2626;background:#fff8f8}
+  .err-msg{display:none;font-size:11px;color:#dc2626;margin-top:5px;font-weight:500}
+  .field.err .err-msg{display:block}
+
+  /* PROPERTY TYPE PILLS */
+  .prop-row{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:2px}
+  .p-btn{display:flex;align-items:center;gap:6px;padding:9px 16px;border:1.5px solid var(--border);border-radius:100px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all .18s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .p-btn.on{background:var(--teal-dark);border-color:var(--teal-dark);color:white;font-weight:600}
+  .p-btn:active{transform:scale(.97)}
+
+  /* SERVICE TILES */
+  .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .svc-btn{display:flex;align-items:center;gap:9px;padding:12px 13px;border:1.5px solid var(--border);border-radius:12px;background:#fafdfc;cursor:pointer;transition:all .18s ease;text-align:left;font-family:'DM Sans',sans-serif;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .svc-btn:active{transform:scale(.97)}
+  .svc-btn .ico{font-size:18px;width:24px;text-align:center;flex-shrink:0}
+  .svc-btn .lbl{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.3;flex:1}
+  .svc-chk{margin-left:auto;width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;transition:all .18s;display:flex;align-items:center;justify-content:center}
+  .svc-btn.on{border-color:var(--teal);background:linear-gradient(135deg,#edf9f7,#dff5f0);box-shadow:0 0 0 2.5px rgba(10,124,110,.08)}
+  .svc-btn.on .lbl{color:var(--teal-dark);font-weight:600}
+  .svc-btn.on .svc-chk{background:var(--teal);border-color:var(--teal)}
+  .svc-btn.on .svc-chk::after{content:'✓';color:white;font-size:10px;font-weight:700}
+  .svc-full{grid-column:span 2}
+
+  /* TIMELINE PILLS */
+  .timeline-row{display:flex;gap:9px;flex-wrap:wrap}
+  .t-btn{padding:9px 17px;border:1.5px solid var(--border);border-radius:100px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all .18s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .t-btn.on{background:var(--teal);border-color:var(--teal);color:white;font-weight:600}
+
+  /* OPTIONAL TOGGLE */
+  .opt-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:11px 0;user-select:none;-webkit-tap-highlight-color:transparent}
+  .opt-toggle-lbl{font-size:12.5px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .arrow{transition:transform .3s ease;color:var(--teal)}
+  .arrow.open{transform:rotate(180deg)}
+  .opt-fields{overflow:hidden;max-height:0;transition:max-height .4s ease}
+  .opt-fields.open{max-height:700px}
+
+  /* CTA */
+  .cta{width:100%;margin-top:24px;padding:17px;background:linear-gradient(130deg,var(--teal-dark) 0%,var(--teal) 55%,var(--teal-light) 100%);color:white;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;letter-spacing:.2px;cursor:pointer;box-shadow:0 8px 28px rgba(10,124,110,.32);transition:transform .18s,box-shadow .18s;display:flex;align-items:center;justify-content:center;gap:10px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .cta:active{transform:scale(.98);box-shadow:0 4px 14px rgba(10,124,110,.2)}
+  .cta:disabled{opacity:.6;cursor:not-allowed;transform:none}
+  .spin{width:18px;height:18px;border:2px solid rgba(255,255,255,.35);border-top-color:white;border-radius:50%;animation:turn .65s linear infinite;display:none}
+  @keyframes turn{to{transform:rotate(360deg)}}
+  .privacy{text-align:center;font-size:11px;color:#9ca3af;margin-top:12px;line-height:1.5}
+
+  /* SUCCESS */
+  .success{display:none;text-align:center;padding:56px 24px;animation:rise .45s cubic-bezier(.22,1,.36,1) both}
+  .success.show{display:block}
+  .card.gone{display:none}
+  .tick-ring{width:90px;height:90px;background:linear-gradient(135deg,var(--teal-dark),var(--teal-light));border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 26px;font-size:40px;box-shadow:0 14px 44px rgba(10,124,110,.28);animation:pop .55s .2s cubic-bezier(.22,1,.36,1) both}
+  @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+  .success h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--teal-dark);margin-bottom:10px}
+  .success h2 span{color:var(--teal)}
+  .success p{font-size:14.5px;color:var(--muted);line-height:1.7;margin-bottom:22px}
+  .prog-wrap{max-width:180px;margin:0 auto 8px}
+  .prog-bar{height:3px;background:var(--border);border-radius:100px;overflow:hidden}
+  .prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--teal),var(--teal-light));border-radius:100px;transition:width 2s linear}
+  .wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;padding:15px 30px;border-radius:14px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 8px 26px rgba(37,211,102,.3);margin-top:16px;transition:transform .18s;-webkit-tap-highlight-color:transparent}
+  .wa-btn:active{transform:scale(.97)}
+  .vishu-tag{display:inline-flex;align-items:center;gap:7px;background:var(--gold-pale);border:1px solid rgba(212,160,23,.28);padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;color:#7a4e00;margin-top:18px}
+
+  @media(max-width:400px){
+    .field-row{grid-template-columns:1fr;gap:0}
+    .services-grid{grid-template-columns:1fr}
+    .card{padding:24px 18px 20px}
+    .brand-name{font-size:26px}
+    .logo-circle{width:52px;height:52px}
+    .logo-circle img{width:42px;height:42px}
+  }
+</style>
+</head>
+<body>
+
+<div class="floral floral-tl">🌸</div>
+<div class="floral floral-br">🌺</div>
+
+<div class="wrap">
+
+  <!-- OFFER BANNER -->
+  <div class="offer-banner">
+    <div class="offer-pill">🌼 Vishu Exclusive &mdash; Today Only</div>
+    <h2 class="offer-headline">Get <span>10% OFF</span> + a Free Walkthrough<br>on Your First Booking</h2>
+    <p class="offer-sub">Deep Clean &middot; Move Out &middot; Regular Cleaning &middot; Carpet &amp; More<br>Available for the first 30 customers who sign up today.</p>
+    <div class="offer-counter">
+      <div class="counter-dot"></div>
+      Limited slots remaining today
+    </div>
+  </div>
+
+  <!-- BRAND HEADER -->
+  <div class="header">
+    <div class="event-badge">🌼 Tatvamasi Vishu Event &middot; April 19, 2026</div>
+
+    <div class="brand">
+      <div class="logo-circle">
+        <img
+          src="Logo .png"
+          alt="ExcelChoice"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;logo-fallback&quot;>✨</div>'"
+        >
+      </div>
+      <div class="brand-name">ExcelChoice</div>
+    </div>
+
+    <p class="header-sub">Professional Cleaning Services &middot; London, ON</p>
+
+    <div class="trust-line">
+      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      Trusted by homeowners &amp; property managers across London
+    </div>
+    <div class="divider-accent"></div>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="card" id="formCard">
+
+    <div class="urgency">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="flex-shrink:0">
+        <path d="M8 1.5L2 8.5h5L5.5 14.5l8.5-7.5H9L10.5 1.5z" fill="#d4a017" stroke="#d4a017" stroke-width="0.5" stroke-linejoin="round"/>
+      </svg>
+      <span>&#9889; Limited discounted slots available today &mdash; fill in your details to reserve yours</span>
+    </div>
+
+    <!-- 1: YOUR DETAILS -->
+    <div class="sec">Your Details</div>
+    <div class="field-row">
+      <div class="field" id="f-name">
+        <label for="name">First Name <span class="req">*</span></label>
+        <input type="text" id="name" placeholder="e.g. George" autocomplete="given-name" autocorrect="off" spellcheck="false">
+        <div class="err-msg">Please enter your name</div>
+      </div>
+      <div class="field" id="f-phone">
+        <label for="phone">Mobile Number <span class="req">*</span></label>
+        <input type="tel" id="phone" placeholder="519 000 0000" autocomplete="tel" inputmode="numeric">
+        <div class="err-msg">Please enter a valid number</div>
+      </div>
+    </div>
+
+    <!-- 2: PROPERTY TYPE — new quick-tap row -->
+    <div class="sep"></div>
+    <div class="sec">Property Type <span class="sec-note">&nbsp;(tap one — optional)</span></div>
+    <div class="prop-row" id="propRow">
+      <button type="button" class="p-btn" data-p="Home / Condo">🏡 Home / Condo</button>
+      <button type="button" class="p-btn" data-p="Rental Unit">🏠 Rental Unit</button>
+      <button type="button" class="p-btn" data-p="Commercial">🏢 Commercial</button>
+    </div>
+
+    <!-- 3: SERVICE -->
+    <div class="sep"></div>
+    <div class="sec">Service Interested In <span class="sec-note">&nbsp;(optional)</span></div>
+    <div class="services-grid">
+      <button type="button" class="svc-btn" data-s="Spring Deep Clean">
+        <span class="ico">🌸</span><span class="lbl">Spring Deep Clean</span><span class="svc-chk"></span>
+      </button>
+      <button type="button" class="svc-btn" data-s="Standard Regular Cleaning">
+        <span class="ico">🧹</span><span class="lbl">Standard Regular Cleaning</span><span class="svc-chk"></span>
+      </button>
+      <button type="button" class="svc-btn" data-s="Rental Property Cleaning">
+        <span class="ico">🏠</span><span class="lbl">Rental Property Cleaning</span><span class="svc-chk"></span>
+      </button>
+      <button type="button" class="svc-btn" data-s="Move In / Move Out Cleaning">
+        <span class="ico">📦</span><span class="lbl">Move In / Move Out</span><span class="svc-chk"></span>
+      </button>
+      <button type="button" class="svc-btn" data-s="Junk Removal">
+        <span class="ico">🗑️</span><span class="lbl">Junk Removal</span><span class="svc-chk"></span>
+      </button>
+      <button type="button" class="svc-btn" data-s="Window Cleaning">
+        <span class="ico">🪟</span><span class="lbl">Window Cleaning</span><span class="svc-chk"></span>
+      </button>
+      <button type="button" class="svc-btn" data-s="Carpet Cleaning">
+        <span class="ico">🧺</span><span class="lbl">Carpet Cleaning</span><span class="svc-chk"></span>
+      </button>
+      <button type="button" class="svc-btn" data-s="Post Construction Cleaning">
+        <span class="ico">🏗️</span><span class="lbl">Post Construction</span><span class="svc-chk"></span>
+      </button>
+      <button type="button" class="svc-btn svc-full" data-s="Not Sure Yet">
+        <span class="ico">🤔</span><span class="lbl">Not Sure Yet — Just Exploring</span><span class="svc-chk"></span>
+      </button>
+    </div>
+
+    <!-- 4: TIMELINE -->
+    <div class="sep"></div>
+    <div class="sec">How Soon? <span class="sec-note">&nbsp;(optional)</span></div>
+    <div class="timeline-row">
+      <button type="button" class="t-btn" data-t="This Month">This Month</button>
+      <button type="button" class="t-btn" data-t="Next Month">Next Month</button>
+      <button type="button" class="t-btn" data-t="Just Exploring">Just Exploring</button>
+    </div>
+
+    <!-- 5: OPTIONAL EXTRAS -->
+    <div class="sep"></div>
+    <div class="opt-toggle" onclick="toggleOpt()">
+      <span class="opt-toggle-lbl">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7" stroke="#0a7c6e" stroke-width="1.5"/>
+          <path d="M8 5v4M8 11v.5" stroke="#0a7c6e" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        More details &mdash; helps us give you a faster quote
+      </span>
+      <svg class="arrow" id="arrow" width="15" height="15" viewBox="0 0 16 16" fill="none">
+        <path d="M4 6l4 4 4-4" stroke="#0a7c6e" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="opt-fields" id="optFields">
+      <div style="padding-top:14px">
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email <span class="opt-tag">optional</span></label>
+            <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="area">Neighbourhood / Area <span class="opt-tag">optional</span></label>
+            <input type="text" id="area" placeholder="e.g. Hyde Park, Byron">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="sqft">Property Size <span class="opt-tag">optional</span></label>
+            <select id="sqft">
+              <option value="">Select size</option>
+              <option>Under 800 sq ft</option>
+              <option>800 &ndash; 1500 sq ft</option>
+              <option>1500 &ndash; 2500 sq ft</option>
+              <option>2500+ sq ft</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="prefDate">Preferred Date <span class="opt-tag">optional</span></label>
+            <input type="date" id="prefDate">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <button class="cta" id="ctaBtn" onclick="handleSubmit()">
+      <span id="ctaTxt">Reserve My Discount Slot &#8594;</span>
+      <div class="spin" id="spin"></div>
+    </button>
+    <p class="privacy">&#128274; Your details are safe with us. We'll only contact you about your booking.</p>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success" id="successScreen">
+    <div class="tick-ring">&#127881;</div>
+    <h2>You're in, <span id="sName"></span>!</h2>
+    <p>Your discount slot is reserved.<br>We'll follow up on WhatsApp to confirm<br>your booking and get you sorted!</p>
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+    </div>
+    <p style="font-size:12px;color:#9ca3af;margin:4px 0 0">Opening WhatsApp for you&hellip;</p>
+    <a class="wa-btn" id="waBtn" href="#" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="white" aria-hidden="true">
+        <path d="M10 1.5C5.3 1.5 1.5 5.3 1.5 10c0 1.5.4 2.9 1.1 4.1L1.5 18.5l4.5-1.1C7.1 18.1 8.5 18.5 10 18.5c4.7 0 8.5-3.8 8.5-8.5S14.7 1.5 10 1.5zm4.2 11.8c-.2.5-1 .9-1.4.9-.4 0-.7.1-2.2-.5s-2.4-2-2.8-2.7c-.3-.5-.8-1.5-.2-2.1.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .4.3l.6 1.4c.1.1.1.3 0 .4l-.4.5c-.1.1-.1.2 0 .3.3.5.7 1 1.1 1.3.5.4 1 .6 1.2.7.1.1.3 0 .4-.1l.4-.5c.1-.1.3-.2.4-.1l1.4.7c.2.1.3.2.3.4v.4c0 .1 0 .3-.2.4z"/>
+      </svg>
+      Chat With Us on WhatsApp
+    </a>
+    <div class="vishu-tag">🌼 Happy Vishu from ExcelChoice!</div>
+  </div>
+
+</div>
+
+<script>
+  const WA_NUM    = '12267936754';
+  const SHEET_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+  let selService  = '';
+  let selTimeline = '';
+  let selProp     = '';
+
+  document.getElementById('prefDate').setAttribute('min', new Date().toISOString().split('T')[0]);
+
+  document.getElementById('name').addEventListener('blur', () => {
+    if (document.getElementById('name').value.trim().length > 1)
+      setTimeout(() => document.getElementById('phone').focus(), 70);
+  });
+
+  document.querySelectorAll('.p-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.p-btn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      selProp = btn.dataset.p;
+      if (navigator.vibrate) navigator.vibrate(22);
+    });
+  });
+
+  document.querySelectorAll('.svc-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.svc-btn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      selService = btn.dataset.s;
+      if (navigator.vibrate) navigator.vibrate(22);
+    });
+  });
+
+  document.querySelectorAll('.t-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      selTimeline = btn.dataset.t;
+    });
+  });
+
+  function toggleOpt() {
+    document.getElementById('optFields').classList.toggle('open');
+    document.getElementById('arrow').classList.toggle('open');
+  }
+
+  function buildWA(name, service, prop) {
+    const svc  = (service && service !== 'Not Sure Yet') ? service : 'cleaning services';
+    const type = prop ? ' (' + prop + ')' : '';
+    return encodeURIComponent('Hi ExcelChoice! 🌸 I met you at the Vishu event. I\'m ' + name + ' and I\'m interested in ' + svc + type + '. Looking forward to hearing from you!');
+  }
+
+  async function handleSubmit() {
+    const name  = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    let ok = true;
+
+    document.getElementById('f-name').classList.toggle('err', !name);
+    if (!name) ok = false;
+
+    const digits = phone.replace(/\D/g, '');
+    document.getElementById('f-phone').classList.toggle('err', digits.length < 10);
+    if (digits.length < 10) ok = false;
+
+    if (!ok) return;
+
+    if (navigator.vibrate) navigator.vibrate([30, 20, 30]);
+
+    document.getElementById('ctaTxt').textContent = 'Securing your slot\u2026';
+    document.getElementById('spin').style.display = 'block';
+    document.getElementById('ctaBtn').disabled = true;
+
+    const payload = {
+      name,
+      phone,
+      propertyType:  selProp     || '',
+      service:       selService  || '',
+      timeline:      selTimeline || '',
+      email:         document.getElementById('email').value.trim(),
+      area:          document.getElementById('area').value.trim(),
+      sqft:          document.getElementById('sqft').value,
+      preferredDate: document.getElementById('prefDate').value,
+      source:        'Tatvamasi Vishu Event \u2014 Apr 19 2026',
+      submittedAt:   new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' })
+    };
+
+    try {
+      fetch(SHEET_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch(e) {}
+
+    const waURL = 'https://wa.me/' + WA_NUM + '?text=' + buildWA(name, selService, selProp);
+    document.getElementById('waBtn').href  = waURL;
+    document.getElementById('sName').textContent = name;
+
+    document.getElementById('formCard').classList.add('gone');
+    document.getElementById('successScreen').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    setTimeout(() => { document.getElementById('progFill').style.width = '100%'; }, 150);
+    setTimeout(() => { window.location.href = waURL; }, 2200);
+  }
+
+  document.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
+  });
+</script>
+</body>
+</html>

@@ -75,6 +75,7 @@
   .svc-btn.on{border-color:var(--teal);background:linear-gradient(135deg,#edf9f7,#dff5f0);box-shadow:0 0 0 2.5px rgba(10,124,110,.08)}
   .svc-btn.on .lbl{color:var(--teal-dark);font-weight:600}
   .svc-btn.on .svc-chk{background:var(--teal);border-color:var(--teal)}
+  .svc-btn.on .svc-chk::after{content:'checkmark';color:white;font-size:10px;font-weight:700}
   .svc-full{grid-column:span 2}
   .t-btn{padding:9px 17px;border:1.5px solid var(--border);border-radius:100px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all .18s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;text-align:center}
   .t-btn.on{background:var(--teal);border-color:var(--teal);color:white;font-weight:600}
@@ -159,8 +160,6 @@
         <input type="tel" id="phone" placeholder="519 000 0000" autocomplete="tel" inputmode="numeric">
         <div class="err-msg">Please enter a valid number</div>
       </div>
-      <label for="email">Email <span class="opt-tag">optional</span></label>
-            <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
     </div>
 
     <div class="sep"></div>
@@ -181,7 +180,7 @@
       <button type="button" class="svc-btn" data-s="Move In / Move Out Cleaning"><span class="ico">&#128230;</span><span class="lbl">Move In / Move Out</span><span class="svc-chk"></span></button>
       <button type="button" class="svc-btn" data-s="Junk Removal"><span class="ico">&#128465;</span><span class="lbl">Junk Removal</span><span class="svc-chk"></span></button>
       <button type="button" class="svc-btn" data-s="Window Cleaning"><span class="ico">&#129695;</span><span class="lbl">Window Cleaning</span><span class="svc-chk"></span></button>
-<button type="button" class="svc-btn" data-s="Carpet Cleaning"><span class="ico">🧶</span><span class="lbl">Carpet Cleaning</span><span class="svc-chk"></span></button>      
+      <button type="button" class="svc-btn" data-s="Carpet Cleaning"><span class="ico">&#129530;</span><span class="lbl">🧶Carpet Cleaning</span><span class="svc-chk"></span></button>
       <button type="button" class="svc-btn" data-s="Post Construction Cleaning"><span class="ico">&#127959;</span><span class="lbl">Post Construction</span><span class="svc-chk"></span></button>
       <button type="button" class="svc-btn svc-full" data-s="Not Sure Yet"><span class="ico">&#129300;</span><span class="lbl">Not Sure Yet &mdash; Just Exploring</span><span class="svc-chk"></span></button>
     </div>
@@ -200,12 +199,12 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:4px;">
       <button type="button" class="book-btn" id="btnWT" onclick="openBooking('walkthrough')">
         <span style="font-size:26px">&#128203;</span>
-        <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book a Walkthrough</span>
+        <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book Walkthrough</span>
         <span style="font-size:10.5px;color:var(--muted)">Free &middot; 30 min</span>
       </button>
       <button type="button" class="book-btn" id="btnCL" onclick="openBooking('cleaning')">
         <span style="font-size:26px">&#129529;</span>
-        <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book a Cleaning</span>
+        <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book Cleaning</span>
         <span style="font-size:10.5px;color:var(--muted)">Pick your date</span>
       </button>
     </div>
@@ -222,7 +221,8 @@
       <div style="text-align:center;margin-top:4px;">
         <span class="skip-link" onclick="skipBooking()">Skip &mdash; just reserve my discount slot</span>
       </div>
-          </div>
+    </div>
+
     <div class="sep"></div>
     <div class="opt-toggle" onclick="toggleOpt()">
       <span class="opt-toggle-lbl">
@@ -235,9 +235,9 @@
       <div style="padding-top:14px">
         <div class="field-row">
           <div class="field">
-             </div>
-<label for="email">Email <span class="opt-tag">optional</span></label>
+            <label for="email">Email <span class="opt-tag">optional</span></label>
             <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
+          </div>
           <div class="field">
             <label for="area">Neighbourhood <span class="opt-tag">optional</span></label>
             <input type="text" id="area" placeholder="e.g. Hyde Park, Byron">
@@ -283,7 +283,7 @@
 </div>
 <script>
   var WA_NUM    = '12267936754';
-  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwXiczVnN76eYye88a-T9bUS5jddogsd-jUzd81JAu9QH0TDUcglIxIKXpZ3Y82vgwdJg/exec';
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbywHEZjyxXqxpJJo7HwkA8PKHDQ96Pv4Igl7VxPlMVvMY5MiAb4rLQsueJu5JvnFk7ZJQ/exec';
 
   var selService='', selTimeline='', selProp='';
   var addressRequired=false, pendingType=null;

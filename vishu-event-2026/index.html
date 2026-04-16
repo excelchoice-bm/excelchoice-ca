@@ -221,7 +221,9 @@
         <span class="skip-link" onclick="skipBooking()">Skip &mdash; just reserve my discount slot</span>
       </div>
     </div>
-
+<label for="email">Email <span class="opt-tag">optional</span></label>
+            <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
+          </div>
     <div class="sep"></div>
     <div class="opt-toggle" onclick="toggleOpt()">
       <span class="opt-toggle-lbl">
@@ -234,9 +236,7 @@
       <div style="padding-top:14px">
         <div class="field-row">
           <div class="field">
-            <label for="email">Email <span class="opt-tag">optional</span></label>
-            <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
-          </div>
+            
           <div class="field">
             <label for="area">Neighbourhood <span class="opt-tag">optional</span></label>
             <input type="text" id="area" placeholder="e.g. Hyde Park, Byron">

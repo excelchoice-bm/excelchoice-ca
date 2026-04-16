@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKM8U4nbYUK7CQvm-9QFzueo7vtFuI_zo&libraries=places&callback=initPlaces" async defer></script>
 <style>
   :root{--teal:#0a7c6e;--teal-light:#0db89e;--teal-dark:#065f52;--gold:#d4a017;--gold-light:#f0c040;--gold-pale:#fdf8ec;--cream:#f7faf9;--white:#ffffff;--text:#111827;--muted:#6b7280;--border:#d1e8e4;--radius-lg:22px;--radius:14px}
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -51,7 +52,7 @@
   .field label{display:block;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--text);margin-bottom:7px}
   .req{color:#dc2626;margin-left:2px}
   .opt-tag{font-size:10px;color:var(--muted);font-weight:400;margin-left:5px;letter-spacing:.3px}
-  input[type="text"],input[type="tel"],input[type="email"],input[type="date"],select{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:var(--text);background:#fafdfc;transition:border-color .18s,box-shadow .18s,background .18s;-webkit-appearance:none;appearance:none}
+  input[type="text"],input[type="tel"],input[type="email"],select{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:var(--text);background:#fafdfc;transition:border-color .18s,box-shadow .18s,background .18s;-webkit-appearance:none;appearance:none}
   input:focus,select:focus{outline:none;border-color:var(--teal-light);background:var(--white);box-shadow:0 0 0 3.5px rgba(13,184,158,.11)}
   input::placeholder{color:#b0bec5;font-size:13.5px;font-weight:400}
   select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230a7c6e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center;padding-right:38px;cursor:pointer}
@@ -74,19 +75,29 @@
   .svc-full{grid-column:span 2}
   .t-btn{padding:9px 17px;border:1.5px solid var(--border);border-radius:100px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all .18s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation;text-align:center}
   .t-btn.on{background:var(--teal);border-color:var(--teal);color:white;font-weight:600}
+  /* BOOKING BUTTONS */
+  .book-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;border:1.5px solid var(--border);border-radius:14px;background:#fafdfc;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;width:100%}
+  .book-btn.on{border-color:var(--teal);background:linear-gradient(135deg,#edf9f7,#dff5f0);box-shadow:0 0 0 2.5px rgba(10,124,110,.08)}
+  .book-btn:active{transform:scale(.97)}
+  /* ADDRESS DROPDOWN */
+  .addr-wrap{position:relative}
+  .addr-dd{display:none;position:absolute;top:100%;left:0;right:0;background:white;border:1.5px solid var(--teal-light);border-top:none;border-radius:0 0 12px 12px;box-shadow:0 8px 24px rgba(10,124,110,.12);z-index:100;max-height:220px;overflow-y:auto}
+  .addr-item{padding:11px 14px;font-size:13.5px;cursor:pointer;border-bottom:1px solid #f0f4f3;color:#111827;line-height:1.4}
+  .addr-item:hover{background:#f0faf8}
+  .addr-item:last-child{border-bottom:none}
+  /* OPTIONAL TOGGLE */
   .opt-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:11px 0;user-select:none;-webkit-tap-highlight-color:transparent}
   .opt-toggle-lbl{font-size:12.5px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:8px}
   .arrow{transition:transform .3s ease;color:var(--teal)}
   .arrow.open{transform:rotate(180deg)}
   .opt-fields{overflow:hidden;max-height:0;transition:max-height .4s ease}
-  .opt-fields.open{max-height:700px}
+  .opt-fields.open{max-height:500px}
   .cta{width:100%;margin-top:24px;padding:17px;background:linear-gradient(130deg,var(--teal-dark) 0%,var(--teal) 55%,var(--teal-light) 100%);color:white;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;letter-spacing:.2px;cursor:pointer;box-shadow:0 8px 28px rgba(10,124,110,.32);transition:transform .18s,box-shadow .18s;display:flex;align-items:center;justify-content:center;gap:10px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   .cta:active{transform:scale(.98)}
   .cta:disabled{opacity:.6;cursor:not-allowed;transform:none}
   .spin{width:18px;height:18px;border:2px solid rgba(255,255,255,.35);border-top-color:white;border-radius:50%;animation:turn .65s linear infinite;display:none}
   @keyframes turn{to{transform:rotate(360deg)}}
   .privacy{text-align:center;font-size:11px;color:#9ca3af;margin-top:12px;line-height:1.5}
-  /* SUCCESS */
   .success{display:none;text-align:center;padding:48px 16px 56px;animation:rise .45s cubic-bezier(.22,1,.36,1) both}
   .success.show{display:block}
   .card.gone{display:none}
@@ -112,7 +123,6 @@
 
 <div class="wrap">
 
-  <!-- OFFER BANNER -->
   <div class="offer-banner">
     <div class="offer-pill">🌼 Vishu Exclusive &mdash; Today Only</div>
     <h2 class="offer-headline">Get <span>10% OFF</span> + a Free Walkthrough<br>on Your First Booking</h2>
@@ -120,7 +130,6 @@
     <div class="offer-counter"><div class="counter-dot"></div>Limited slots remaining today</div>
   </div>
 
-  <!-- HEADER -->
   <div class="header">
     <div class="event-badge">🌼 Tatvamasi Vishu Event &middot; April 19, 2026</div>
     <div class="brand">
@@ -137,7 +146,6 @@
     <div class="divider-accent"></div>
   </div>
 
-  <!-- FORM CARD -->
   <div class="card" id="formCard">
     <div class="urgency">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><path d="M8 1.5L2 8.5h5L5.5 14.5l8.5-7.5H9L10.5 1.5z" fill="#d4a017" stroke="#d4a017" stroke-width="0.5" stroke-linejoin="round"/></svg>
@@ -162,7 +170,7 @@
     <!-- 2: PROPERTY TYPE -->
     <div class="sep"></div>
     <div class="sec">Property Type <span class="sec-note">&nbsp;(tap one &mdash; optional)</span></div>
-    <div id="propRow" style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
       <button type="button" class="p-btn" data-p="Home / Condo">🏡 Home / Condo</button>
       <button type="button" class="p-btn" data-p="Rental Unit">🏠 Rental Unit</button>
       <button type="button" class="p-btn" data-p="Commercial">🏢 Commercial</button>
@@ -194,7 +202,35 @@
       <button type="button" class="t-btn" data-t="Just Exploring">🤔 Just Exploring</button>
     </div>
 
-    <!-- 5: OPTIONAL EXTRAS -->
+    <!-- 5: BOOK A SLOT -->
+    <div class="sep"></div>
+    <div class="sec">Book a Slot <span class="sec-note">&nbsp;(optional — tap to open calendar)</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:16px;">
+      <button type="button" class="book-btn" id="btnWalkthrough" onclick="openBooking('walkthrough')">
+        <span style="font-size:26px">📋</span>
+        <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book Walkthrough</span>
+        <span style="font-size:10.5px;color:var(--muted)">Free &middot; 30 min</span>
+      </button>
+      <button type="button" class="book-btn" id="btnCleaning" onclick="openBooking('cleaning')">
+        <span style="font-size:26px">🧹</span>
+        <span style="font-size:13px;font-weight:700;color:var(--teal-dark)">Book Cleaning</span>
+        <span style="font-size:10.5px;color:var(--muted)">Pick your date</span>
+      </button>
+    </div>
+
+    <!-- ADDRESS — appears when booking button tapped -->
+    <div id="addressBlock" style="display:none">
+      <div class="field" id="f-address">
+        <label for="address">Property Address <span class="req">*</span> <span style="font-size:10px;color:var(--muted);font-weight:400">Ontario, Canada</span></label>
+        <div class="addr-wrap">
+          <input type="text" id="address" placeholder="Start typing e.g. 146 Elliott..." autocomplete="off" autocorrect="off" spellcheck="false">
+          <div class="addr-dd" id="addrDd"></div>
+        </div>
+        <div class="err-msg">Please enter your property address</div>
+      </div>
+    </div>
+
+    <!-- 6: OPTIONAL EXTRAS -->
     <div class="sep"></div>
     <div class="opt-toggle" onclick="toggleOpt()">
       <span class="opt-toggle-lbl">
@@ -215,22 +251,16 @@
             <input type="text" id="area" placeholder="e.g. Hyde Park, Byron">
           </div>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="sqft">Property Size <span class="opt-tag">optional</span></label>
-            <select id="sqft">
-              <option value="">Select size</option>
-              <option>Under 800 sq ft</option>
-              <option>800 &ndash; 1500 sq ft</option>
-              <option>1500 &ndash; 2500 sq ft</option>
-              <option>2500+ sq ft</option>
-              <option>Not sure</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="prefDate">Preferred Date <span class="opt-tag">optional</span></label>
-            <input type="date" id="prefDate">
-          </div>
+        <div class="field">
+          <label for="sqft">Property Size <span class="opt-tag">optional</span></label>
+          <select id="sqft">
+            <option value="">Select size</option>
+            <option>Under 800 sq ft</option>
+            <option>800 &ndash; 1500 sq ft</option>
+            <option>1500 &ndash; 2500 sq ft</option>
+            <option>2500+ sq ft</option>
+            <option>Not sure</option>
+          </select>
         </div>
       </div>
     </div>
@@ -242,28 +272,23 @@
     <p class="privacy">&#128274; Your details are safe with us. We'll only contact you about your booking.</p>
   </div>
 
-  <!-- SUCCESS SCREEN -->
+  <!-- SUCCESS -->
   <div class="success" id="successScreen">
     <div class="tick-ring">🎉</div>
     <h2>You're in, <span id="sName"></span>!</h2>
     <p class="sub">Your discount slot is reserved.<br>What would you like to do next?</p>
-
     <div class="action-label">Choose your next step</div>
     <div class="action-btns">
-
       <a id="waBtn" href="#" target="_blank" class="btn-wa">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M10 1.5C5.3 1.5 1.5 5.3 1.5 10c0 1.5.4 2.9 1.1 4.1L1.5 18.5l4.5-1.1C7.1 18.1 8.5 18.5 10 18.5c4.7 0 8.5-3.8 8.5-8.5S14.7 1.5 10 1.5zm4.2 11.8c-.2.5-1 .9-1.4.9-.4 0-.7.1-2.2-.5s-2.4-2-2.8-2.7c-.3-.5-.8-1.5-.2-2.1.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .4.3l.6 1.4c.1.1.1.3 0 .4l-.4.5c-.1.1-.1.2 0 .3.3.5.7 1 1.1 1.3.5.4 1 .6 1.2.7.1.1.3 0 .4-.1l.4-.5c.1-.1.3-.2.4-.1l1.4.7c.2.1.3.2.3.4v.4c0 .1 0 .3-.2.4z"/></svg>
         💬 Chat With Us on WhatsApp
       </a>
-
       <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/excelchoicebm/30min'});return false;" class="btn-wt">
         📋 Book a Free Walkthrough
       </a>
-
       <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/excel-choice-info/cleaning-slot'});return false;" class="btn-cl">
         🧹 Book a Cleaning Slot
       </a>
-
     </div>
     <div class="vishu-tag">🌼 Happy Vishu from ExcelChoice!</div>
   </div>
@@ -275,9 +300,97 @@
   const SHEET_URL = 'https://script.google.com/macros/s/AKfycbywHEZjyxXqxpJJo7HwkA8PKHDQ96Pv4Igl7VxPlMVvMY5MiAb4rLQsueJu5JvnFk7ZJQ/exec';
 
   let selService = '', selTimeline = '', selProp = '';
+  let addressRequired = false, pendingType = null;
+  let acService, acSession;
 
-  document.getElementById('prefDate').setAttribute('min', new Date().toISOString().split('T')[0]);
+  // ── Google Places init (called by API callback) ──
+  function initPlaces() {
+    acService = new google.maps.places.AutocompleteService();
+    acSession = new google.maps.places.AutocompleteSessionToken();
+    const inp = document.getElementById('address');
+    const dd  = document.getElementById('addrDd');
 
+    inp.addEventListener('input', function() {
+      const val = this.value.trim();
+      if (val.length < 2) { dd.style.display = 'none'; return; }
+      acService.getPlacePredictions({
+        input: val,
+        sessionToken: acSession,
+        componentRestrictions: { country: 'ca' },
+        types: ['address'],
+        bounds: new google.maps.LatLngBounds(
+          new google.maps.LatLng(42.0, -81.5),
+          new google.maps.LatLng(44.0, -79.5)
+        )
+      }, (preds, status) => {
+        dd.innerHTML = '';
+        if (status !== 'OK' || !preds) { dd.style.display = 'none'; return; }
+        preds.slice(0, 5).forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'addr-item';
+          item.textContent = p.description;
+          item.addEventListener('mousedown', () => {
+            inp.value = p.description;
+            dd.style.display = 'none';
+            document.getElementById('f-address').classList.remove('err');
+            acSession = new google.maps.places.AutocompleteSessionToken();
+            // Auto-open Calendly after address picked
+            if (pendingType) launchCalendly(pendingType);
+          });
+          dd.appendChild(item);
+        });
+        dd.style.display = 'block';
+      });
+    });
+
+    inp.addEventListener('blur', () => setTimeout(() => dd.style.display = 'none', 180));
+  }
+
+  // ── Booking buttons ──
+  function openBooking(type) {
+    pendingType = type;
+    addressRequired = true;
+
+    // Highlight active button
+    document.getElementById('btnWalkthrough').classList.toggle('on', type === 'walkthrough');
+    document.getElementById('btnCleaning').classList.toggle('on', type === 'cleaning');
+
+    // Show address block
+    const block = document.getElementById('addressBlock');
+    block.style.display = 'block';
+    setTimeout(() => block.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+
+    // If address already filled, open Calendly immediately
+    if (document.getElementById('address').value.trim()) {
+      launchCalendly(type);
+    } else {
+      document.getElementById('address').focus();
+    }
+  }
+
+  function launchCalendly(type) {
+    const addr = document.getElementById('address').value.trim();
+    if (!addr) { document.getElementById('f-address').classList.add('err'); return; }
+    document.getElementById('f-address').classList.remove('err');
+
+    const name  = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const svc   = (selService && selService !== 'Not Sure Yet') ? selService : 'cleaning services';
+    const url   = type === 'walkthrough'
+      ? 'https://calendly.com/excelchoicebm/30min'
+      : 'https://calendly.com/excel-choice-info/cleaning-slot';
+
+    Calendly.initPopupWidget({
+      url,
+      prefill: {
+        name,
+        email: document.getElementById('email').value.trim() || '',
+        customAnswers: { a1: phone, a2: addr, a3: svc }
+      }
+    });
+  }
+
+  // ── Other interactions ──
   document.getElementById('name').addEventListener('blur', () => {
     if (document.getElementById('name').value.trim().length > 1)
       setTimeout(() => document.getElementById('phone').focus(), 70);
@@ -323,6 +436,12 @@
     document.getElementById('f-phone').classList.toggle('err', digits.length < 10);
     if (digits.length < 10) ok = false;
 
+    if (addressRequired) {
+      const addr = document.getElementById('address').value.trim();
+      document.getElementById('f-address').classList.toggle('err', !addr);
+      if (!addr) ok = false;
+    }
+
     if (!ok) return;
 
     if (navigator.vibrate) navigator.vibrate([30, 20, 30]);
@@ -332,15 +451,15 @@
 
     const payload = {
       name, phone,
-      propertyType:  selProp     || '',
-      service:       selService  || '',
-      timeline:      selTimeline || '',
-      email:         document.getElementById('email').value.trim(),
-      area:          document.getElementById('area').value.trim(),
-      sqft:          document.getElementById('sqft').value,
-      preferredDate: document.getElementById('prefDate').value,
-      source:        'Tatvamasi Vishu Event \u2014 Apr 19 2026',
-      submittedAt:   new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' })
+      propertyType: selProp     || '',
+      service:      selService  || '',
+      timeline:     selTimeline || '',
+      address:      addressRequired ? document.getElementById('address').value.trim() : '',
+      email:        document.getElementById('email').value.trim(),
+      area:         document.getElementById('area').value.trim(),
+      sqft:         document.getElementById('sqft').value,
+      source:       'Tatvamasi Vishu Event \u2014 Apr 19 2026',
+      submittedAt:  new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' })
     };
 
     try {

@@ -43,29 +43,31 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   background: rgba(13,27,62,0.97);
   backdrop-filter: blur(10px);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 13px 52px;
   border-bottom: 1px solid rgba(201,168,76,0.18);
+}
+.nav-top-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 52px;
+}
+.nav-call-bar {
+  display: none; /* shown on mobile only */
 }
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
   text-decoration: none;
 }
 .nav-logo-mark {
-  width: 36px; height: 36px;
-  border-radius: 8px;
-  background: var(--gold);
-  color: var(--navy);
+  width: 46px; height: 46px;
+  border-radius: 10px;
+  background: var(--white);
+  padding: 4px;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: 0.9rem;
-  letter-spacing: -0.02em;
   flex-shrink: 0;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(201,168,76,0.3);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
 }
 .nav-logo-mark img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
+  width: 100%; height: 100%; object-fit: contain; display: block;
 }
 .nav-logo-text {
   font-family: 'Playfair Display', serif;
@@ -402,11 +404,11 @@ nav {
 }
 .marquee-track {
   display: flex;
-  gap: 52px;
-  animation: marqueeScroll 32s linear infinite;
+  gap: 72px;
+  animation: marqueeScroll 36s linear infinite;
   width: max-content;
   align-items: center;
-  padding: 8px 0;
+  padding: 10px 0;
 }
 .marquee-wrap:hover .marquee-track {
   animation-play-state: paused;
@@ -418,28 +420,26 @@ nav {
 
 .vendor-logo {
   flex-shrink: 0;
-  height: 70px;
-  min-width: 170px;
+  height: 120px;
+  min-width: 220px;
   background: var(--white);
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 22px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-  filter: grayscale(22%);
-  opacity: 0.88;
+  padding: 0 26px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0.95;
 }
 .vendor-logo:hover {
-  transform: scale(1.09);
-  filter: grayscale(0%);
+  transform: scale(1.1);
   opacity: 1;
-  box-shadow: 0 10px 28px rgba(13,27,62,0.1);
+  box-shadow: 0 14px 34px rgba(13,27,62,0.12);
   z-index: 3;
 }
 .vendor-logo img {
-  max-height: 48px;
-  max-width: 140px;
+  max-height: 85px;
+  max-width: 195px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -742,8 +742,8 @@ footer {
    RESPONSIVE
 ════════════════════════════════════ */
 @media (max-width: 960px) {
-  .hero { grid-template-columns: 1fr; padding: 88px 24px 44px; gap: 36px; }
-  nav { padding: 12px 22px; }
+  .hero { grid-template-columns: 1fr; padding: 96px 24px 44px; gap: 36px; }
+  .nav-top-row { padding: 11px 22px; }
   .trust-bar { padding: 14px 22px; gap: 16px; }
   .services, .reviews, .why-us, .bottom-cta, .how-it-works, .awards { padding: 60px 22px; }
   .vendors { padding: 52px 0 56px; }
@@ -753,32 +753,54 @@ footer {
   .bottom-form-card { padding: 32px 22px; }
   .f-row { grid-template-columns: 1fr; }
   .awards-grid, .how-grid, .services-grid { grid-template-columns: 1fr; }
-  .vendor-logo { height: 60px; min-width: 140px; padding: 0 16px; }
-  .vendor-logo img { max-height: 38px; max-width: 110px; }
+  .vendor-logo { height: 100px; min-width: 190px; padding: 0 22px; }
+  .vendor-logo img { max-height: 68px; max-width: 160px; }
+  .marquee-track { gap: 48px; }
 }
 @media (max-width: 560px) {
   .trust-item:nth-child(n+4) { display: none; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
-  /* Mobile nav — keep phone visible and tappable (critical for Google Ads) */
-  nav { padding: 10px 14px; }
+  /* Hero padding increased to account for two-row mobile nav */
+  .hero { padding: 116px 20px 40px; }
+
+  /* Two-row mobile nav: logo+CTA on top, tap-to-call bar below */
+  .nav-top-row { padding: 10px 14px; }
   .nav-right { gap: 8px; }
-  .nav-logo-text { font-size: 1rem; }
-  .nav-logo-mark { width: 30px; height: 30px; font-size: 0.78rem; border-radius: 7px; }
-  .nav-phone {
-    font-size: 0.78rem; font-weight: 600;
-    padding: 7px 11px;
-    background: rgba(201,168,76,0.16);
-    border-radius: 6px;
-    color: var(--gold-light);
+  .nav-logo-text { font-size: 1.02rem; }
+  .nav-logo-mark { width: 40px; height: 40px; border-radius: 8px; padding: 3px; }
+
+  /* Hide the text phone link — replaced by full-width call bar below */
+  .nav-phone { display: none; }
+
+  /* Full-width tap-to-call bar (high-converting for Google Ads mobile) */
+  .nav-call-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    padding: 10px 14px;
+    text-decoration: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s;
   }
-  .nav-phone::before { font-size: 0.72rem; }
-  .btn-nav { padding: 8px 13px; font-size: 0.78rem; }
+  .nav-call-bar:active { background: var(--gold-light); }
+
+  .btn-nav { padding: 9px 14px; font-size: 0.8rem; }
+  .vendor-logo { height: 90px; min-width: 170px; padding: 0 20px; }
+  .vendor-logo img { max-height: 58px; max-width: 140px; }
+  .marquee-track { gap: 36px; }
 }
 @media (max-width: 380px) {
-  /* Extra-tight screens — shrink phone to icon + short number */
-  .nav-phone { padding: 7px 9px; font-size: 0.74rem; }
   .btn-nav { padding: 8px 11px; font-size: 0.74rem; }
-  .nav-logo-text { font-size: 0.92rem; }
+  .nav-logo-text { font-size: 0.95rem; }
+  .nav-logo-mark { width: 36px; height: 36px; }
+  .hero { padding: 110px 18px 36px; }
 }
 </style>
 </head>
@@ -786,18 +808,22 @@ footer {
 
 <!-- ═══ NAV ═══ -->
 <nav>
-  <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">
-      <!-- When your logo.png is ready in root, replace "EC" below with:
-           <img src="logo.png" alt="ExcelChoice"> -->
-      EC
+  <div class="nav-top-row">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <img src="Logo%20.png" alt="ExcelChoice">
+      </div>
+      <div class="nav-logo-text">Excel<span>Choice</span></div>
+    </a>
+    <div class="nav-right">
+      <a href="tel:2267936754" class="nav-phone">226-793-6754</a>
+      <a href="#hero-form" class="btn-nav">Get Free Quote</a>
     </div>
-    <div class="nav-logo-text">Excel<span>Choice</span></div>
-  </a>
-  <div class="nav-right">
-    <a href="tel:2267936754" class="nav-phone">226-793-6754</a>
-    <a href="#hero-form" class="btn-nav">Get Free Quote</a>
   </div>
+  <!-- Mobile-only tap-to-call bar -->
+  <a href="tel:2267936754" class="nav-call-bar">
+    📞 Call Now: 226-793-6754
+  </a>
 </nav>
 
 <!-- ═══ HERO ═══ -->
@@ -873,15 +899,16 @@ footer {
           </div>
         </div>
         <div class="addon-wrap">
-          <label class="addon-label">Add-on Services</label>
+          <label class="addon-label">Add-on Services <span style="font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--text-muted); font-size: 0.7rem;">(optional)</span></label>
           <div class="addon-options">
             <label class="addon-chip"><input type="checkbox" name="addons" value="Carpet Cleaning"> 🧹 Carpet Cleaning</label>
+            <label class="addon-chip"><input type="checkbox" name="addons" value="Window Cleaning"> 🪟 Window Cleaning</label>
+            <label class="addon-chip"><input type="checkbox" name="addons" value="Inside Fridge & Oven"> 🧽 Inside Fridge &amp; Oven</label>
             <label class="addon-chip"><input type="checkbox" name="addons" value="Junk Removal"> 🗑️ Junk Removal</label>
-            <label class="addon-chip"><input type="checkbox" name="addons" value="None" checked> None</label>
           </div>
         </div>
         <button type="submit" class="btn-submit">Request My Free Quote</button>
-        <p class="form-privacy">🔒 Your info stays private. We never spam.</p>
+        <p class="form-privacy">🔒 Takes less than 30 seconds · Your info stays private</p>
       </form>
       <div class="success-state" id="successTop">
         <div class="tick">✅</div>
@@ -1142,48 +1169,47 @@ footer {
     -->
     <div class="review-card reveal delay-1">
       <div class="stars">★★★★★</div>
-      <p class="review-body">"Highly recommended!
-
-It was a last-minute appointment, and after contacting several residential cleaning services, we finally chose Excel Choice — and we’re so glad we did. They even travelled all the way from London, Ontario to Niagara Falls to provide the service, which we truly appreciated."</p>
+      <p class="review-body">"[PASTE REAL GOOGLE REVIEW TEXT HERE]"</p>
       <div class="reviewer">
         <div class="r-avatar">A</div>
-        <div><div class="r-name">Jinse</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
+        <div><div class="r-name">[Reviewer Name]</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
       </div>
     </div>
     <div class="review-card reveal delay-2">
       <div class="stars">★★★★★</div>
-      <p class="review-body">"I'm the property administrator and Excel Choice Building Maintenance has just started doing our unit turnover cleanings. We are very pleased with the work they have done, and have had a positive response from our tenants. They really help set a good tone for our new residents. Looking forward to working with them long-term!"</p>
+      <p class="review-body">"[PASTE REAL GOOGLE REVIEW TEXT HERE]"</p>
       <div class="reviewer">
         <div class="r-avatar">B</div>
-        <div><div class="r-name">Kathy Barton</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
+        <div><div class="r-name">[Reviewer Name]</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
       </div>
     </div>
     <div class="review-card reveal delay-3">
       <div class="stars">★★★★★</div>
-      <p class="review-body">"I recently hired Excel Choice Cleaning Services for a post-construction cleaning of my home, and I couldn’t be more impressed with their work. After all the renovation dust and debris, they transformed the entire space into something that truly felt like a home again."</p>
+      <p class="review-body">"[PASTE REAL GOOGLE REVIEW TEXT HERE]"</p>
       <div class="reviewer">
         <div class="r-avatar">C</div>
-        <div><div class="r-name">Jatin Mayani</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
+        <div><div class="r-name">[Reviewer Name]</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
       </div>
     </div>
     <div class="review-card reveal delay-4">
       <div class="stars">★★★★★</div>
-      <p class="review-body">"Excellent work, 100% professional, commitment. I had an amazing experience! From the moment I walked in, the staff was very polite and hardworking. The service was top-notch, and I'll be returning!."</p>
+      <p class="review-body">"[PASTE REAL GOOGLE REVIEW TEXT HERE]"</p>
       <div class="reviewer">
         <div class="r-avatar">D</div>
-        <div><div class="r-name">Paul</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
+        <div><div class="r-name">[Reviewer Name]</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
       </div>
     </div>
     <div class="review-card reveal delay-5">
       <div class="stars">★★★★★</div>
-      <p class="review-body">"Used Excel Choice for some minor maintenance projects at my small business. They were very detail-oriented and executed the project well. They were also very easy to communicate with and on time for the project. Great work."</p>
+      <p class="review-body">"[PASTE REAL GOOGLE REVIEW TEXT HERE]"</p>
       <div class="reviewer">
         <div class="r-avatar">E</div>
-        <div><div class="r-name">Stephen Rothwell</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
+        <div><div class="r-name">[Reviewer Name]</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
       </div>
     </div>
   </div>
 </section>
+
 <!-- ═══ WHY US ═══ -->
 <section class="why-us">
   <div class="tc">
@@ -1206,7 +1232,7 @@ It was a last-minute appointment, and after contacting several residential clean
   <div class="bottom-form-card">
     <span class="section-eyebrow">Ready to Book?</span>
     <h2 class="section-h">Get Pricing for Your Home Cleaning</h2>
-    <p class="section-p">Request your free quote, and we'll follow up with availability and next steps.</p>
+    <p class="section-p">Request your free quote and we'll follow up with availability and next steps.</p>
     <form id="formBottom">
       <div class="f-row">
         <div class="f-group">
@@ -1260,15 +1286,16 @@ It was a last-minute appointment, and after contacting several residential clean
         </div>
       </div>
       <div class="addon-wrap">
-        <label class="addon-label">Add-on Services</label>
+        <label class="addon-label">Add-on Services <span style="font-weight: 400; text-transform: none; letter-spacing: 0; color: rgba(255,255,255,0.4); font-size: 0.7rem;">(optional)</span></label>
         <div class="addon-options">
           <label class="addon-chip"><input type="checkbox" name="addons" value="Carpet Cleaning"> 🧹 Carpet Cleaning</label>
+          <label class="addon-chip"><input type="checkbox" name="addons" value="Window Cleaning"> 🪟 Window Cleaning</label>
+          <label class="addon-chip"><input type="checkbox" name="addons" value="Inside Fridge & Oven"> 🧽 Inside Fridge &amp; Oven</label>
           <label class="addon-chip"><input type="checkbox" name="addons" value="Junk Removal"> 🗑️ Junk Removal</label>
-          <label class="addon-chip"><input type="checkbox" name="addons" value="None" checked> None</label>
         </div>
       </div>
       <button type="submit" class="btn-submit">Request My Free Quote</button>
-      <p class="form-privacy">🔒 Your info stays private. No spam, ever.</p>
+      <p class="form-privacy">🔒 Takes less than 30 seconds · Your info stays private</p>
     </form>
     <div class="success-state" id="successBottom">
       <div class="tick">✅</div>
@@ -1299,7 +1326,7 @@ It was a last-minute appointment, and after contacting several residential clean
     const fd = new FormData(formEl);
     const addons = [];
     formEl.querySelectorAll('input[name="addons"]:checked').forEach(cb => {
-      if (cb.value !== "None") addons.push(cb.value);
+      addons.push(cb.value);
     });
     return {
       name:           fd.get("name")           || "",

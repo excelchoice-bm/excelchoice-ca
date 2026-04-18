@@ -48,11 +48,32 @@ nav {
   border-bottom: 1px solid rgba(201,168,76,0.18);
 }
 .nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--gold);
+  color: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: 0.9rem;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(201,168,76,0.3);
+}
+.nav-logo-mark img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.nav-logo-text {
   font-family: 'Playfair Display', serif;
   font-size: 1.28rem; font-weight: 700;
-  color: var(--gold); letter-spacing: 0.02em; text-decoration: none;
+  color: var(--gold); letter-spacing: 0.02em;
+  line-height: 1;
 }
-.nav-logo span { color: var(--white); }
+.nav-logo-text span { color: var(--white); }
 .nav-right { display: flex; align-items: center; gap: 20px; }
 .nav-phone {
   color: var(--gold-pale); font-size: 0.87rem; font-weight: 500;
@@ -736,9 +757,28 @@ footer {
   .vendor-logo img { max-height: 38px; max-width: 110px; }
 }
 @media (max-width: 560px) {
-  .nav-phone { display: none; }
   .trust-item:nth-child(n+4) { display: none; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
+  /* Mobile nav — keep phone visible and tappable (critical for Google Ads) */
+  nav { padding: 10px 14px; }
+  .nav-right { gap: 8px; }
+  .nav-logo-text { font-size: 1rem; }
+  .nav-logo-mark { width: 30px; height: 30px; font-size: 0.78rem; border-radius: 7px; }
+  .nav-phone {
+    font-size: 0.78rem; font-weight: 600;
+    padding: 7px 11px;
+    background: rgba(201,168,76,0.16);
+    border-radius: 6px;
+    color: var(--gold-light);
+  }
+  .nav-phone::before { font-size: 0.72rem; }
+  .btn-nav { padding: 8px 13px; font-size: 0.78rem; }
+}
+@media (max-width: 380px) {
+  /* Extra-tight screens — shrink phone to icon + short number */
+  .nav-phone { padding: 7px 9px; font-size: 0.74rem; }
+  .btn-nav { padding: 8px 11px; font-size: 0.74rem; }
+  .nav-logo-text { font-size: 0.92rem; }
 }
 </style>
 </head>
@@ -746,7 +786,14 @@ footer {
 
 <!-- ═══ NAV ═══ -->
 <nav>
-  <a href="#" class="nav-logo">Excel<span>Choice</span></a>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">
+      <!-- When your logo.png is ready in root, replace "EC" below with:
+           <img src="logo.png" alt="ExcelChoice"> -->
+      EC
+    </div>
+    <div class="nav-logo-text">Excel<span>Choice</span></div>
+  </a>
   <div class="nav-right">
     <a href="tel:2267936754" class="nav-phone">226-793-6754</a>
     <a href="#hero-form" class="btn-nav">Get Free Quote</a>
@@ -952,55 +999,48 @@ footer {
     <div class="marquee-track">
       <!-- First set -->
       <div class="vendor-logo">
-        <!-- <img src="logos/larlyn.png" alt="Larlyn Property Management"> -->
-        <span class="vendor-logo-text">Larlyn<br><span style="font-weight:400;font-size:0.72rem;color:var(--text-muted);">Property Management</span></span>
+        <img src="logos/larlyn.png" alt="Larlyn Property Management">
       </div>
       <div class="vendor-logo">
-        <!-- <img src="logos/bluestone.png" alt="BlueStone Properties"> -->
-        <span class="vendor-logo-text">BlueStone<br><span style="font-weight:400;font-size:0.72rem;color:var(--text-muted);">Properties</span></span>
+        <img src="logos/bluestone.png" alt="BlueStone Properties">
       </div>
       <div class="vendor-logo">
-        <!-- <img src="logos/beeclean.png" alt="BeeClean"> -->
-        <span class="vendor-logo-text">BeeClean</span>
+        <img src="logos/beeclean.png" alt="BeeClean">
       </div>
       <div class="vendor-logo">
-        <!-- <img src="logos/united-services-group.png" alt="United Services Group"> -->
-        <span class="vendor-logo-text">United<br><span style="font-weight:400;font-size:0.72rem;color:var(--text-muted);">Services Group</span></span>
+        <img src="logos/united-services-group.png" alt="United Services Group">
       </div>
       <div class="vendor-logo">
-        <!-- <img src="logos/facility-plus.png" alt="Facility Plus"> -->
-        <span class="vendor-logo-text">Facility Plus</span>
+        <img src="logos/facility-plus.png" alt="Facility Plus">
       </div>
       <div class="vendor-logo">
-        <!-- <img src="logos/facility-network.png" alt="Facility Network"> -->
-        <span class="vendor-logo-text">Facility Network</span>
+        <img src="logos/facility-network.png" alt="Facility Network">
       </div>
       <div class="vendor-logo">
-        <!-- <img src="logos/citywide.png" alt="City Wide Facility Solutions"> -->
-        <span class="vendor-logo-text">City Wide<br><span style="font-weight:400;font-size:0.72rem;color:var(--text-muted);">Facility Solutions</span></span>
+        <img src="logos/citywide.png" alt="City Wide Facility Solutions">
       </div>
 
       <!-- Duplicate set for seamless infinite scroll — must match first set exactly -->
       <div class="vendor-logo">
-        <span class="vendor-logo-text">Larlyn<br><span style="font-weight:400;font-size:0.72rem;color:var(--text-muted);">Property Management</span></span>
+        <img src="logos/larlyn.png" alt="Larlyn Property Management">
       </div>
       <div class="vendor-logo">
-        <span class="vendor-logo-text">BlueStone<br><span style="font-weight:400;font-size:0.72rem;color:var(--text-muted);">Properties</span></span>
+        <img src="logos/bluestone.png" alt="BlueStone Properties">
       </div>
       <div class="vendor-logo">
-        <span class="vendor-logo-text">BeeClean</span>
+        <img src="logos/beeclean.png" alt="BeeClean">
       </div>
       <div class="vendor-logo">
-        <span class="vendor-logo-text">United<br><span style="font-weight:400;font-size:0.72rem;color:var(--text-muted);">Services Group</span></span>
+        <img src="logos/united-services-group.png" alt="United Services Group">
       </div>
       <div class="vendor-logo">
-        <span class="vendor-logo-text">Facility Plus</span>
+        <img src="logos/facility-plus.png" alt="Facility Plus">
       </div>
       <div class="vendor-logo">
-        <span class="vendor-logo-text">Facility Network</span>
+        <img src="logos/facility-network.png" alt="Facility Network">
       </div>
       <div class="vendor-logo">
-        <span class="vendor-logo-text">City Wide<br><span style="font-weight:400;font-size:0.72rem;color:var(--text-muted);">Facility Solutions</span></span>
+        <img src="logos/citywide.png" alt="City Wide Facility Solutions">
       </div>
     </div>
   </div>
@@ -1128,7 +1168,7 @@ It was a last-minute appointment, and after contacting several residential clean
     </div>
     <div class="review-card reveal delay-4">
       <div class="stars">★★★★★</div>
-      <p class="review-body">"Excellent work, 100% professional, commitments. I had an amazing experience! From the moment I walked in, the staff was very polite and hardworking. The service was top-notch, and I'll be returning!."</p>
+      <p class="review-body">"Excellent work, 100% professional, commitment. I had an amazing experience! From the moment I walked in, the staff was very polite and hardworking. The service was top-notch, and I'll be returning!."</p>
       <div class="reviewer">
         <div class="r-avatar">D</div>
         <div><div class="r-name">Paul</div><div class="r-source"><span class="g-dot">G</span> Google Review</div></div>
@@ -1144,7 +1184,6 @@ It was a last-minute appointment, and after contacting several residential clean
     </div>
   </div>
 </section>
-
 <!-- ═══ WHY US ═══ -->
 <section class="why-us">
   <div class="tc">
@@ -1167,7 +1206,7 @@ It was a last-minute appointment, and after contacting several residential clean
   <div class="bottom-form-card">
     <span class="section-eyebrow">Ready to Book?</span>
     <h2 class="section-h">Get Pricing for Your Home Cleaning</h2>
-    <p class="section-p">Request your free quote and we'll follow up with availability and next steps.</p>
+    <p class="section-p">Request your free quote, and we'll follow up with availability and next steps.</p>
     <form id="formBottom">
       <div class="f-row">
         <div class="f-group">
